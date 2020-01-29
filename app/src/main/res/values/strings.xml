@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">ProjectSetup</string>
+
+    <!-- Placeholders -->
+    <string name="icon">Icon</string>
+    <string name="button">Button</string>
+    <string name="separator">Separator</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="image">Image</string>
+    <string name="retry">RETRY</string>
+    <string name="internal_storage">Internal storage</string>
+    <string name="button_sure_default" translatable="false">Done</string>
+
+    <!-- Progress Loader -->
+    <string name="default_loading_message">Please wait…</string>
+    <string name="reset">Reset</string>
+    <string name="done">Done</string>
+
+    <!-- Application -->
+    <string name="no_internet">No internet connection</string>
+
+    <!-- Permission -->
+    <string name="please_allow_permission">Please allow permissions</string>
+    <string name="turn_on">Turn On</string>
+    <string name="exit">EXIT</string>
+
+    <!--Error-->
+    <string name="cancelled">Cancelled</string>
+
+    <!-- Popup -->
+    <string name="share">Share</string>
+    <string name="delete">Delete</string>
+    <string name="report">Report</string>
+    <string name="are_you_sure_you_want_to_delete">Are you sure you want to delete?</string>
+    <string name="question_deleted">Question deleted successfully</string>
+
+    <!-- Image picker -->
+    <string name="no_image_selected">No Image Selected</string>
+
+    <!-- Confirmation -->
+    <string name="close">Close</string>
+    <string name="apply">Apply</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="skip">Skip</string>
+
+    <!-- Instruction -->
+    <string name="instructions">Instructions</string>
+    <string name="ok">OK</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="answer">Answer</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="dismiss_caps">DISMISS</string>
+
+    <string name="view_more_button">VIEW MORE</string>
+    <string name="or">or</string>
+
+    <string name="we_need_your_permissions">We need\nyour permissions!</string>
+</resources>

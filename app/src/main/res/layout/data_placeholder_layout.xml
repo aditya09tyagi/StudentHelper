@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_normal">
+
+    <View
+        android:layout_width="@dimen/placeholderImage"
+        android:layout_height="@dimen/placeholderTextHeight"
+        android:background="@color/shimmer_placeholders" />
+
+    <View
+        android:id="@+id/thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/placeholderImage"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:background="@color/shimmer_placeholders" />
+</RelativeLayout>

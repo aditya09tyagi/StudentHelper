@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3378E1</color>
+    <color name="colorPrimaryNew">#0E313A</color>
+    <color name="colorPrimaryDark">#124F9E</color>
+    <color name="colorAccent">@color/colorPrimary</color>
+
+    <!-- weekly rewards main activity -->
+    <color name="weekly_rewards_main_bg_color">#F7F6FB</color>
+    <color name="exciting_prizes_card_color">#2A2079</color>
+    <color name="text_color_win_exciting_prizes">#FBD645</color>
+    <color name="text_color_view_prizes">#2A2079</color>
+    <color name="text_color_weekly_rewards_main">#2C2C2C</color>
+    <color name="weekly_rewards_main_separator_color">#EFEFEF</color>
+    <color name="text_color_num_days_completed">#3A3A3A</color>
+    <color name="text_color_num_days_sub_title">#5C5C5C</color>
+    <color name="text_color_your_eligibility">#191919</color>
+    <color name="text_color_your_eligibility_sub_heading">#6D6D6D</color>
+    <color name="eligibility_percent_weekly_rewards_main">#838383</color>
+    <color name="stay_eligible_card_bg_color">#4635B5</color>
+    <color name="announced_prizes_text_color">#4635B5</color>
+
+    <!-- weekly rewards prize activity -->
+    <color name="text_color_previous_winners">#4635B5</color>
+
+    <!-- answer analysis dialog -->
+    <color name="rating_chart_outline">#656FEB</color>
+    <color name="rating_chart_fill">#6E79F8</color>
+    <color name="answer_rating_start">#AACC30</color>
+    <color name="answer_rating_center">#6CCC30</color>
+    <color name="answer_rating_end">#30CC78</color>
+    <color name="text_posted_on">#ACACAC</color>
+    <color name="text_answer_number">#8F8F8F</color>
+
+    <!-- previous questions sheet in home -->
+    <color name="color_bg_previous_questions_folded">#FFFFFF</color>
+    <color name="color_bg_previous_questions_expanded">#FFFFFF</color>
+
+    <!-- Text Colors -->
+    <color name="color_text_primary">@color/black</color>
+    <color name="color_text_secondary">#80000000</color>
+    <color name="color_text_disabled">#66ffffff</color>
+
+    <!-- answer analysis screen -->
+    <color name="analysis_header_color">#3C3C3C</color>
+    <color name="answer_analysis_text_color">#6E79F8</color>
+    <color name="answer_analysis_subtitle_grey">#535353</color>
+    <color name="analysis_view_separator_color">#F9F9FB</color>
+    <color name="answer_analysis_dismiss_selected">#4150FF</color>
+    <color name="answer_analysis_dismiss_unselected">#6E79F8</color>
+    <color name="overall_rating_analysis_text">#575757</color>
+    <color name="rating_analysis_text">#575757</color>
+    <color name="inactive_bg_overall_circle_progress">#EEEEEE</color>
+    <color name="path_bg_overall_circle_progress">#6E79F8</color>
+    <color name="inactive_bg_other_circle_progress">#EEEEEE</color>
+    <color name="path_bg_other_circle_progress">#808080</color>
+    <color name="scroll_bar_thumb_vertical">#6E79F8</color>
+    <color name="label_last_few_answers">#535353</color>
+
+    <!-- New Profile -->
+    <color name="how_to_earn_rectangle_color">#5F42FF</color>
+    <color name="rewards_rectangle_color">#389FF6</color>
+
+    <!-- SOLID COLORS -->
+    <color name="transparent">#00ffffff</color>
+    <color name="black">#000000</color>
+    <color name="half_transparent_black">#80000000</color>
+    <color name="quarter_transparent_black">#40000000</color>
+    <color name="almost_black">#181818</color>
+    <color name="translucent_black">#8A000000</color>
+    <color name="translucent_black_dark">#C4000000</color>
+    <color name="translucent_black_darker">#DD000000</color>
+    <color name="translucent_black_darkest">#F8000000</color>
+    <color name="white">#ffffff</color>
+    <color name="off_white">#F7F7F7</color>
+    <color name="separator">#1A000000</color>
+    <color name="grey">#9E9D9D</color>
+    <color name="dark_grey">#6D6767</color>
+    <color name="light_grey">#dddddd</color>
+    <color name="lighter_grey">#EBE9E9</color>
+    <color name="lightest_grey">#F7F7F7</color>
+    <color name="shimmer_placeholders">#dddddd</color>
+    <color name="reward_detail_background">#e6000000</color>
+    <color name="translucent_white">#46FFFFFF</color>
+    <color name="subject_grey">#6D6C6C</color>
+
+    <color name="exam_selected">#3E3378E1</color>
+    <color name="sub_exam_selected">#759FDF</color>
+    <color name="color_logout_text">#9F033AC5</color>
+    <color name="choose_exam_tab_bar">@color/colorPrimaryDark</color>
+    <color name="subject_grid_bg">#3378E1</color>
+
+    <color name="navigation_bar">#33FFFFFF</color>
+
+    <!-- Viewpager transition colors -->
+    <color name="page_one">#A7A8E2</color>
+    <color name="page_two">@color/colorPrimaryNew</color>
+    <color name="page_three">#406C8C</color>
+    <color name="page_four">#1e656d</color>
+    <color name="page_five">#1e656d</color>
+
+    <!-- Tap Target View -->
+    <color name="outer_information">#A7A8E2</color>
+    <color name="inner_information">#7F81C0</color>
+    <color name="outer_qna">#FFDF57</color>
+    <color name="inner_qna">#F8D339</color>
+    <color name="outer_leaderboard">#75C199</color>
+    <color name="inner_leaderboard">#64B188</color>
+    <color name="outer_previous_questions">#3C97F8</color>
+    <color name="inner_previous_questions">#ffffff</color>
+    <color name="outer_similar_questions">#A2B0C5</color>
+    <color name="inner_similar_questions">#7F8FA7</color>
+
+    <!-- Background -->
+    <color name="feedback_positive">#208020</color>
+    <color name="feedback_negative">#C22222</color>
+    <color name="overlay">#B9000000</color>
+
+    <!-- Feed -->
+    <color name="feed_background_surge">#102331</color>
+    <color name="surge_description_background">#085792</color>
+    <color name="color_button_green">#00E02A</color>
+    <color name="color_feed_tab_new">#FFDF57</color>
+
+    <!-- Leader Board Activity -->
+    <color name="leader_board_background_dark">#3E407C</color>
+    <color name="leader_board_background">#5154A4</color>
+    <color name="leader_board_foreground">#8587BF</color>
+    <color name="leader_board_foreground_dark">#7D7FB9</color>
+    <color name="leader_board_foreground_light">#9C9ECF</color>
+
+    <color name="leader_board_card_right">#EC9922</color>
+    <color name="leader_board_card_center">#FFDB70</color>
+    <color name="leader_board_card_left">#738693</color>
+
+    <!-- daily rewards -->
+    <color name="text_red">#952D2D</color>
+    <color name="text_green">#75C199</color>
+    <color name="warning_red">#DA2A2A</color>
+    <color name="collect_blue">#389FF6</color>
+
+    <!-- layout ask in community -->
+    <color name="bg_ask_in_community">#077483</color>
+    <color name="is_this_the_right_answer">#0E313A</color>
+
+    <!-- weekly rewards main -->
+    <color name="status_bar_weekly_rewards">#000000</color>
+
+    <!-- weekly rewards prize activity -->
+    <color name="status_bar_weekly_rewards_prize">#000000</color>
+
+    <!-- layout filter exams sheet -->
+    <color name="close_separator">#D6E4F9</color>
+    <color name="clear_all_text">#389FF6</color>
+    <color name="bg_top_level_exams">#F8F8F8</color>
+    <color name="exam_highlight_color">#3378E1</color>
+
+    <!-- dialog confirmation -->
+    <color name="confirmation_highlight">#389FF6</color>
+
+    <!-- new profile fragment -->
+    <color name="highlight_view_profile">#389FF6</color>
+
+    <!-- QnA ToolTip -->
+
+    <!-- my account activity -->
+    <color name="highlight_account_value">#66A986</color>
+
+    <!-- Rewards -->
+    <color name="rewards">#75C199</color>
+    <color name="highlighted_daily_reward">#3378E1</color>
+
+    <color name="scratch_translucent_background">#000000</color>
+
+    <!-- Rating -->
+    <color name="rating">#282828</color>
+    <color name="points_earned">#FFC107</color>
+
+    <color name="see_more">#D6E4F9</color>
+
+    <color name="highlight_filter">#3378E1</color>
+    <color name="selected_filter">#389FF6</color>
+    <color name="retake_photo">#389FF6</color>
+    <color name="no_text_dialog_description">#666666</color>
+
+    <color name="surge_card_color">#374652</color>
+    <color name="no_surge_card_color">#FFFFFF</color>
+
+    <color name="report_selected">#000000</color>
+
+    <color name="subject_no_surge">#6D6767</color>
+    <color name="subject_surge">#C0BFBF</color>
+
+    <color name="rv_surge_bg">#102331</color>
+    <color name="rv_no_surge_bg">#BBBBBB</color>
+
+    <color name="custom_loading_text">#8F8F8F</color>
+
+    <color name="surge_background">#102331</color>
+
+
+    <color name="subject_unselected_color">#E9434649</color>
+
+    <!-- Whatsapp Solution Screen -->
+    <color name="whatsapp_login_button">#25D366</color>
+    <color name="black_shade">#303030</color>
+    <color name="text_user_rating_review">#3C3C3C</color>
+    <color name="text_color_overdraw_permission_header">#2E2E2E</color>
+    <color name="text_color_overdraw_permission_description">#9F9F9F</color>
+    <color name="app_name_color_answer_popup">#076D7B</color>
+    <color name="solution_giver_name_color">#13499B</color>
+    <color name="text_color_we_believe_tv">#BAE9E5</color>
+    <color name="text_color_prize_popup_heading">#452F7E</color>
+    <color name="text_color_prize_popup_description">#8D8D8D</color>
+    <color name="color_bg_ask_question_now_tv">#442E7D</color>
+    <color name="text_color_skip_prize_popup">#442E7D</color>
+    <color name="bg_live_class_fragment">#F5F5F5</color>
+    <color name="bg_cell_live_class">#434343</color>
+    <color name="bg_live_class_video_view">#ADADAD</color>
+    <color name="bg_warch_live_now_tv_button">#FF0000</color>
+    <color name="physics_live_class_color">#2A1080D7</color>
+    <color name="bg_register_now_button_live_class">#1080D7</color>
+    <color name="replay_now_past_class_button">#1080D7</color>
+
+    <color name="physics_color_light">#D9EBF9</color>
+    <color name="physics_color">#1080D7</color>
+    <color name="chemistry_color_light">#EBD6ED</color>
+    <color name="chemistry_color">#85008C</color>
+    <color name="maths_color_light">#FCECD6</color>
+    <color name="maths_color">#EE8700</color>
+    <color name="biology_color_light">#E6F2D7</color>
+    <color name="biology_color">#60B008</color>
+
+    <color name="classroom_tab_red">#DF0000</color>
+
+    <color name="tab_selected_color">#FFFFFF</color>
+    <color name="tab_unselected_color">#AEAEAE</color>
+    <color name="live_class_web_view_toolbar_color">#E53125</color>
+    <color name="live_class_web_view_status_bar_color">#D92418</color>
+    <color name="live_class_countdown_zero">#4E4E4E</color>
+
+    <color name="exam_select_status_bar_color">#F9F9F9</color>
+
+</resources>
