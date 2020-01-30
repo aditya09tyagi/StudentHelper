@@ -16,9 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class SetUpServiceModule {
 
     companion object {
-        private const val BASE_URL_TESTING = "https://apitesting.instasolv.com:3001"
-        private const val BASE_URL_TESTING_NEW = "http://164.52.193.217:3000"
-        private const val BASE_URL_RELEASE = "https://api.instasolv.com"
+        private const val BASE_URL_TESTING = "http://.com"
+        private const val BASE_URL_RELEASE = "https://.com"
         private const val BASE_URL = BASE_URL_RELEASE
     }
 
