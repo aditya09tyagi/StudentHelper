@@ -2,7 +2,7 @@
 
 package com.example.projectsetup.di.modules.network
 
-import com.example.projectsetup.data.network.SetUpService
+import com.example.projectsetup.data.network.StudentHelperService
 import com.example.projectsetup.di.scopes.SetUpApplicationScope
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -13,7 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module(includes = [NetworkModule::class])
-class SetUpServiceModule {
+class StudentHelperServiceModule {
 
     companion object {
         private const val BASE_URL_TESTING = "http://.com"
@@ -23,8 +23,8 @@ class SetUpServiceModule {
 
     @Provides
     @SetUpApplicationScope
-    fun setUpService(retrofit: Retrofit): SetUpService {
-        return retrofit.create(SetUpService::class.java)
+    fun setUpService(retrofit: Retrofit): StudentHelperService {
+        return retrofit.create(StudentHelperService::class.java)
     }
 
     @Provides

@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.example.projectsetup.R
-import com.example.projectsetup.SetUpApp
+import com.example.projectsetup.StudentHelper
 import com.example.projectsetup.di.components.DaggerBaseActivityComponent
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -42,7 +42,7 @@ open class BaseActivity : AppCompatActivity() {
         StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.colorPrimaryDark))
 
         val component = DaggerBaseActivityComponent.builder()
-                .setUpApplicationComponent(SetUpApp.get(this).setUpApplicationComponent())
+                .setUpApplicationComponent(StudentHelper.get(this).studentHelperApplicationComponent())
                 .build()
 
         component.injectBaseActivity(this)

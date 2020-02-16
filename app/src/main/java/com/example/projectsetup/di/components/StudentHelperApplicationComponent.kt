@@ -1,11 +1,11 @@
 package com.example.projectsetup.di.components
 
-import com.example.projectsetup.data.network.SetUpRepository
+import com.example.projectsetup.data.network.StudentHelperRepository
 import com.example.projectsetup.di.modules.application.SetUpAppModule
 import com.example.projectsetup.di.modules.helper.SharedPreferenceModule
 import com.example.projectsetup.di.modules.helper.UtilsModule
 import com.example.projectsetup.di.modules.libraries.PicassoModule
-import com.example.projectsetup.di.modules.network.SetUpRepositoryModule
+import com.example.projectsetup.di.modules.network.StudentHelperRepositoryModule
 import com.example.projectsetup.di.scopes.SetUpApplicationScope
 import com.example.projectsetup.util.*
 import com.google.gson.Gson
@@ -17,12 +17,12 @@ import timber.log.Timber
 @SetUpApplicationScope
 @Component(modules = [
     SetUpAppModule::class,
-    SetUpRepositoryModule::class,
+    StudentHelperRepositoryModule::class,
     PicassoModule::class,
     SharedPreferenceModule::class,
     UtilsModule::class
 ])
-interface SetUpApplicationComponent {
+interface StudentHelperApplicationComponent {
 
     fun calligraphyInterceptor(): CalligraphyInterceptor
 
@@ -30,7 +30,7 @@ interface SetUpApplicationComponent {
 
     fun getPicasso(): Picasso
 
-    fun getSetUpRepository(): SetUpRepository
+    fun getStudentHelperRepository(): StudentHelperRepository
 
     fun getSharedPreferenceUtil(): SharedPreferenceUtil
 

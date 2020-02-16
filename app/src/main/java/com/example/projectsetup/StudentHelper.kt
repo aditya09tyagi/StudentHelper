@@ -10,8 +10,8 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.example.projectsetup.data.event.NoInternetEvent
-import com.example.projectsetup.di.components.DaggerSetUpApplicationComponent
-import com.example.projectsetup.di.components.SetUpApplicationComponent
+import com.example.projectsetup.di.components.DaggerStudentHelperApplicationComponent
+import com.example.projectsetup.di.components.StudentHelperApplicationComponent
 import com.example.projectsetup.di.modules.helper.ContextModule
 import com.jakewharton.threetenabp.AndroidThreeTen
 import es.dmoral.toasty.Toasty
@@ -21,24 +21,22 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import timber.log.Timber
 
-class SetUpApp :Application(), LifecycleObserver {
+class StudentHelper :Application(), LifecycleObserver {
 
-    private lateinit var component:SetUpApplicationComponent
+    private lateinit var component:StudentHelperApplicationComponent
 
     private lateinit var toast: Toast
 
     companion object {
         const val defaultOffset = 0
         var isAppInForeground = false
-        var shouldShowNewOnBoarding = true
-        const val APP_OPEN_WORKER = "APP_OPEN_WORKER"
 
-        fun get(activity: Activity): SetUpApp {
-            return activity.application as SetUpApp
+        fun get(activity: Activity): StudentHelper {
+            return activity.application as StudentHelper
         }
 
-        fun get(service: Service): SetUpApp {
-            return service.application as SetUpApp
+        fun get(service: Service): StudentHelper {
+            return service.application as StudentHelper
         }
     }
 
@@ -71,7 +69,7 @@ class SetUpApp :Application(), LifecycleObserver {
     }
 
     private fun initComponent() {
-        component = DaggerSetUpApplicationComponent.builder()
+        component = DaggerStudentHelperApplicationComponent.builder()
             .contextModule(ContextModule(this))
             .build()
     }
@@ -80,7 +78,7 @@ class SetUpApp :Application(), LifecycleObserver {
         EventBus.getDefault().register(this)
     }
 
-    fun setUpApplicationComponent(): SetUpApplicationComponent{
+    fun studentHelperApplicationComponent(): StudentHelperApplicationComponent{
         return component
     }
 
