@@ -76,6 +76,7 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 sharedPreferenceUtil.putString(Constants.EXTRA_USER, gson.toJson(user))
+                sharedPreferenceUtil.putString(Constants.EXTRA_USER_ID, user!!.id)
             }
             _userLiveData.postValue(Resource.success(user))
         }

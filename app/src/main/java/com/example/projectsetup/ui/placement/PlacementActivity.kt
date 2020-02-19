@@ -3,14 +3,18 @@ package com.example.projectsetup.ui.placement
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectsetup.R
 import com.example.projectsetup.StudentHelper
+import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerPlacementActivityComponent
 import com.example.projectsetup.ui.base.BaseActivity
+import com.example.projectsetup.ui.loader.ProgressModal
 import com.example.projectsetup.ui.placement.past.PastPlacementAdapter
 import com.example.projectsetup.ui.placement.upcoming.UpcomingPlacementAdapter
+import com.example.projectsetup.util.Constants
 import kotlinx.android.synthetic.main.activity_placement.*
 import javax.inject.Inject
 
@@ -26,6 +30,7 @@ class PlacementActivity : BaseActivity() {
     lateinit var pastPlacementAdapter: PastPlacementAdapter
 
     private lateinit var placementViewModel: PlacementViewModel
+    private lateinit var progressModal: ProgressModal
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -53,6 +58,8 @@ class PlacementActivity : BaseActivity() {
         placementViewModel =
             ViewModelProvider(this, viewModelFactory).get(PlacementViewModel::class.java)
 
+        progressModal = ProgressModal(this)
+
     }
 
     private fun initialiseLayout() {
@@ -61,6 +68,8 @@ class PlacementActivity : BaseActivity() {
 
         rvPast.layoutManager = LinearLayoutManager(this)
         rvPast.adapter = pastPlacementAdapter
+
+        placementViewModel.upcomingCompanies(sharedPreferenceUtil.getString(Constants.EXTRA_USER_ID))
     }
 
     private fun setListener() {
@@ -68,6 +77,21 @@ class PlacementActivity : BaseActivity() {
     }
 
     private fun observeData() {
-
+        placementViewModel.upcomingLiveData.observe(this, Observer {
+            when(it.status){
+                Status.LOADING->{
+                    progressModal.show()
+                }
+                Status.SUCCESS->{
+                    progressModal.dismiss()
+                    it.data?.let {list->
+                        upcomingPlacementAdapter.setList(list)
+                    }
+                }
+                Status.ERROR->{
+                    progressModal.dismiss()
+                }
+            }
+        })
     }
 }

@@ -5,6 +5,7 @@ import com.example.projectsetup.di.mapkey.ViewModelKey
 import com.example.projectsetup.ui.home.HomeViewModel
 import com.example.projectsetup.ui.login.LoginViewModel
 import com.example.projectsetup.ui.placement.PlacementViewModel
+import com.example.projectsetup.ui.user_details.UserDetailsViewModel
 
 import dagger.Binds
 import dagger.Module
@@ -28,6 +29,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     abstract fun bindLoginViewModel(loginViewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserDetailsViewModel::class)
+    abstract fun bindUserDetailsViewModel(userDetailsViewModel: UserDetailsViewModel): ViewModel
 
     @Binds
     @IntoMap

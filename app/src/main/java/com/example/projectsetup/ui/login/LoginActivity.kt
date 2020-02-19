@@ -119,15 +119,17 @@ class LoginActivity : BaseActivity(), LoginAdapter.OnItemClickListener {
         loginViewModel.userLiveData.observe(this, Observer {
             when (it.status) {
                 Status.LOADING -> {
-
+                    progressModal.show()
                 }
                 Status.SUCCESS -> {
+                    progressModal.dismiss()
                     it.data?.let {
-                        startActivity(UserDetailsActivity.newIntent(this,it.name))
+                        startActivity(UserDetailsActivity.newIntent(this,it.id,it.name))
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                     }
                 }
                 Status.ERROR -> {
+                    progressModal.dismiss()
                     it.message?.let { msg ->
                         if (msg.contains("college id"))
                             googleSignInClient.signOut()

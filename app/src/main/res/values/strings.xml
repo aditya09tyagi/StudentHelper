@@ -79,10 +79,11 @@
     <!-- PLACEMENT SCREEN -->
     <string name="placement_label">PLACEMENT</string>
     <string name="starts_on_text">Starts on</string>
-    <string name="register_btn_text">Register</string>
+    <string name="register_btn_text">Register Now</string>
     <string name="registered_text">Registered</string>
     <string name="upcoming_companies">Upcoming Companies</string>
     <string name="past_companies">Past Companies</string>
+    <string name="class_date_format" >%s, %s %s</string>
 
     <!-- Application -->
     <string name="no_internet">No internet connection</string>

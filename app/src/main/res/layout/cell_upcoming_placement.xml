@@ -19,46 +19,46 @@
             android:id="@+id/classDetailsHolder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding_14_dp"
-            android:layout_marginTop="@dimen/padding_14_dp"
-            android:layout_marginEnd="@dimen/padding_14_dp"
+            android:layout_marginStart="@dimen/padding_medium"
+            android:layout_marginTop="@dimen/padding_medium"
+            android:layout_marginEnd="@dimen/padding_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/subjectNameTv"
+                android:id="@+id/tvCompanyName"
                 fontPath="fonts/Lato-Medium.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.96"
                 android:textColor="@color/black"
-                android:textSize="@dimen/font_14_sp"
+                android:textSize="@dimen/font_normal"
                 app:layout_constraintHorizontal_weight="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingPrefix"
-                tools:text="Physics"
+                tools:text="Goldman Sachs"
                 tools:textStyle="bold" />
 
             <TextView
-                android:id="@+id/videoNameTv"
-                fontPath="fonts/Lato-Bold.ttf"
+                android:id="@+id/tvCompanyDescription"
+                style="@style/Text.Secondary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding_14_dp"
                 android:maxLines="2"
-                android:textColor="@color/black"
-                android:textSize="@dimen/font_16_sp"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/font_14_sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/subjectNameTv"
+                app:layout_constraintTop_toBottomOf="@id/tvCompanyName"
                 tools:ignore="MissingPrefix"
-                tools:text="Newton’s First Law - Newton’s Laws of Motion - Of Three Motions"
+                tools:text="Goldman Sachs is looking for Rockstar Android Developers"
                 tools:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tutorNameTv"
+                android:id="@+id/tvJobProfile"
                 fontPath="fonts/Lato.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,12 +68,12 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_16_sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/videoNameTv"
+                app:layout_constraintTop_toBottomOf="@id/tvCompanyDescription"
                 tools:ignore="MissingPrefix"
-                tools:text="Tutor - Harsh Patodia" />
+                tools:text="Android Developer" />
 
             <TextView
-                android:id="@+id/tutorInstitutionTv"
+                android:id="@+id/tvDriveLocation"
                 fontPath="fonts/Lato.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -83,9 +83,9 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_14_sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tutorNameTv"
+                app:layout_constraintTop_toBottomOf="@id/tvJobProfile"
                 tools:ignore="MissingPrefix"
-                tools:text="(IIT Delhi)" />
+                tools:text="Auditorium, ABESEC" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/tutorPhotoIv"
@@ -96,7 +96,7 @@
                 app:civ_border_width="@dimen/padding_2_dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/videoNameTv"
+                app:layout_constraintTop_toBottomOf="@id/tvCompanyDescription"
                 tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -105,7 +105,7 @@
             android:id="@+id/registrationDetailsHolder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding_20_dp"
+            android:layout_marginTop="@dimen/padding_normal"
             android:background="@color/physics_color_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -113,8 +113,25 @@
             app:layout_constraintTop_toBottomOf="@id/classDetailsHolder"
             tools:layout_height="wrap_content">
 
+
             <TextView
-                android:id="@+id/startDateTv"
+                android:id="@+id/startsOnTv"
+                fontPath="fonts/Lato-Medium.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_14_dp"
+                android:layout_marginTop="@dimen/padding_8_dp"
+                android:alpha="0.56"
+                android:text="@string/starts_on_text"
+                android:textColor="#000000"
+                android:textSize="@dimen/font_14_sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingPrefix" />
+
+
+            <TextView
+                android:id="@+id/tvVisitDate"
                 fontPath="fonts/Lato-Medium.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -123,8 +140,8 @@
                 android:layout_marginBottom="@dimen/padding_14_dp"
                 android:textColor="#000000"
                 android:textSize="@dimen/font_14_sp"
+                app:layout_constraintTop_toBottomOf="@id/startsOnTv"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingPrefix"
                 tools:text="12th October, 2019" />
 
@@ -136,12 +153,51 @@
                 android:layout_marginTop="@dimen/padding_12_dp"
                 android:layout_marginBottom="@dimen/padding_16_dp"
                 android:alpha="0.80"
+                android:text="20 students participated"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_12_sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/startDateTv"
-                tools:text="3245 students participated" />
+                app:layout_constraintTop_toBottomOf="@id/tvVisitDate"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/registerStatusLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:padding="@dimen/padding_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/registerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="@dimen/padding_14_dp"
+                android:text="@string/register_btn_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_14_sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@drawable/bg_rounded_corner" />
+
+            <TextView
+                android:id="@+id/registeredTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/padding_small"
+                android:padding="@dimen/padding_14_dp"
+                android:text="@string/registered_text"
+                android:textSize="@dimen/font_14_sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:textColor="@color/physics_color" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

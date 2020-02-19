@@ -27,6 +27,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_small"
+        android:textColor="@color/exam_selected"
+        android:layout_margin="@dimen/padding_micro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvPersonalInfo"
@@ -36,7 +38,7 @@
         android:id="@+id/etAge"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_micro"
+        android:layout_margin="@dimen/padding_small"
         android:backgroundTint="@color/dark_grey"
         android:hint="@string/age_hint"
         android:inputType="number"
@@ -49,7 +51,7 @@
     <Spinner
         android:id="@+id/spinnerBranch"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_margin="@dimen/padding_micro"
         android:backgroundTint="@color/dark_grey"
         android:padding="@dimen/padding_medium"
@@ -60,7 +62,8 @@
     <Spinner
         android:id="@+id/spinnerSection"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/padding_micro"
         android:backgroundTint="@color/dark_grey"
         android:padding="@dimen/padding_medium"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,28 +73,27 @@
     <Spinner
         android:id="@+id/spinnerSemester"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/padding_micro"
         android:backgroundTint="@color/dark_grey"
         android:padding="@dimen/padding_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinnerSection" />
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/etSkills"
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteSkills"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_micro"
         android:backgroundTint="@color/dark_grey"
+        android:hint="@string/skills_hint"
+        android:completionThreshold="1"
         android:drawableEnd="@drawable/ic_add_circle"
         android:drawablePadding="@dimen/padding_small"
-        android:hint="@string/skills_hint"
-        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinnerSemester"
-        app:met_floatingLabel="highlight"
-        app:met_floatingLabelText="Skills" />
+        app:layout_constraintTop_toBottomOf="@id/spinnerSemester" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSkills"
@@ -99,7 +101,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etSkills"
+        app:layout_constraintTop_toBottomOf="@id/autoCompleteSkills"
         app:spanCount="3"
         tools:itemCount="2"
         tools:listitem="@layout/cell_skill" />

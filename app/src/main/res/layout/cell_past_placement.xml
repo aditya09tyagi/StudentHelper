@@ -38,7 +38,7 @@
             app:layout_constraintTop_toBottomOf="@id/classCoverIv">
 
             <TextView
-                android:id="@+id/subjectNameTv"
+                android:id="@+id/tvCompanyName"
                 fontPath="fonts/Lato-Medium.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
 
 
             <TextView
-                android:id="@+id/videoNameTv"
+                android:id="@+id/tvCompanyDescription"
                 fontPath="fonts/Lato-Bold.ttf"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -64,13 +64,13 @@
                 android:textSize="@dimen/font_16_sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/subjectNameTv"
+                app:layout_constraintTop_toBottomOf="@id/tvCompanyName"
                 tools:ignore="MissingPrefix"
                 tools:text="Newton’s First Law - Newton’s Laws of Motion - Of Three Motions"
                 tools:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tutorNameTv"
+                android:id="@+id/tvJobProfile"
                 fontPath="fonts/Lato.ttf"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 android:textSize="@dimen/font_16_sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/videoNameTv"
+                app:layout_constraintTop_toBottomOf="@id/tvCompanyDescription"
                 tools:ignore="MissingPrefix"
                 tools:text="Tutor - Harsh Patodia (IIT Delhi)" />
 
@@ -115,7 +115,7 @@
                 tools:ignore="MissingPrefix" />
 
             <TextView
-                android:id="@+id/startDateTv"
+                android:id="@+id/tvVisitDate"
                 fontPath="fonts/Lato-Medium.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_medium_small"
                 android:visibility="visible"
-                app:layout_constraintTop_toBottomOf="@id/startDateTv"
+                app:layout_constraintTop_toBottomOf="@id/tvVisitDate"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="3245 students interested" />

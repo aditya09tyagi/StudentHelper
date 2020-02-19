@@ -19,7 +19,7 @@
             android:contentDescription="@string/image"
             android:elevation="@dimen/padding_micro"
             android:padding="@dimen/padding_small"
-            android:src="@drawable/img_placement"
+            android:src="@drawable/img_placements"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +31,7 @@
             android:contentDescription="@string/image"
             android:elevation="@dimen/padding_micro"
             android:padding="@dimen/padding_small"
-            android:src="@drawable/img_project"
+            android:src="@drawable/img_projects"
             app:layout_constraintStart_toEndOf="@id/ivPlacement"
             app:layout_constraintTop_toTopOf="parent" />
 
