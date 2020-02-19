@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clUserDetails"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/padding_medium"
+    android:fitsSystemWindows="true">
+
+    <TextView
+        android:id="@+id/tvPersonalInfo"
+        style="@style/Text.Primary.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_small"
+        android:padding="@dimen/padding_medium"
+        android:text="@string/personal_info"
+        android:textColor="@color/translucent_black_dark"
+        android:textSize="@dimen/font_large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHiUser"
+        style="@style/Text.Secondary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvPersonalInfo"
+        tools:text="Hi Aditya" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/etAge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_micro"
+        android:backgroundTint="@color/dark_grey"
+        android:hint="@string/age_hint"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvHiUser"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Age" />
+
+    <Spinner
+        android:id="@+id/spinnerBranch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_micro"
+        android:backgroundTint="@color/dark_grey"
+        android:padding="@dimen/padding_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etAge" />
+
+    <Spinner
+        android:id="@+id/spinnerSection"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_grey"
+        android:padding="@dimen/padding_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerBranch" />
+
+    <Spinner
+        android:id="@+id/spinnerSemester"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_grey"
+        android:padding="@dimen/padding_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerSection" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/etSkills"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_micro"
+        android:backgroundTint="@color/dark_grey"
+        android:drawableEnd="@drawable/ic_add_circle"
+        android:drawablePadding="@dimen/padding_small"
+        android:hint="@string/skills_hint"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinnerSemester"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="Skills" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSkills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSkills"
+        app:spanCount="3"
+        tools:itemCount="2"
+        tools:listitem="@layout/cell_skill" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSubmitDetails"
+        style="@style/Text.Primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_corner"
+        android:foreground="@drawable/ripple_back_button"
+        android:padding="@dimen/padding_normal"
+        android:text="@string/submit_details"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvSkills" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

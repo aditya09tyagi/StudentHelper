@@ -16,8 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 class StudentHelperServiceModule {
 
     companion object {
-        private const val BASE_URL_TESTING = "http://.com"
-        private const val BASE_URL_RELEASE = "https://.com"
+        private const val BASE_URL_TESTING = "http://apitesting.instasolv.com:6000/"
+        private const val BASE_URL_RELEASE = "https://guarded-harbor-78775.herokuapp.com"
         private const val BASE_URL = BASE_URL_RELEASE
     }
 

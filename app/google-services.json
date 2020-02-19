@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "241504643600",
+    "firebase_url": "https://studenthelper-74892.firebaseio.com",
+    "project_id": "studenthelper-74892",
+    "storage_bucket": "studenthelper-74892.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241504643600:android:bed6ebea87d46037a2f895",
+        "android_client_info": {
+          "package_name": "com.example.projectsetup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241504643600-55sj8lsg6gapcs51ib97l5l598pfl3ur.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.projectsetup",
+            "certificate_hash": "a81472b18c8b2c753be55fadd595051791d225c1"
+          }
+        },
+        {
+          "client_id": "241504643600-7mvciklkncb1taudo6h2f41in0agg18e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCADHCqWU2WffuQ-j84zGGmahfC52Eni2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241504643600-7mvciklkncb1taudo6h2f41in0agg18e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clInnerFriendChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_friend_chat_message"
+        android:padding="@dimen/padding_small"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="250dp"
+        app:layout_constraintWidth_min="250dp">
+
+        <TextView
+            android:id="@+id/tvUserName"
+            style="@style/Text.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_normal"
+            android:textSize="@dimen/font_10_sp"
+            app:layout_constraintStart_toEndOf="@+id/civFriend"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Ashu Tyagi" />
+
+        <TextView
+            android:id="@+id/messageTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_normal"
+            android:layout_marginTop="@dimen/padding_micro"
+            app:layout_constraintTop_toBottomOf="@id/tvUserName"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_medium_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/civFriend"
+            tools:text="Hi. I am robin Kamboj. How do you do?" />
+
+        <TextView
+            android:id="@+id/timeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_normal"
+            android:layout_marginTop="@dimen/padding_micro"
+            android:alpha="0.5"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_10_sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/civFriend"
+            app:layout_constraintTop_toBottomOf="@id/messageTv"
+            tools:text="02:30 PM" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/civFriend"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

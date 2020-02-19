@@ -32,18 +32,22 @@ open class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         window.navigationBarColor = ContextCompat.getColor(this, R.color.navigation_bar)
 
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
 
-        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.colorPrimaryDark))
+        StatusBarUtil.setColorNoTranslucent(
+            this,
+            ContextCompat.getColor(this, R.color.colorPrimaryDark)
+        )
 
         val component = DaggerBaseActivityComponent.builder()
-                .setUpApplicationComponent(StudentHelper.get(this).studentHelperApplicationComponent())
-                .build()
+            .studentHelperApplicationComponent(StudentHelper.get(this).studentHelperApplicationComponent())
+            .build()
 
         component.injectBaseActivity(this)
 
@@ -65,13 +69,18 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        if(::appCloseEventWatcher.isInitialized)
+        if (::appCloseEventWatcher.isInitialized)
             appCloseEventWatcher.stopWatch()
 
         super.onDestroy()
     }
 
-    protected fun showErrorToast(message: String, view: View? = null, actionText: String = getString(R.string.ok), duration: Int = Toasty.LENGTH_LONG) {
+    protected fun showErrorToast(
+        message: String,
+        view: View? = null,
+        actionText: String = getString(R.string.ok),
+        duration: Int = Toasty.LENGTH_LONG
+    ) {
 
         if (NotificationManagerCompat.from(this).areNotificationsEnabled())
             Toasty.error(this, message, duration).show()
@@ -87,7 +96,11 @@ open class BaseActivity : AppCompatActivity() {
 
     }
 
-    protected fun showSuccessToast(message: String, view: View? = null, duration: Int = Toasty.LENGTH_LONG) {
+    protected fun showSuccessToast(
+        message: String,
+        view: View? = null,
+        duration: Int = Toasty.LENGTH_LONG
+    ) {
         if (NotificationManagerCompat.from(this).areNotificationsEnabled())
             Toasty.success(this, message, duration).show()
         else if (view != null) {
@@ -95,9 +108,41 @@ open class BaseActivity : AppCompatActivity() {
             snackbar.setAction(getString(R.string.ok)) {
                 snackbar.dismiss()
             }
-            snackbar.view.setBackgroundColor(ContextCompat.getColor(this, R.color.feedback_positive))
+            snackbar.view.setBackgroundColor(
+                ContextCompat.getColor(
+                    this,
+                    R.color.feedback_positive
+                )
+            )
             snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.white))
             snackbar.show()
         }
+    }
+
+    protected fun showSuccessSnackBar(
+        message: String,
+        view: View
+    ) {
+        val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+        snackbar.setAction(getString(R.string.ok)) {
+            snackbar.dismiss()
+        }
+        snackbar.view.setBackgroundColor(ContextCompat.getColor(this, R.color.feedback_positive))
+        snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.white))
+        snackbar.show()
+    }
+
+    protected fun showErrorSnackBar(
+        message: String,
+        view: View,
+        actionText: String = getString(R.string.ok)
+    ) {
+        val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+        snackbar.setAction(actionText) {
+            snackbar.dismiss()
+        }
+        snackbar.view.setBackgroundColor(ContextCompat.getColor(this, R.color.text_red))
+        snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.white))
+        snackbar.show()
     }
 }

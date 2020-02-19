@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjectSetup</string>
+    <string name="app_name">StudentHelper</string>
 
     <!-- Placeholders -->
     <string name="icon">Icon</string>
@@ -11,10 +11,78 @@
     <string name="internal_storage">Internal storage</string>
     <string name="button_sure_default" translatable="false">Done</string>
 
+    <string-array name="branch_array">
+        <item>Electrical Engineering </item>
+        <item>Computer Science</item>
+        <item>Information Technology</item>
+        <item>Civil Engineering</item>
+        <item>Electronics Engineering</item>
+        <item>Mechanical Engineering</item>
+    </string-array>
+
+    <string-array name="semester_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="section_array">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+        <item>E</item>
+    </string-array>
+    
     <!-- Progress Loader -->
     <string name="default_loading_message">Please wait…</string>
     <string name="reset">Reset</string>
     <string name="done">Done</string>
+
+    <!-- LOGIN SCREEN-->
+    <string name="choose_account_type">Choose your account type</string>
+    <string name="student_label">Student</string>
+    <string name="teacher_label">Teacher</string>
+    <string name="admin_label">Admin</string>
+    <string name="select_account_type">Please select your account type first.</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="introduction_text">
+        Hello there!!.
+        <br>
+           \n Let\'s start exploring your college app.
+        </br>
+        <br>
+           \n Login below to get started.
+        </br>
+    </string>
+
+    <!-- ADD USER DETAILS SCREEN-->
+    <string name="personal_info">Personal Info</string>
+    <string name="age_hint">Enter your Age</string>
+    <string name="branch_hint">Enter your Branch</string>
+    <string name="section_hint">Enter your Section</string>
+    <string name="semester_hint">Enter your Semester</string>
+    <string name="skills_hint">Enter your Skills</string>
+    <string name="submit_details">Submit Details</string>
+    
+    <!-- SELECTION SCREEN -->
+    <string name="select_choice">Choose one of the following</string>
+
+    <!-- PROJECT SCREEN -->
+    <string name="project_label">PROJECT</string>
+
+    <!-- PLACEMENT SCREEN -->
+    <string name="placement_label">PLACEMENT</string>
+    <string name="starts_on_text">Starts on</string>
+    <string name="register_btn_text">Register</string>
+    <string name="registered_text">Registered</string>
+    <string name="upcoming_companies">Upcoming Companies</string>
+    <string name="past_companies">Past Companies</string>
 
     <!-- Application -->
     <string name="no_internet">No internet connection</string>
