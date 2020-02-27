@@ -2,9 +2,11 @@ package com.example.projectsetup.di.modules.helper
 
 import androidx.lifecycle.ViewModel
 import com.example.projectsetup.di.mapkey.ViewModelKey
+import com.example.projectsetup.ui.chat.ChatViewModel
 import com.example.projectsetup.ui.home.HomeViewModel
 import com.example.projectsetup.ui.login.LoginViewModel
 import com.example.projectsetup.ui.placement.PlacementViewModel
+import com.example.projectsetup.ui.project.ProjectViewModel
 import com.example.projectsetup.ui.user_details.UserDetailsViewModel
 
 import dagger.Binds
@@ -39,4 +41,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(PlacementViewModel::class)
     abstract fun bindPlacementViewModel(placementViewModel: PlacementViewModel):ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProjectViewModel::class)
+    abstract fun bindProjectViewModel(projectViewModel: ProjectViewModel):ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ChatViewModel::class)
+    abstract fun bindChatViewModel(chatViewModel: ChatViewModel):ViewModel
 }

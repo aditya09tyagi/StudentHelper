@@ -85,6 +85,9 @@
     <string name="past_companies">Past Companies</string>
     <string name="class_date_format" >%s, %s %s</string>
 
+    <!-- Chat Screen -->
+    <string name="write_a_chat_message">Chat with teacher</string>
+
     <!-- Application -->
     <string name="no_internet">No internet connection</string>
 

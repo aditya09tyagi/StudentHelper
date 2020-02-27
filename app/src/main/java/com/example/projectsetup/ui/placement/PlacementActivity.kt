@@ -31,9 +31,11 @@ class PlacementActivity : BaseActivity() {
 
     private lateinit var placementViewModel: PlacementViewModel
     private lateinit var progressModal: ProgressModal
+    private lateinit var userId: String
 
     companion object {
-        fun newIntent(context: Context): Intent {
+        private const val EXTRA_USER_ID = "EXTRA_USER_ID"
+        fun newIntent(context: Context, userId: String): Intent {
             val intent = Intent(context, PlacementActivity::class.java)
             return intent
         }
@@ -42,10 +44,19 @@ class PlacementActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_placement)
+        getArguments()
         inject()
         initialiseLayout()
         setListener()
         observeData()
+    }
+
+    private fun getArguments(){
+        intent?.let {
+            it.getStringExtra(EXTRA_USER_ID)?.let {uid->
+                userId = uid
+            }
+        }
     }
 
     private fun inject() {
@@ -78,17 +89,17 @@ class PlacementActivity : BaseActivity() {
 
     private fun observeData() {
         placementViewModel.upcomingLiveData.observe(this, Observer {
-            when(it.status){
-                Status.LOADING->{
+            when (it.status) {
+                Status.LOADING -> {
                     progressModal.show()
                 }
-                Status.SUCCESS->{
+                Status.SUCCESS -> {
                     progressModal.dismiss()
-                    it.data?.let {list->
+                    it.data?.let { list ->
                         upcomingPlacementAdapter.setList(list)
                     }
                 }
-                Status.ERROR->{
+                Status.ERROR -> {
                     progressModal.dismiss()
                 }
             }

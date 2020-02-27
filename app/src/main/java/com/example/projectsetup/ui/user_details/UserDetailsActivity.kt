@@ -266,7 +266,7 @@ class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener 
     }
 
     private fun startSelectionActivity() {
-        startActivity(SelectionActivity.newIntent(this))
+        startActivity(SelectionActivity.newIntent(this,userId))
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 

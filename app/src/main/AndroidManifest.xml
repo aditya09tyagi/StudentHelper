@@ -38,6 +38,9 @@
 
         <activity android:name=".ui.project.ProjectActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".ui.chat.ChatActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
