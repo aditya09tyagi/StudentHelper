@@ -21,9 +21,12 @@ class PastPlacementViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
         itemView.tvDriveLocation.text = past.driveLocation
         itemView.tvVisitDate.text = getStartDateString(past.visitDate)
 
+        val skills = past.skills.joinToString { it.name }
+        itemView.tvSkills.text = skills
+
         itemView.setOnClickListener {
-            if(::onItemClickListener.isInitialized)
-                onItemClickListener.onItemClick(adapterPosition,past.company.id)
+            if (::onItemClickListener.isInitialized)
+                onItemClickListener.onItemClick(adapterPosition, past.company.id)
         }
     }
 
@@ -38,7 +41,7 @@ class PastPlacementViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
         )
     }
 
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener){
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
         this.onItemClickListener = onItemClickListener
     }
 

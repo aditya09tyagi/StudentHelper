@@ -87,6 +87,21 @@
                 tools:ignore="MissingPrefix"
                 tools:text="Auditorium, ABESEC" />
 
+            <TextView
+                android:id="@+id/tvSkills"
+                fontPath="fonts/Lato.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_4_dp"
+                android:alpha="0.56"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_14_sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDriveLocation"
+                tools:ignore="MissingPrefix"
+                tools:text="JAVA, Kotlin" />
+
             <ImageView
                 android:id="@+id/tutorPhotoIv"
                 android:layout_width="80dp"
@@ -138,8 +153,8 @@
                 android:layout_marginBottom="@dimen/padding_14_dp"
                 android:textColor="#000000"
                 android:textSize="@dimen/font_14_sp"
-                app:layout_constraintTop_toBottomOf="@id/startsOnTv"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/startsOnTv"
                 tools:ignore="MissingPrefix"
                 tools:text="12th October, 2019" />
 
@@ -156,9 +171,10 @@
                 android:textSize="@dimen/font_12_sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvVisitDate"/>
+                app:layout_constraintTop_toBottomOf="@id/tvVisitDate" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/registerStatusLayout"
             android:layout_width="wrap_content"
@@ -174,7 +190,7 @@
                 android:gravity="center"
                 android:padding="@dimen/padding_14_dp"
                 android:text="@string/register_btn_text"
-                android:textColor="@color/white"
+                android:textColor="@color/chemistry_color"
                 android:textSize="@dimen/font_14_sp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -194,7 +210,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:textColor="@color/physics_color" />
+                tools:textColor="@color/chemistry_color" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

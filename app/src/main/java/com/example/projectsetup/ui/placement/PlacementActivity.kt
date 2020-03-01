@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectsetup.R
 import com.example.projectsetup.StudentHelper
 import com.example.projectsetup.data.models.Status
+import com.example.projectsetup.data.models.Upcoming
 import com.example.projectsetup.di.components.DaggerPlacementActivityComponent
 import com.example.projectsetup.ui.base.BaseActivity
 import com.example.projectsetup.ui.company.CompanyActivity
@@ -39,6 +40,9 @@ class PlacementActivity : BaseActivity(), UpcomingPlacementAdapter.OnUpcomingIte
     private lateinit var placementViewModel: PlacementViewModel
     private lateinit var progressModal: ProgressModal
     private lateinit var userId: String
+
+    private lateinit var upcomingClasses: ArrayList<Upcoming>
+    private var position = 0
 
     companion object {
         private const val EXTRA_USER_ID = "EXTRA_USER_ID"
@@ -147,9 +151,10 @@ class PlacementActivity : BaseActivity(), UpcomingPlacementAdapter.OnUpcomingIte
                 Status.SUCCESS -> {
                     progressModal.dismiss()
                     it.data?.let { list ->
+                        upcomingClasses = list
                         if (list.isNotEmpty()) {
                             tvUpcoming.visibility = View.VISIBLE
-                            upcomingPlacementAdapter.setList(list)
+                            upcomingPlacementAdapter.setList(upcomingClasses)
                         } else {
                             tvUpcoming.visibility = View.GONE
                         }
@@ -189,6 +194,10 @@ class PlacementActivity : BaseActivity(), UpcomingPlacementAdapter.OnUpcomingIte
                 Status.SUCCESS -> {
                     progressModal.dismiss()
                     it.data?.let { job ->
+                        if (::upcomingClasses.isInitialized) {
+                            upcomingClasses[position].isRegistered = true
+                            upcomingPlacementAdapter.notifyItemChanged(position)
+                        }
                         showSuccessToast("Registered")
                     }
                 }
@@ -200,8 +209,10 @@ class PlacementActivity : BaseActivity(), UpcomingPlacementAdapter.OnUpcomingIte
     }
 
     override fun onRegisterNowClickedListener(position: Int, jobId: String) {
-        if (::userId.isInitialized)
+        if (::userId.isInitialized) {
             placementViewModel.applyForJob(userId, jobId)
+            this.position = position
+        }
     }
 
     override fun onItemClickListener(position: Int, companyId: String) {
@@ -212,7 +223,7 @@ class PlacementActivity : BaseActivity(), UpcomingPlacementAdapter.OnUpcomingIte
         startCompanyActivity(companyId)
     }
 
-    private fun startCompanyActivity(companyId: String){
+    private fun startCompanyActivity(companyId: String) {
         startActivity(CompanyActivity.newIntent(this, companyId))
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }

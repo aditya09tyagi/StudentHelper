@@ -14,10 +14,10 @@ data class Upcoming(
     @SerializedName("description")
     val description: String,
     @SerializedName("isRegistered")
-    val isRegistered: Boolean,
+    var isRegistered: Boolean,
     @SerializedName("place")
     val place: String,
-    @SerializedName("_skill")
+    @SerializedName("skill")
     val skill: List<Skill>,
     @SerializedName("title")
     val title: String,

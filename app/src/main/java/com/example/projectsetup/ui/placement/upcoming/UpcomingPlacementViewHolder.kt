@@ -20,20 +20,29 @@ class UpcomingPlacementViewHolder(itemView: View) : RecyclerView.ViewHolder(item
         itemView.tvJobProfile.text = upcoming.title
         itemView.tvDriveLocation.text = upcoming.place
         itemView.tvVisitDate.text = getStartDateString(upcoming.visit_date)
-        setItemClickListener(itemView,upcoming)
+        setItemClickListener(itemView, upcoming)
         setRegisterViews(upcoming.isRegistered)
+
+        val skills = upcoming.skill.joinToString { it.name }
+        itemView.tvSkills.text = skills
 
     }
 
-    private fun setItemClickListener(itemView: View,upcoming: Upcoming){
+    private fun setItemClickListener(itemView: View, upcoming: Upcoming) {
         itemView.setOnClickListener {
             if (::onUpcomingItemClickListener.isInitialized)
-                onUpcomingItemClickListener.onItemClickListener(adapterPosition,upcoming.company.id)
+                onUpcomingItemClickListener.onItemClickListener(
+                    adapterPosition,
+                    upcoming.company.id
+                )
         }
 
         itemView.registerButton.setOnClickListener {
             if (::onUpcomingItemClickListener.isInitialized)
-                onUpcomingItemClickListener.onRegisterNowClickedListener(adapterPosition,upcoming.jobId)
+                onUpcomingItemClickListener.onRegisterNowClickedListener(
+                    adapterPosition,
+                    upcoming.jobId
+                )
         }
     }
 
@@ -58,12 +67,12 @@ class UpcomingPlacementViewHolder(itemView: View) : RecyclerView.ViewHolder(item
         )
     }
 
-    fun setOnUpcomingItemClickListener(onUpcomingItemClickListener: OnUpcomingItemClickListener){
+    fun setOnUpcomingItemClickListener(onUpcomingItemClickListener: OnUpcomingItemClickListener) {
         this.onUpcomingItemClickListener = onUpcomingItemClickListener
     }
 
     interface OnUpcomingItemClickListener {
         fun onRegisterNowClickedListener(position: Int, jobId: String)
-        fun onItemClickListener(position: Int,companyId: String)
+        fun onItemClickListener(position: Int, companyId: String)
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.projectsetup.R
 import com.example.projectsetup.StudentHelper
 import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerCompanyActivityComponent
@@ -32,11 +33,20 @@ class CompanyActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_company)
+        setWindowInsets()
         getArguments()
         inject()
         if (::companyId.isInitialized)
             companyViewModel.getCompanyById(companyId)
         observeData()
+    }
+
+    private fun setWindowInsets() {
+        clCompany.setOnApplyWindowInsetsListener { view, insets ->
+            view.setPadding(0, insets.systemWindowInsetTop, 0, insets.systemWindowInsetBottom)
+            insets
+        }
     }
 
     private fun getArguments() {
