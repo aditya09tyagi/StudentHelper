@@ -3,17 +3,14 @@ package com.example.projectsetup.ui.user_details
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.projectsetup.data.models.Error
-import com.example.projectsetup.data.models.Resource
-import com.example.projectsetup.data.models.Skill
-import com.example.projectsetup.data.models.User
+import com.example.projectsetup.data.models.*
 import com.example.projectsetup.data.network.StudentHelperRepository
 import javax.inject.Inject
 
 class UserDetailsViewModel @Inject constructor(
     private val studentHelperRepository: StudentHelperRepository
 ) : ViewModel(), StudentHelperRepository.OnSearchSkillListener,
-    StudentHelperRepository.OnUpdateUserListener {
+    StudentHelperRepository.OnUpdateUserListener, StudentHelperRepository.OnGetAllBranchesListener {
 
 
     private val _skillsLiveData = MutableLiveData<Resource<ArrayList<Skill>>>()
@@ -24,27 +21,38 @@ class UserDetailsViewModel @Inject constructor(
     val updateUserLiveData: LiveData<Resource<User>>
         get() = _updateUserLiveData
 
+    private val _branchLiveData = MutableLiveData<Resource<List<Branch>>>()
+    val branchLiveData: LiveData<Resource<List<Branch>>>
+        get() = _branchLiveData
+
 
     fun searchSkills(queryText: String) {
         _skillsLiveData.postValue(Resource.loading())
         studentHelperRepository.searchSkills(queryText, this)
     }
 
+    fun getBranches() {
+        _branchLiveData.postValue(Resource.loading())
+        studentHelperRepository.getAllBranches(this)
+    }
+
     fun updateUser(
         userId: String,
-        age: String,
+        age: Int,
         branch: String,
         section: String,
-        semester: String,
-        commaSeparatedSkillIds: String
+        semester: Int,
+        commaSeparatedSkillIds: String,
+        userType: Int
     ) {
         studentHelperRepository.updateUser(
             userId = userId,
             age = age,
-//            branch = branch,
+            branch = branch,
             section = section,
             semester = semester,
-//            commaSeparatedSkillIds = commaSeparatedSkillIds,
+            commaSeparatedSkillIds = commaSeparatedSkillIds,
+            userType = userType,
             onUpdateUserListener = this
         )
     }
@@ -63,5 +71,13 @@ class UserDetailsViewModel @Inject constructor(
 
     override fun onUpdateUserFailure(error: Error) {
         _updateUserLiveData.postValue(Resource.error(error))
+    }
+
+    override fun onGetAllBranchesSuccess(branches: ArrayList<Branch>) {
+        _branchLiveData.postValue(Resource.success(branches))
+    }
+
+    override fun onGetAllBranchesFailure(error: Error) {
+        _branchLiveData.postValue(Resource.error(error))
     }
 }

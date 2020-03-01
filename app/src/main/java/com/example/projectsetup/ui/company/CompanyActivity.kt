@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.projectsetup.R
@@ -37,6 +39,7 @@ class CompanyActivity : BaseActivity() {
         setWindowInsets()
         getArguments()
         inject()
+        initWebView()
         if (::companyId.isInitialized)
             companyViewModel.getCompanyById(companyId)
         observeData()
@@ -68,6 +71,22 @@ class CompanyActivity : BaseActivity() {
             ViewModelProvider(this, viewModelFactory).get(CompanyViewModel::class.java)
     }
 
+    private fun initWebView() {
+        companyWebView.settings?.let {
+            it.javaScriptEnabled = true
+            it.loadWithOverviewMode = true
+            it.useWideViewPort = true
+            it.builtInZoomControls = true
+            it.displayZoomControls = false
+        }
+        companyWebView.webViewClient = object : WebViewClient() {
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                progressBar.visibility = View.GONE
+            }
+        }
+    }
+
     private fun observeData() {
         companyViewModel.companyLiveData.observe(this, Observer {
             when (it.status) {
@@ -75,7 +94,6 @@ class CompanyActivity : BaseActivity() {
                     progressBar.visibility = View.VISIBLE
                 }
                 Status.SUCCESS -> {
-                    progressBar.visibility = View.GONE
                     it.data?.let { company ->
                         companyWebView.loadUrl(company.companyWebsite)
                     }

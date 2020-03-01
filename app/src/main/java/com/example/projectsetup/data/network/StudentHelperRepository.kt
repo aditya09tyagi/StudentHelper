@@ -37,11 +37,11 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
     fun updateUser(
         userId: String,
-        age: String = "",
-        branch: String = "",
-        userType: String = "",
-        section: String = "",
-        semester: String = "",
+        age: Int,
+        branch: String,
+        userType: Int,
+        section: String = "A",
+        semester: Int,
         commaSeparatedSkillIds: String = "",
         onUpdateUserListener: OnUpdateUserListener? = null
     ) {
@@ -182,8 +182,8 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
     }
 
     fun getMyProject(userId: String, onGetMyProjectListener: OnGetMyProjectListener) {
-        studentHelperService.getMyProject(userId).enqueue(object : ApiCallback<Project>() {
-            override fun success(response: Project) {
+        studentHelperService.getMyProject(userId).enqueue(object : ApiCallback<List<Project>>() {
+            override fun success(response: List<Project>) {
                 onGetMyProjectListener.onGetMyProjectSuccess(response)
             }
 
@@ -337,7 +337,7 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
     interface OnGetMyProjectListener {
 
-        fun onGetMyProjectSuccess(project: Project)
+        fun onGetMyProjectSuccess(project: List<Project>)
 
         fun onGetMyProjectFailure(error: Error)
 

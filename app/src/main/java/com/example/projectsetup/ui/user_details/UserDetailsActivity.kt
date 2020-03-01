@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectsetup.R
 import com.example.projectsetup.StudentHelper
+import com.example.projectsetup.data.models.Branch
 import com.example.projectsetup.data.models.Skill
 import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerUserDetailsActivityComponent
 import com.example.projectsetup.ui.base.BaseActivity
 import com.example.projectsetup.ui.loader.ProgressModal
 import com.example.projectsetup.ui.selection.SelectionActivity
+import com.example.projectsetup.util.Constants
 import com.example.projectsetup.util.CustomValidationListener
 import com.mobsandgeeks.saripaar.Validator
 import com.mobsandgeeks.saripaar.annotation.NotEmpty
@@ -51,14 +53,19 @@ class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener 
     private var commaSeparatedSkillIds: String = ""
     private var skills: ArrayList<String> = ArrayList()
 
+    private lateinit var branchList: List<Branch>
+
+    private var userType = Constants.USER_TYPE_STUDENT
 
     companion object {
+        private const val EXTRA_USER_TYPE = "EXTRA_USER_TYPE"
         private const val EXTRA_USER_NAME = "EXTRA_USER_NAME"
         private const val EXTRA_USER_ID = "EXTRA_USER_ID"
-        fun newIntent(context: Context, userId: String, name: String): Intent {
+        fun newIntent(context: Context, userId: String, name: String, userType: Int): Intent {
             val intent = Intent(context, UserDetailsActivity::class.java)
             intent.putExtra(EXTRA_USER_ID, userId)
             intent.putExtra(EXTRA_USER_NAME, name)
+            intent.putExtra(EXTRA_USER_TYPE, userType)
             return intent
         }
     }
@@ -81,6 +88,9 @@ class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener 
             it.getStringExtra(EXTRA_USER_ID)?.let { id ->
                 this.userId = id
             }
+            it.getIntExtra(EXTRA_USER_TYPE, Constants.USER_TYPE_STUDENT).let { id ->
+                this.userType = id
+            }
         }
     }
 
@@ -101,21 +111,13 @@ class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener 
         etAge = findViewById(R.id.etAge)
         autoCompleteSkills = findViewById(R.id.autoCompleteSkills)
 
+        userDetailsViewModel.getBranches()
+
         if (::name.isInitialized)
             tvHiUser.text = "Hi $name, please fill the following details."
 
         validator = Validator(this)
 
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.branch_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinnerBranch.adapter = adapter
-        }
         ArrayAdapter.createFromResource(
             this,
             R.array.section_array,
@@ -155,15 +157,15 @@ class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener 
             override fun onValidationSucceeded() {
                 if (isSkillAdded) {
                     if (::userId.isInitialized) {
-                        startSelectionActivity()
-//                        userDetailsViewModel.updateUser(
-//                            userId = userId,
-//                            age = etAge.text.toString(),
-//                            branch = spinnerBranch.selectedItem.toString(),
-//                            section = spinnerSection.selectedItem.toString(),
-//                            semester = spinnerSemester.selectedItem.toString(),
-//                            commaSeparatedSkillIds = commaSeparatedSkillIds
-//                        )
+                        userDetailsViewModel.updateUser(
+                            userId = userId,
+                            age = etAge.text.toString().toInt(),
+                            branch = branchList[spinnerBranch.selectedItemPosition].id,
+                            section = spinnerSection.selectedItem.toString(),
+                            semester = spinnerSemester.selectedItem.toString().toInt(),
+                            commaSeparatedSkillIds = commaSeparatedSkillIds,
+                            userType = userType
+                        )
                     }
                 } else {
                     autoCompleteSkills.error = "Enter atleast one skill"
@@ -211,6 +213,32 @@ class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener 
                 }
             }
         })
+
+        userDetailsViewModel.branchLiveData.observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                }
+                Status.SUCCESS -> {
+                    it.data?.let {
+                        branchList = it
+                        val newList = ArrayList<String>()
+                        branchList.forEach {
+                            newList.add(it.branchName)
+                        }
+                        val adapter = ArrayAdapter<String>(
+                            this,
+                            android.R.layout.simple_spinner_item,
+                            newList
+                        )
+                        spinnerBranch.adapter = adapter
+                    }
+
+                }
+                Status.ERROR -> {
+                    showErrorToast("${it.message}")
+                }
+            }
+        })
     }
 
     private fun initAutoComplete() {
@@ -244,7 +272,7 @@ class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener 
                             if (skillText == skills[i]) {
                                 isSkillAdded = true
                                 commaSeparatedSkillIds += if (commaSeparatedSkillIds.isNullOrEmpty())
-                                    "${skillList[i].id},"
+                                    "${skillList[i].id}"
                                 else
                                     ",${skillList[i].id}"
 
@@ -266,8 +294,9 @@ class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener 
     }
 
     private fun startSelectionActivity() {
-        startActivity(SelectionActivity.newIntent(this,userId))
+        startActivity(SelectionActivity.newIntent(this, userId))
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        finishAffinity()
     }
 
     override fun onItemDeleted(position: Int) {

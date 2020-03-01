@@ -74,12 +74,12 @@ interface StudentHelperService {
     @GET("v1/user/updateUser")
     fun updateUser(
         @Query("userId") userId: String,
-        @Query("age") age: String?,
-        @Query("branch") branch: String?,
-        @Query("userType") userType: String?,
-        @Query("section") section: String?,
-        @Query("semester") semester: String?,
-        @Query("skills") commaSeparatedSkillIds: String?
+        @Query("age") age: Int,
+        @Query("branch") branch: String,
+        @Query("userType") userType: Int,
+        @Query("section") section: String,
+        @Query("semester") semester: Int,
+        @Query("skills") commaSeparatedSkillIds: String
     ): Call<User>
 
     @GET("v1/placement/company")
@@ -113,8 +113,8 @@ interface StudentHelperService {
 
     @GET("/project/getMyProject")
     fun getMyProject(
-        @Query("userId") userId: String
-    ): Call<Project>
+        @Query("user") userId: String
+    ): Call<List<Project>>
 
     @POST("/project/assignproject")
     fun assignProject(
@@ -131,10 +131,10 @@ interface StudentHelperService {
     fun updateProjectProgress(
         @Query("progress") updatedProgress: Int,
         @Query("project") projectId: String
-    ):Call<Progress>
+    ): Call<Progress>
 
     @GET("/project/getProjectUnderFaculty")
     fun getProjectUnderFaculty(
         @Query("faculty") facultyId: String
-    ):Call<Project>
+    ): Call<Project>
 }

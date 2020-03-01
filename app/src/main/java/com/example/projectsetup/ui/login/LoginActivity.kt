@@ -15,8 +15,11 @@ import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerLoginActivityComponent
 import com.example.projectsetup.di.modules.activity.LoginActivityModule
 import com.example.projectsetup.ui.base.BaseActivity
+import com.example.projectsetup.ui.home.HomeActivity
 import com.example.projectsetup.ui.loader.ProgressModal
+import com.example.projectsetup.ui.selection.SelectionActivity
 import com.example.projectsetup.ui.user_details.UserDetailsActivity
+import com.example.projectsetup.util.Constants
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.android.synthetic.main.activity_login.*
@@ -39,6 +42,8 @@ class LoginActivity : BaseActivity(), LoginAdapter.OnItemClickListener {
     private lateinit var loginModel: LoginModel
     private var selectedItemId: Int = 0
     private var loginTypeList: ArrayList<LoginModel> = ArrayList()
+
+    private var userType = Constants.USER_TYPE_STUDENT
 
     companion object {
         private const val REQUEST_CODE_GOOGLE_SIGN_IN = 1001
@@ -74,20 +79,20 @@ class LoginActivity : BaseActivity(), LoginAdapter.OnItemClickListener {
 
     private fun initLoginTypeList() {
         loginModel = LoginModel(
-            1,
+            Constants.USER_TYPE_STUDENT,
             getDrawable(R.drawable.ic_student)!!,
             getString(R.string.student_label)
         )
         loginTypeList.add(loginModel)
         loginModel = LoginModel(
-            2,
+            Constants.USER_TYPE_FACULTY,
             getDrawable(R.drawable.ic_teacher)!!,
             getString(R.string.teacher_label)
         )
         loginTypeList.add(loginModel)
         loginModel =
             LoginModel(
-                3,
+                Constants.USER_TYPE_ADMIN,
                 getDrawable(R.drawable.ic_admin)!!,
                 getString(R.string.admin_label)
             )
@@ -124,8 +129,22 @@ class LoginActivity : BaseActivity(), LoginAdapter.OnItemClickListener {
                 Status.SUCCESS -> {
                     progressModal.dismiss()
                     it.data?.let {
-                        startActivity(UserDetailsActivity.newIntent(this,it.id,it.name))
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                        if (it.age == 0) {
+                            startActivity(
+                                UserDetailsActivity.newIntent(
+                                    this,
+                                    it.id,
+                                    it.name,
+                                    userType
+                                )
+                            )
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                            finishAffinity()
+                        } else {
+                            startActivity(SelectionActivity.newIntent(this, it.id))
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                            finishAffinity()
+                        }
                     }
                 }
                 Status.ERROR -> {
@@ -159,6 +178,7 @@ class LoginActivity : BaseActivity(), LoginAdapter.OnItemClickListener {
     override fun onItemClicked(position: Int, loginModel: LoginModel) {
         selectedItemId = loginModel.id
         loginAdapter.notifyDataSetChanged()
+        userType = loginModel.id
     }
 
 }

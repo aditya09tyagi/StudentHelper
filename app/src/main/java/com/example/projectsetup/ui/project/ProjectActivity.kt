@@ -13,7 +13,9 @@ import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerProjectActivityComponent
 import com.example.projectsetup.ui.base.BaseActivity
 import com.example.projectsetup.ui.chat.ChatActivity
+import com.example.projectsetup.util.DateTimeUtils
 import kotlinx.android.synthetic.main.acitivity_project.*
+import org.threeten.bp.format.DateTimeFormatter
 import javax.inject.Inject
 
 class ProjectActivity : BaseActivity() {
@@ -63,8 +65,8 @@ class ProjectActivity : BaseActivity() {
             ViewModelProvider(this, viewModelFactory).get(ProjectViewModel::class.java)
     }
 
-    private fun getProject(){
-        if (::userId.isInitialized){
+    private fun getProject() {
+        if (::userId.isInitialized) {
             projectViewModel.getMyProject(userId)
         }
     }
@@ -75,8 +77,8 @@ class ProjectActivity : BaseActivity() {
 
     private fun setListener() {
         fabChat.setOnClickListener {
-            if (::userId.isInitialized){
-                startActivity(ChatActivity.newIntent(this,userId))
+            if (::userId.isInitialized) {
+                startActivity(ChatActivity.newIntent(this, userId))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         }
@@ -84,19 +86,43 @@ class ProjectActivity : BaseActivity() {
 
     private fun observeData() {
         projectViewModel.projectLiveData.observe(this, Observer {
-            when(it.status){
-                Status.LOADING->{
+            when (it.status) {
+                Status.LOADING -> {
                     progressBar.visibility = View.VISIBLE
                     clProjectContainer.visibility = View.GONE
                 }
-                Status.SUCCESS->{
+                Status.SUCCESS -> {
                     progressBar.visibility = View.GONE
-                    clProjectContainer.visibility = View.VISIBLE
                     it.data?.let {
-
+                        if (it.isNotEmpty()) {
+                            it[0].let {
+                                var members = ""
+                                it.userMembers.forEachIndexed { index, user ->
+                                    if (index == it.userMembers.size - 1) {
+                                        members += user.name
+                                    } else {
+                                        members = members + user.name + "\n"
+                                    }
+                                }
+                                tvMembers.text = members
+                                tvCoordinator.text = it.userFaculty.name
+                                tvDeadline.text =
+                                    DateTimeUtils.getLocalDateFromString(it.deadline)
+                                        .format(
+                                            DateTimeFormatter.BASIC_ISO_DATE
+                                        )
+                                projectProgress.progress = it.progress
+                                tvProgressValue.text = it.progress.toString()
+                                tvProjectName.text = it.title
+                                clProjectContainer.visibility = View.VISIBLE
+                            }
+                        } else {
+                            showSuccessToast("No Project Assigned Yet")
+                        }
                     }
                 }
-                Status.ERROR->{
+                Status.ERROR -> {
+                    showErrorToast("${it.message}")
                     progressBar.visibility = View.GONE
                     clProjectContainer.visibility = View.GONE
                 }

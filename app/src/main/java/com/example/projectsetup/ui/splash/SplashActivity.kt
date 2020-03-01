@@ -65,14 +65,16 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun goToSelectionActivity() {
-        if (::userId.isInitialized){
-            startActivity(SelectionActivity.newIntent(this,userId))
+        if (::userId.isInitialized) {
+            startActivity(SelectionActivity.newIntent(this, userId))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            finishAffinity()
         }
     }
 
     private fun goToLoginActivity() {
         startActivity(LoginActivity.newIntent(this))
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        finishAffinity()
     }
 }

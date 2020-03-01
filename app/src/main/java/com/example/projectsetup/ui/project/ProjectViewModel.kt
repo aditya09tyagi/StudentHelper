@@ -15,8 +15,8 @@ class ProjectViewModel @Inject constructor(
 ) : ViewModel(), StudentHelperRepository.OnGetMyProjectListener {
 
 
-    private val _projectLiveData = MutableLiveData<Resource<Project>>()
-    val projectLiveData: LiveData<Resource<Project>>
+    private val _projectLiveData = MutableLiveData<Resource<List<Project>>>()
+    val projectLiveData: LiveData<Resource<List<Project>>>
         get() = _projectLiveData
 
     fun getMyProject(userId: String) {
@@ -24,7 +24,7 @@ class ProjectViewModel @Inject constructor(
         studentHelperRepository.getMyProject(userId, this)
     }
 
-    override fun onGetMyProjectSuccess(project: Project) {
+    override fun onGetMyProjectSuccess(project: List<Project>) {
         _projectLiveData.postValue(Resource.success(project))
     }
 

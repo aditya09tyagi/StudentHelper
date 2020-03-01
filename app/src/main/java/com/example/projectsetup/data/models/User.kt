@@ -21,6 +21,14 @@ data class User(
     val commaSeparatedSubjectIds: List<String>,
     @SerializedName("updatedAt")
     val updatedAt: String,
+    @SerializedName("branch")
+    val branch: String,
+    @SerializedName("section")
+    val section: String,
     @SerializedName("user_type")
-    val userType: Int
+    val userType: Int,
+    @SerializedName("age")
+    val age: Int = 0,
+    @SerializedName("semester")
+    val semester: Int
 )
