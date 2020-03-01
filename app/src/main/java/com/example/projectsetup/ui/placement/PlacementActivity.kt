@@ -3,6 +3,7 @@ package com.example.projectsetup.ui.placement
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerPlacementActivityComponent
 import com.example.projectsetup.ui.base.BaseActivity
 import com.example.projectsetup.ui.loader.ProgressModal
+import com.example.projectsetup.ui.placement.live.LiveCompaniesAdapter
 import com.example.projectsetup.ui.placement.past.PastPlacementAdapter
 import com.example.projectsetup.ui.placement.upcoming.UpcomingPlacementAdapter
 import com.example.projectsetup.util.Constants
@@ -25,6 +27,9 @@ class PlacementActivity : BaseActivity() {
 
     @Inject
     lateinit var upcomingPlacementAdapter: UpcomingPlacementAdapter
+
+    @Inject
+    lateinit var liveCompaniesAdapter: LiveCompaniesAdapter
 
     @Inject
     lateinit var pastPlacementAdapter: PastPlacementAdapter
@@ -84,6 +89,9 @@ class PlacementActivity : BaseActivity() {
         rvPast.layoutManager = LinearLayoutManager(this)
         rvPast.adapter = pastPlacementAdapter
 
+        rvLive.layoutManager = LinearLayoutManager(this)
+        rvLive.adapter = liveCompaniesAdapter
+
     }
 
     private fun getUpcomingCompanies() {
@@ -97,7 +105,8 @@ class PlacementActivity : BaseActivity() {
     }
 
     private fun getLiveCompanies() {
-
+        if (::userId.isInitialized)
+            placementViewModel.liveCompanies(userId)
     }
 
     private fun setListener() {
@@ -113,7 +122,12 @@ class PlacementActivity : BaseActivity() {
                 Status.SUCCESS -> {
                     progressModal.dismiss()
                     it.data?.let { list ->
-                        pastPlacementAdapter.setList(list)
+                        if (list.isNotEmpty()){
+                            tvPast.visibility = View.VISIBLE
+                            pastPlacementAdapter.setList(list)
+                        }else{
+                            tvPast.visibility = View.GONE
+                        }
                     }
                 }
                 Status.ERROR -> {
@@ -129,7 +143,33 @@ class PlacementActivity : BaseActivity() {
                 Status.SUCCESS -> {
                     progressModal.dismiss()
                     it.data?.let { list ->
-                        upcomingPlacementAdapter.setList(list)
+                        if (list.isNotEmpty()){
+                            tvUpcoming.visibility = View.VISIBLE
+                            upcomingPlacementAdapter.setList(list)
+                        }else{
+                            tvUpcoming.visibility = View.GONE
+                        }
+                    }
+                }
+                Status.ERROR -> {
+                    progressModal.dismiss()
+                }
+            }
+        })
+        placementViewModel.liveCompaniesLiveData.observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    progressModal.show()
+                }
+                Status.SUCCESS -> {
+                    progressModal.dismiss()
+                    it.data?.let { list ->
+                        if (list.isNotEmpty()){
+                            tvLive.visibility = View.VISIBLE
+                            liveCompaniesAdapter.setList(list)
+                        }
+                        else
+                            tvLive.visibility = View.GONE
                     }
                 }
                 Status.ERROR -> {

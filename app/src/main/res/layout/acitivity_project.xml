@@ -32,6 +32,7 @@
         app:layout_constraintTop_toBottomOf="@id/tvProjectLabel">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clProjectContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_project_card">
@@ -158,6 +159,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabChat"

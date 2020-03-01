@@ -77,6 +77,7 @@ class LoginViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 sharedPreferenceUtil.putString(Constants.EXTRA_USER, gson.toJson(user))
                 sharedPreferenceUtil.putString(Constants.EXTRA_USER_ID, user!!.id)
+                sharedPreferenceUtil.putBoolean(Constants.IS_ALREADY_LOGGED_IN,true)
             }
             _userLiveData.postValue(Resource.success(user))
         }

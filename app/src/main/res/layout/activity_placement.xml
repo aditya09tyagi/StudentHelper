@@ -11,6 +11,29 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/tvLive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:layout_marginStart="@dimen/padding_small"
+            style="@style/Text.Primary.Bold"
+            android:text="@string/live_companies"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/tvUpcoming"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLive"
+            tools:listitem="@layout/cell_upcoming_placement"
+            tools:itemCount="3"/>
+
+        <TextView
             android:id="@+id/tvUpcoming"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +43,7 @@
             android:text="@string/upcoming_companies"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/rvLive" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvUpcoming"
@@ -30,7 +53,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvUpcoming"
-            tools:listitem="@layout/cell_upcoming_placement" />
+            tools:listitem="@layout/cell_upcoming_placement"
+            tools:itemCount="3"/>
 
         <TextView
             android:id="@+id/tvPast"
@@ -53,7 +77,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvPast"
-            tools:listitem="@layout/cell_past_placement" />
+            tools:listitem="@layout/cell_past_placement"
+            tools:itemCount="3"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

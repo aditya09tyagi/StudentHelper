@@ -38,16 +38,10 @@
     <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
     </style>
 
-<!--    <style name="AppTheme.Launcher" parent="Theme.MaterialComponents.Light.NoActionBar">-->
-<!--        <item name="android:windowBackground">@drawable/launch_screen_old</item>-->
-<!--        <item name="colorPrimaryDark">@color/colorPrimaryNew</item>-->
-<!--    </style>-->
-
-<!--    <style name="AppTheme.NewLauncher" parent="Theme.MaterialComponents.Light.NoActionBar">-->
-<!--        <item name="android:windowBackground">@drawable/launch_screen_new</item>-->
-<!--        <item name="colorPrimaryDark">@color/white</item>-->
-<!--    </style>-->
-
+    <style name="AppTheme.Launcher" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="colorPrimaryDark">@color/white</item>
+    </style>
     <!-- Text -->
     <style name="Text">
         <item name="android:layout_width">wrap_content</item>

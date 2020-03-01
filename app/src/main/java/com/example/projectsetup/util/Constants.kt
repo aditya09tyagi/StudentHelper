@@ -11,6 +11,7 @@ interface Constants {
         const val EXTRA_USER = "EXTRA_USER"
         const val EXTRA_USER_ID = "EXTRA_USER_ID"
         const val EXTRA_HEADER = "x-auth-token"
+        const val IS_ALREADY_LOGGED_IN = "IS_ALREADY_LOGGED_IN"
 
         //user access types
         const val USER_ACCESS_ADMIN = "ADMIN"

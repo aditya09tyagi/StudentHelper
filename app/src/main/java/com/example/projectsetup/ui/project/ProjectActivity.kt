@@ -4,9 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
+import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.projectsetup.R
 import com.example.projectsetup.StudentHelper
+import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerProjectActivityComponent
 import com.example.projectsetup.ui.base.BaseActivity
 import com.example.projectsetup.ui.chat.ChatActivity
@@ -35,6 +38,7 @@ class ProjectActivity : BaseActivity() {
         setContentView(R.layout.acitivity_project)
         getArguments()
         inject()
+        getProject()
         initialiseLayout()
         setListener()
         observeData()
@@ -59,6 +63,12 @@ class ProjectActivity : BaseActivity() {
             ViewModelProvider(this, viewModelFactory).get(ProjectViewModel::class.java)
     }
 
+    private fun getProject(){
+        if (::userId.isInitialized){
+            projectViewModel.getMyProject(userId)
+        }
+    }
+
     private fun initialiseLayout() {
         tvProjectName.paintFlags = Paint.UNDERLINE_TEXT_FLAG
     }
@@ -73,6 +83,24 @@ class ProjectActivity : BaseActivity() {
     }
 
     private fun observeData() {
+        projectViewModel.projectLiveData.observe(this, Observer {
+            when(it.status){
+                Status.LOADING->{
+                    progressBar.visibility = View.VISIBLE
+                    clProjectContainer.visibility = View.GONE
+                }
+                Status.SUCCESS->{
+                    progressBar.visibility = View.GONE
+                    clProjectContainer.visibility = View.VISIBLE
+                    it.data?.let {
 
+                    }
+                }
+                Status.ERROR->{
+                    progressBar.visibility = View.GONE
+                    clProjectContainer.visibility = View.GONE
+                }
+            }
+        })
     }
 }
