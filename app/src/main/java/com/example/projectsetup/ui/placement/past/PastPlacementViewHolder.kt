@@ -12,12 +12,19 @@ import java.util.*
 
 class PastPlacementViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun setPastCompany(picasso: Picasso, past: Past){
-        itemView.tvCompanyName.text = past.companyName
+    private lateinit var onItemClickListener: OnItemClickListener
+
+    fun setPastCompany(picasso: Picasso, past: Past) {
+        itemView.tvCompanyName.text = past.company.companyName
         itemView.tvCompanyDescription.text = past.companyDescription
         itemView.tvJobProfile.text = past.companyTitle
         itemView.tvDriveLocation.text = past.driveLocation
         itemView.tvVisitDate.text = getStartDateString(past.visitDate)
+
+        itemView.setOnClickListener {
+            if(::onItemClickListener.isInitialized)
+                onItemClickListener.onItemClick(adapterPosition,past.company.id)
+        }
     }
 
     private fun getStartDateString(startDate: String): String {
@@ -29,5 +36,13 @@ class PastPlacementViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
             date.dayOfMonth,
             date.month.getDisplayName(TextStyle.SHORT, Locale.UK)
         )
+    }
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener){
+        this.onItemClickListener = onItemClickListener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int, companyId: String)
     }
 }

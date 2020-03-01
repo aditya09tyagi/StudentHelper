@@ -16,7 +16,7 @@ data class Job(
     @SerializedName("place")
     val drivePlace: String,
     @SerializedName("skill")
-    val commaSeparatedSkillIds: List<String>,
+    val commaSeparatedSkillIds: List<Skill>,
     @SerializedName("title")
     val jobTitle: String,
     @SerializedName("updatedAt")

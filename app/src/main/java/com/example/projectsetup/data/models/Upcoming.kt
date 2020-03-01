@@ -6,9 +6,9 @@ data class Upcoming(
     @SerializedName("_v")
     val __v: Int,
     @SerializedName("_id")
-    val id: String,
+    val jobId: String,
     @SerializedName("company")
-    val company: String,
+    val company: Company,
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("description")
@@ -18,7 +18,7 @@ data class Upcoming(
     @SerializedName("place")
     val place: String,
     @SerializedName("_skill")
-    val skill: List<String>,
+    val skill: List<Skill>,
     @SerializedName("title")
     val title: String,
     @SerializedName("updatedAt")

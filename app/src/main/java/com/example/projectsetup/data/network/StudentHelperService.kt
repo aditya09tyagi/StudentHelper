@@ -85,7 +85,7 @@ interface StudentHelperService {
     @GET("v1/placement/company")
     fun getAllCompanies(): Call<ArrayList<Company>>
 
-    @GET("v1/schedule/live")
+    @GET("placement/schedule/live")
     fun getLiveCompanies(
         @Query("userId") userId: String
     ): Call<ArrayList<Live>>

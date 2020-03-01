@@ -8,7 +8,7 @@ data class Live(
     @SerializedName("_id")
     val id: String,
     @SerializedName("company")
-    val companyName: String,
+    val company: Company,
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("description")
@@ -16,7 +16,7 @@ data class Live(
     @SerializedName("place")
     val driveLocation: String,
     @SerializedName("skill")
-    val skills: List<String>,
+    val skills: List<Skill>,
     @SerializedName("title")
     val companyTitle: String,
     @SerializedName("updatedAt")

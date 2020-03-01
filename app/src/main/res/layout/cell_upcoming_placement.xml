@@ -87,13 +87,11 @@
                 tools:ignore="MissingPrefix"
                 tools:text="Auditorium, ABESEC" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/tutorPhotoIv"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@color/light_grey"
-                app:civ_border_color="@color/light_grey"
-                app:civ_border_width="@dimen/padding_2_dp"
+                android:src="@drawable/ic_company"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCompanyDescription"
@@ -153,7 +151,7 @@
                 android:layout_marginTop="@dimen/padding_12_dp"
                 android:layout_marginBottom="@dimen/padding_16_dp"
                 android:alpha="0.80"
-                android:text="20 students participated"
+                android:text="20 students registered"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_12_sp"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -7,9 +7,11 @@ import com.example.projectsetup.R
 import com.example.projectsetup.data.models.Past
 import com.squareup.picasso.Picasso
 
-class PastPlacementAdapter(val picasso: Picasso) : RecyclerView.Adapter<PastPlacementViewHolder>() {
+class PastPlacementAdapter(val picasso: Picasso) : RecyclerView.Adapter<PastPlacementViewHolder>(),
+    PastPlacementViewHolder.OnItemClickListener {
 
     private lateinit var pastList: ArrayList<Past>
+    private lateinit var onItemClickListener: OnItemClickListener
 
     fun setList(list: ArrayList<Past>) {
         pastList = list
@@ -29,8 +31,24 @@ class PastPlacementAdapter(val picasso: Picasso) : RecyclerView.Adapter<PastPlac
     }
 
     override fun onBindViewHolder(holder: PastPlacementViewHolder, position: Int) {
-        if (::pastList.isInitialized){
-            holder.setPastCompany(picasso,pastList[position])
+        if (::pastList.isInitialized) {
+            holder.setPastCompany(picasso, pastList[position])
         }
+        if (::onItemClickListener.isInitialized) {
+            holder.setOnItemClickListener(this)
+        }
+    }
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.onItemClickListener = onItemClickListener
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int, companyId: String)
+    }
+
+    override fun onItemClick(position: Int, companyId: String) {
+        if (::onItemClickListener.isInitialized)
+            onItemClickListener.onItemClick(position, companyId)
     }
 }

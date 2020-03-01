@@ -11,7 +11,12 @@ class PlacementViewModel @Inject constructor(
     private val studentHelperRepository: StudentHelperRepository
 ) : ViewModel(), StudentHelperRepository.OnUpcomingCompaniesListener,
     StudentHelperRepository.OnPastCompaniesListener,
-    StudentHelperRepository.OnGetLiveCompaniesListener {
+    StudentHelperRepository.OnGetLiveCompaniesListener,
+    StudentHelperRepository.OnApplyForJobListener {
+
+    private val _jobApplyLiveData = MutableLiveData<Resource<JobApply>>()
+    val jobApplyLiveData: LiveData<Resource<JobApply>>
+        get() = _jobApplyLiveData
 
     private val _upcomingLiveData = MutableLiveData<Resource<ArrayList<Upcoming>>>()
     val upcomingLiveData: LiveData<Resource<ArrayList<Upcoming>>>
@@ -25,19 +30,24 @@ class PlacementViewModel @Inject constructor(
     val liveCompaniesLiveData: LiveData<Resource<ArrayList<Live>>>
         get() = _liveCompaniesLiveData
 
-    fun upcomingCompanies(userId:String){
+    fun upcomingCompanies(userId: String) {
         _upcomingLiveData.postValue(Resource.loading())
-        studentHelperRepository.getUpcomingCompanies(userId,this)
+        studentHelperRepository.getUpcomingCompanies(userId, this)
     }
 
-    fun pastCompanies(userId:String){
+    fun pastCompanies(userId: String) {
         _pastLiveData.postValue(Resource.loading())
-        studentHelperRepository.getPastCompanies(userId,this)
+        studentHelperRepository.getPastCompanies(userId, this)
     }
 
-    fun liveCompanies(userId: String){
+    fun liveCompanies(userId: String) {
         _liveCompaniesLiveData.postValue(Resource.loading())
-        studentHelperRepository.getLiveCompanies(userId,this)
+        studentHelperRepository.getLiveCompanies(userId, this)
+    }
+
+    fun applyForJob(userId: String, jobId: String) {
+        _jobApplyLiveData.postValue(Resource.loading())
+        studentHelperRepository.applyForJob(userId,jobId,this)
     }
 
     override fun onUpcomingCompanySuccess(upcoming: ArrayList<Upcoming>) {
@@ -62,6 +72,15 @@ class PlacementViewModel @Inject constructor(
 
     override fun onGetLiveCompaniesFailure(error: Error) {
         _liveCompaniesLiveData.postValue(Resource.error(error))
+    }
+
+
+    override fun onApplyForJobSuccess(jobApply: JobApply) {
+        _jobApplyLiveData.postValue(Resource.success(jobApply))
+    }
+
+    override fun onApplyForJobFailure(error: Error) {
+        _jobApplyLiveData.postValue(Resource.error(error))
     }
 
 }

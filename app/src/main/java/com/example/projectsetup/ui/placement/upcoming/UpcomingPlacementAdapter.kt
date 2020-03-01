@@ -8,11 +8,13 @@ import com.example.projectsetup.data.models.Upcoming
 import com.squareup.picasso.Picasso
 
 class UpcomingPlacementAdapter(val picasso: Picasso) :
-    RecyclerView.Adapter<UpcomingPlacementViewHolder>() {
+    RecyclerView.Adapter<UpcomingPlacementViewHolder>(),
+    UpcomingPlacementViewHolder.OnUpcomingItemClickListener {
 
     private lateinit var upcomingList: ArrayList<Upcoming>
+    private lateinit var onUpcomingItemClickListener: OnUpcomingItemClickListener
 
-    fun setList(list: ArrayList<Upcoming>){
+    fun setList(list: ArrayList<Upcoming>) {
         upcomingList = list
         notifyDataSetChanged()
     }
@@ -30,8 +32,28 @@ class UpcomingPlacementAdapter(val picasso: Picasso) :
     }
 
     override fun onBindViewHolder(holderUpcoming: UpcomingPlacementViewHolder, position: Int) {
-        if (::upcomingList.isInitialized){
-            holderUpcoming.setUpcomingCompany(picasso,upcomingList[position])
+        if (::upcomingList.isInitialized) {
+            holderUpcoming.setUpcomingCompany(picasso, upcomingList[position])
+            holderUpcoming.setOnUpcomingItemClickListener(this)
         }
+    }
+
+    override fun onRegisterNowClickedListener(position: Int, jobId: String) {
+        if (::onUpcomingItemClickListener.isInitialized)
+            onUpcomingItemClickListener.onRegisterNowClickedListener(position, jobId)
+    }
+
+    override fun onItemClickListener(position: Int, companyId: String) {
+        if (::onUpcomingItemClickListener.isInitialized)
+            onUpcomingItemClickListener.onItemClickListener(position,companyId)
+    }
+
+    fun setOnUpcomingItemClickListener(onUpcomingItemClickListener: OnUpcomingItemClickListener) {
+        this.onUpcomingItemClickListener = onUpcomingItemClickListener
+    }
+
+    interface OnUpcomingItemClickListener {
+        fun onRegisterNowClickedListener(position: Int, jobId: String)
+        fun onItemClickListener(position: Int, companyId: String)
     }
 }

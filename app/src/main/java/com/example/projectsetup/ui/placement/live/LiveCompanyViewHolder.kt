@@ -12,7 +12,7 @@ import java.util.*
 
 class LiveCompanyViewHolder (itemView: View):RecyclerView.ViewHolder(itemView){
     fun setLiveCompany(picasso: Picasso, live: Live) {
-        itemView.tvCompanyName.text = live.companyName
+        itemView.tvCompanyName.text = live.company.companyName
         itemView.tvCompanyDescription.text = live.companyDescription
         itemView.tvJobProfile.text = live.companyTitle
         itemView.tvDriveLocation.text = live.driveLocation

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projectsetup.data.models.Error
+import com.example.projectsetup.data.models.JobApply
 import com.example.projectsetup.data.models.Project
 import com.example.projectsetup.data.models.Resource
 import com.example.projectsetup.data.network.StudentHelperRepository
@@ -20,7 +21,7 @@ class ProjectViewModel @Inject constructor(
 
     fun getMyProject(userId: String) {
         _projectLiveData.postValue(Resource.loading())
-        studentHelperRepository.getMyProject(userId,this)
+        studentHelperRepository.getMyProject(userId, this)
     }
 
     override fun onGetMyProjectSuccess(project: Project) {
@@ -30,4 +31,5 @@ class ProjectViewModel @Inject constructor(
     override fun onGetMyProjectFailure(error: Error) {
         _projectLiveData.postValue(Resource.error(error))
     }
+
 }
