@@ -2,6 +2,7 @@ package com.example.projectsetup.ui.project
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.projectsetup.R
@@ -59,7 +60,7 @@ class ProjectActivity : BaseActivity() {
     }
 
     private fun initialiseLayout() {
-
+        tvProjectName.paintFlags = Paint.UNDERLINE_TEXT_FLAG
     }
 
     private fun setListener() {

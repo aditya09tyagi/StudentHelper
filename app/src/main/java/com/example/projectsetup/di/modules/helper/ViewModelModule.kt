@@ -7,6 +7,7 @@ import com.example.projectsetup.ui.home.HomeViewModel
 import com.example.projectsetup.ui.login.LoginViewModel
 import com.example.projectsetup.ui.placement.PlacementViewModel
 import com.example.projectsetup.ui.project.ProjectViewModel
+import com.example.projectsetup.ui.splash.SplashViewModel
 import com.example.projectsetup.ui.user_details.UserDetailsViewModel
 
 import dagger.Binds
@@ -17,10 +18,10 @@ import dagger.multibindings.IntoMap
 @Suppress("unused")
 abstract class ViewModelModule {
 
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(SplashViewModel::class)
-//    abstract fun bindSplashViewModel(splashViewModel: SplashViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(SplashViewModel::class)
+    abstract fun bindSplashViewModel(splashViewModel: SplashViewModel): ViewModel
 
     @Binds
     @IntoMap

@@ -23,6 +23,9 @@
 
         <activity android:name=".ui.base.BaseActivity"/>
 
+        <activity android:name=".ui.splash.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".ui.home.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 

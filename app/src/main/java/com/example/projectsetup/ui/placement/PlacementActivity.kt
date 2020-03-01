@@ -37,6 +37,7 @@ class PlacementActivity : BaseActivity() {
         private const val EXTRA_USER_ID = "EXTRA_USER_ID"
         fun newIntent(context: Context, userId: String): Intent {
             val intent = Intent(context, PlacementActivity::class.java)
+            intent.putExtra(EXTRA_USER_ID, userId)
             return intent
         }
     }
@@ -47,13 +48,16 @@ class PlacementActivity : BaseActivity() {
         getArguments()
         inject()
         initialiseLayout()
+        getLiveCompanies()
+        getUpcomingCompanies()
+        getPastCompanies()
         setListener()
         observeData()
     }
 
-    private fun getArguments(){
+    private fun getArguments() {
         intent?.let {
-            it.getStringExtra(EXTRA_USER_ID)?.let {uid->
+            it.getStringExtra(EXTRA_USER_ID)?.let { uid ->
                 userId = uid
             }
         }
@@ -80,7 +84,20 @@ class PlacementActivity : BaseActivity() {
         rvPast.layoutManager = LinearLayoutManager(this)
         rvPast.adapter = pastPlacementAdapter
 
-        placementViewModel.upcomingCompanies(sharedPreferenceUtil.getString(Constants.EXTRA_USER_ID))
+    }
+
+    private fun getUpcomingCompanies() {
+        if (::userId.isInitialized)
+            placementViewModel.upcomingCompanies(userId)
+    }
+
+    private fun getPastCompanies() {
+        if (::userId.isInitialized)
+            placementViewModel.pastCompanies(userId)
+    }
+
+    private fun getLiveCompanies() {
+
     }
 
     private fun setListener() {
@@ -88,6 +105,22 @@ class PlacementActivity : BaseActivity() {
     }
 
     private fun observeData() {
+        placementViewModel.pastLiveData.observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                    progressModal.show()
+                }
+                Status.SUCCESS -> {
+                    progressModal.dismiss()
+                    it.data?.let { list ->
+                        pastPlacementAdapter.setList(list)
+                    }
+                }
+                Status.ERROR -> {
+                    progressModal.dismiss()
+                }
+            }
+        })
         placementViewModel.upcomingLiveData.observe(this, Observer {
             when (it.status) {
                 Status.LOADING -> {

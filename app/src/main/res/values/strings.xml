@@ -75,6 +75,13 @@
 
     <!-- PROJECT SCREEN -->
     <string name="project_label">PROJECT</string>
+    <string name="member_label">Members :- </string>
+    <string name="dummy_member">1. Mehul Tyagi \n2. Aakansha \n3. Siddharth</string>
+    <string name="coordinator_label">Co-ordinator :- </string>
+    <string name="dummy_coordinator">Aditya Tyagi</string>
+    <string name="deadline_label">Deadline :- </string>
+    <string name="dummy_deadline">25,March 2020</string>
+    <string name="progress_label">Progress :- </string>
 
     <!-- PLACEMENT SCREEN -->
     <string name="placement_label">PLACEMENT</string>

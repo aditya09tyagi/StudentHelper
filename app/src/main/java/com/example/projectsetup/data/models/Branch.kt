@@ -2,25 +2,17 @@ package com.example.projectsetup.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class User(
+data class Branch(
     @SerializedName("_v")
     val __v: Int,
     @SerializedName("_id")
     val id: String,
-    @SerializedName("avatar_url")
-    val avatarUrl: String,
     @SerializedName("createdAt")
     val createdAt: String,
-    @SerializedName("email")
-    val email: String,
     @SerializedName("name")
-    val name: String,
-    @SerializedName("skills")
-    val commaSeparatedSkillIds: List<String>,
-    @SerializedName("subjects")
+    val branchName: String,
+    @SerializedName("subject")
     val commaSeparatedSubjectIds: List<String>,
     @SerializedName("updatedAt")
-    val updatedAt: String,
-    @SerializedName("user_type")
-    val userType: Int
+    val updatedAt: String
 )
