@@ -186,7 +186,7 @@ class LoginActivity : BaseActivity(), LoginAdapter.OnItemClickListener {
                     data?.let {
                         val googleSignInTask =
                             GoogleSignIn.getSignedInAccountFromIntent(it)
-                        loginViewModel.handleGoogleSignInResult(googleSignInTask, loginModel.id)
+                        loginViewModel.handleGoogleSignInResult(googleSignInTask, userType)
                     }
                 }
             }
