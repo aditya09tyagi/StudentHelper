@@ -3,52 +3,79 @@
     package="com.example.projectsetup">
 
     <application
+        android:name=".StudentHelper"
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".StudentHelper"
-        android:fullBackupContent="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".ui.base.BaseActivity"/>
+        <activity android:name=".ui.base.BaseActivity" />
 
-        <activity android:name=".ui.splash.SplashActivity"
+        <activity
+            android:name=".ui.splash.SplashActivity"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.home.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".ui.user_details.UserDetailsActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.user_details.UserDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
 
-        <activity android:name=".ui.selection.SelectionActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.selection.SelectionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".ui.placement.PlacementActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.placement.PlacementActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".ui.project.ProjectActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.project.ProjectActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".ui.chat.ChatActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.chat.ChatActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".ui.company.CompanyActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.company.CompanyActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ui.admin.AddBranchActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.admin.AddCompanyActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.admin.AddJobActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.admin.AddSkillActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.admin.AddSubjectActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.admin.AdminHomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

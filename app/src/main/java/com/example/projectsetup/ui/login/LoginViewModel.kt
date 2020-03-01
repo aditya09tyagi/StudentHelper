@@ -34,7 +34,7 @@ class LoginViewModel @Inject constructor(
         get() = _userLiveData
 
 
-    fun handleGoogleSignInResult(googleSignInTask: Task<GoogleSignInAccount>) {
+    fun handleGoogleSignInResult(googleSignInTask: Task<GoogleSignInAccount>, userType: Int) {
         try {
             val account = googleSignInTask.getResult(ApiException::class.java)
             account?.let {
@@ -42,7 +42,7 @@ class LoginViewModel @Inject constructor(
                 val email = it.email
                 avatarUrl = it.photoUrl.toString()
                 if (email!!.contains("abes")) {
-                    login(name!!, email, avatarUrl)
+                    login(name!!, email, avatarUrl, userType)
                 } else {
                     _userLiveData.postValue(
                         Resource.error(
@@ -66,9 +66,9 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private fun login(name: String, email: String, avatarUrl: String?) {
+    private fun login(name: String, email: String, avatarUrl: String?, userType: Int) {
         _userLiveData.postValue(Resource.loading())
-        studentHelperRepository.login(name, email, avatarUrl, this)
+        studentHelperRepository.login(name, email, avatarUrl, userType, this)
     }
 
     override fun onLoginSuccess(response: Response<User>) {
@@ -77,7 +77,7 @@ class LoginViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 sharedPreferenceUtil.putString(Constants.EXTRA_USER, gson.toJson(user))
                 sharedPreferenceUtil.putString(Constants.EXTRA_USER_ID, user!!.id)
-                sharedPreferenceUtil.putBoolean(Constants.IS_ALREADY_LOGGED_IN,true)
+                sharedPreferenceUtil.putBoolean(Constants.IS_ALREADY_LOGGED_IN, true)
             }
             _userLiveData.postValue(Resource.success(user))
         }

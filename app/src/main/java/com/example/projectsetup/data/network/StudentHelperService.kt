@@ -12,7 +12,8 @@ interface StudentHelperService {
     fun login(
         @Query("name") name: String,
         @Query("email") email: String,
-        @Query("avatar_url") avatarUrl: String?
+        @Query("avatar_url") avatarUrl: String?,
+        @Query("userType") userType: Int
     ): Call<User>
 
     @POST("v1/home/skill")
@@ -49,7 +50,7 @@ interface StudentHelperService {
         @Query("hour") driveHour: String,
         @Query("minute") driveMinute: String,
         @Query("userId") userId: String
-    ): Call<Branch>
+    ): Call<Job>
 
     @POST("v1/home/subject")
     fun addSubject(

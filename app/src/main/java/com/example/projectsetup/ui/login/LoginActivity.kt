@@ -14,6 +14,7 @@ import com.example.projectsetup.data.models.LoginModel
 import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerLoginActivityComponent
 import com.example.projectsetup.di.modules.activity.LoginActivityModule
+import com.example.projectsetup.ui.admin.AdminHomeActivity
 import com.example.projectsetup.ui.base.BaseActivity
 import com.example.projectsetup.ui.home.HomeActivity
 import com.example.projectsetup.ui.loader.ProgressModal
@@ -129,21 +130,38 @@ class LoginActivity : BaseActivity(), LoginAdapter.OnItemClickListener {
                 Status.SUCCESS -> {
                     progressModal.dismiss()
                     it.data?.let {
-                        if (it.age == 0) {
-                            startActivity(
-                                UserDetailsActivity.newIntent(
-                                    this,
-                                    it.id,
-                                    it.name,
-                                    userType
-                                )
-                            )
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                            finishAffinity()
-                        } else {
-                            startActivity(SelectionActivity.newIntent(this, it.id))
-                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                            finishAffinity()
+                        when (it.userType) {
+                            Constants.USER_TYPE_STUDENT -> {
+                                if (it.age == 0) {
+                                    startActivity(
+                                        UserDetailsActivity.newIntent(
+                                            this,
+                                            it.id,
+                                            it.name,
+                                            userType
+                                        )
+                                    )
+                                    overridePendingTransition(
+                                        R.anim.slide_in_right,
+                                        R.anim.slide_out_left
+                                    )
+                                    finishAffinity()
+                                } else {
+                                    startActivity(SelectionActivity.newIntent(this, it.id))
+                                    overridePendingTransition(
+                                        R.anim.slide_in_right,
+                                        R.anim.slide_out_left
+                                    )
+                                    finishAffinity()
+                                }
+                            }
+                            Constants.USER_TYPE_FACULTY -> {
+
+                            }
+                            Constants.USER_TYPE_ADMIN -> {
+                                startActivity(AdminHomeActivity.newIntent(this))
+                                finishAffinity()
+                            }
                         }
                     }
                 }
@@ -168,7 +186,7 @@ class LoginActivity : BaseActivity(), LoginAdapter.OnItemClickListener {
                     data?.let {
                         val googleSignInTask =
                             GoogleSignIn.getSignedInAccountFromIntent(it)
-                        loginViewModel.handleGoogleSignInResult(googleSignInTask)
+                        loginViewModel.handleGoogleSignInResult(googleSignInTask, loginModel.id)
                     }
                 }
             }

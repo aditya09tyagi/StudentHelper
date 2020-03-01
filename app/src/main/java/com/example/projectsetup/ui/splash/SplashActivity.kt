@@ -9,11 +9,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.projectsetup.R
 import com.example.projectsetup.StudentHelper
 import com.example.projectsetup.di.components.DaggerSplashActivityComponent
+import com.example.projectsetup.ui.admin.AdminHomeActivity
 import com.example.projectsetup.ui.base.BaseActivity
 import com.example.projectsetup.ui.home.HomeActivity
 import com.example.projectsetup.ui.login.LoginActivity
 import com.example.projectsetup.ui.selection.SelectionActivity
 import com.example.projectsetup.util.Constants
+import com.example.projectsetup.util.SharedPreferencesLiveData
+import com.example.projectsetup.util.SharedPreferencesUserLiveData
 import com.jaeger.library.StatusBarUtil
 import javax.inject.Inject
 
@@ -21,6 +24,9 @@ class SplashActivity : BaseActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var sharedPreferencesLiveData: SharedPreferencesUserLiveData
 
     private lateinit var splashViewModel: SplashViewModel
     private lateinit var userId: String
@@ -54,11 +60,23 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun observeData() {
-        splashViewModel.isUserLoggedInLiveData.observe(this, Observer {
-            if (it) {
-                userId = sharedPreferenceUtil.getString(Constants.EXTRA_USER_ID)
-                goToSelectionActivity()
-            } else {
+        sharedPreferencesLiveData.observe(this, Observer {
+            it?.let {
+                when (it.userType) {
+                    Constants.USER_TYPE_STUDENT -> {
+                        userId = sharedPreferenceUtil.getString(Constants.EXTRA_USER_ID)
+                        goToSelectionActivity()
+                    }
+                    Constants.USER_TYPE_FACULTY -> {
+
+                    }
+                    Constants.USER_TYPE_ADMIN -> {
+                        startActivity(AdminHomeActivity.newIntent(this))
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                        finishAffinity()
+                    }
+                }
+            } ?: run {
                 goToLoginActivity()
             }
         })

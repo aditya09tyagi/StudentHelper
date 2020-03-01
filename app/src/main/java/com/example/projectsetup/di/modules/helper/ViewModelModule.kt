@@ -2,6 +2,7 @@ package com.example.projectsetup.di.modules.helper
 
 import androidx.lifecycle.ViewModel
 import com.example.projectsetup.di.mapkey.ViewModelKey
+import com.example.projectsetup.ui.admin.AdminActivityViewModel
 import com.example.projectsetup.ui.chat.ChatViewModel
 import com.example.projectsetup.ui.company.CompanyViewModel
 import com.example.projectsetup.ui.home.HomeViewModel
@@ -42,20 +43,25 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(PlacementViewModel::class)
-    abstract fun bindPlacementViewModel(placementViewModel: PlacementViewModel):ViewModel
+    abstract fun bindPlacementViewModel(placementViewModel: PlacementViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(ProjectViewModel::class)
-    abstract fun bindProjectViewModel(projectViewModel: ProjectViewModel):ViewModel
+    abstract fun bindProjectViewModel(projectViewModel: ProjectViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(ChatViewModel::class)
-    abstract fun bindChatViewModel(chatViewModel: ChatViewModel):ViewModel
+    abstract fun bindChatViewModel(chatViewModel: ChatViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(CompanyViewModel::class)
-    abstract fun bindCompanyViewModel(companyViewModel: CompanyViewModel):ViewModel
+    abstract fun bindCompanyViewModel(companyViewModel: CompanyViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AdminActivityViewModel::class)
+    abstract fun bindAdminActivityViewModel(adminActivityViewModel: AdminActivityViewModel): ViewModel
 }

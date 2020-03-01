@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/clHome"
+    android:padding="@dimen/padding_16_dp">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/etTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_small"
+        android:backgroundTint="@color/dark_grey"
+        android:hint="@string/enter_job_title"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="@string/enter_job_title" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_small"
+        android:backgroundTint="@color/dark_grey"
+        android:hint="@string/enter_job_description"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etTitle"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="@string/enter_job_description" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/etPlace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_small"
+        android:backgroundTint="@color/dark_grey"
+        android:hint="@string/enter_job_place"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etDescription"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="@string/enter_job_place" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteSkills"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_micro"
+        android:layout_marginTop="@dimen/padding_16_dp"
+        android:backgroundTint="@color/dark_grey"
+        android:completionThreshold="1"
+        android:drawableEnd="@drawable/ic_add_circle"
+        android:drawablePadding="@dimen/padding_small"
+        android:hint="@string/skills_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etPlace" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSkills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_16_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/autoCompleteSkills"
+        app:spanCount="3"
+        tools:itemCount="3"
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:listitem="@layout/cell_skill" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAdd"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_16_dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/add"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvSkills" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,7 +38,7 @@
         <item>D</item>
         <item>E</item>
     </string-array>
-    
+
     <!-- Progress Loader -->
     <string name="default_loading_message">Please wait…</string>
     <string name="reset">Reset</string>
@@ -68,8 +68,9 @@
     <string name="section_hint">Enter your Section</string>
     <string name="semester_hint">Enter your Semester</string>
     <string name="skills_hint">Enter your Skills</string>
+    <string name="subject_hint">Enter Subjects Here</string>
     <string name="submit_details">Submit Details</string>
-    
+
     <!-- SELECTION SCREEN -->
     <string name="select_choice">Choose one of the following</string>
 
@@ -92,7 +93,7 @@
     <string name="live_companies">Live Companies</string>
     <string name="upcoming_companies">Upcoming Companies</string>
     <string name="past_companies">Past Companies</string>
-    <string name="class_date_format" >%s, %s %s</string>
+    <string name="class_date_format">%s, %s %s</string>
 
     <!-- Chat Screen -->
     <string name="write_a_chat_message">Chat with teacher</string>
@@ -139,4 +140,21 @@
     <string name="or">or</string>
 
     <string name="we_need_your_permissions">We need\nyour permissions!</string>
+
+    <!-- ADMIN -->
+    <string name="enter_branch_name">Enter Branch Name</string>
+    <string name="enter_company_name">Enter Company Name</string>
+    <string name="enter_company_website">Enter Company Website</string>
+    <string name="enter_company_logo">Enter Company Logo URL</string>
+    <string name="enter_job_title">Enter Job Title</string>
+    <string name="enter_job_description">Enter Job Description</string>
+    <string name="enter_job_place">Enter Job Place</string>
+    <string name="enter_skill_name">Enter Skill Name</string>
+    <string name="enter_subject_name">Enter Subject Name</string>
+    <string name="add">ADD</string>
+    <string name="add_branch">ADD BRANCH</string>
+    <string name="add_company">ADD COMPANY</string>
+    <string name="add_job">ADD JOB</string>
+    <string name="add_skill">ADD SKILL</string>
+    <string name="add_subject">ADD SUBJECT</string>
 </resources>

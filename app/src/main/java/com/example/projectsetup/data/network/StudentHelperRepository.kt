@@ -13,26 +13,28 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
         name: String,
         email: String,
         avatarUrl: String? = null,
+        userType: Int,
         onLoginListener: OnLoginListener
     ) {
-        studentHelperService.login(name, email, avatarUrl).enqueue(object : Callback<User> {
+        studentHelperService.login(name, email, avatarUrl, userType)
+            .enqueue(object : Callback<User> {
 
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                if (response.isSuccessful) {
-                    response.body()?.let { _ ->
-                        onLoginListener.onLoginSuccess(response)
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful) {
+                        response.body()?.let { _ ->
+                            onLoginListener.onLoginSuccess(response)
+                        }
                     }
                 }
-            }
 
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                if (t is UnknownHostException) {
-                    onLoginListener.onLoginFailure(Error(true, "Internet not connected"))
-                } else {
-                    onLoginListener.onLoginFailure(Error(true, "${t.message}"))
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    if (t is UnknownHostException) {
+                        onLoginListener.onLoginFailure(Error(true, "Internet not connected"))
+                    } else {
+                        onLoginListener.onLoginFailure(Error(true, "${t.message}"))
+                    }
                 }
-            }
-        })
+            })
     }
 
     fun updateUser(
@@ -231,7 +233,7 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
         projectId: String,
         onUpdateProjectProgressListener: OnUpdateProjectProgressListener
     ) {
-        studentHelperService.updateProjectProgress(updateProgress,projectId)
+        studentHelperService.updateProjectProgress(updateProgress, projectId)
             .enqueue(object : ApiCallback<Progress>() {
                 override fun success(response: Progress) {
                     onUpdateProjectProgressListener.onUpdateProjectProgressSuccess(response)
@@ -240,6 +242,120 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
                 override fun failure(error: Error) {
                     onUpdateProjectProgressListener.onUpdateProjectProgressFailure(error)
                 }
+            })
+    }
+
+    fun addBranch(
+        branchName: String,
+        commaSeparatedSubjectIds: String,
+        userId: String,
+        onAddBranchListener: OnAddBranchListener
+    ) {
+        studentHelperService.addBranch(branchName, commaSeparatedSubjectIds, userId)
+            .enqueue(object : ApiCallback<Branch>() {
+                override fun success(response: Branch) {
+                    onAddBranchListener.onAddBranchSuccess(response)
+                }
+
+                override fun failure(error: Error) {
+                    onAddBranchListener.onAddBranchFailure(error)
+                }
+
+            })
+    }
+
+    fun addCompany(
+        companyName: String,
+        websiteLink: String,
+        companyLogo: String,
+        userId: String,
+        onAddCompanyListener: OnAddCompanyListener
+    ) {
+        studentHelperService.addCompany(companyName, websiteLink, companyLogo, userId)
+            .enqueue(object : ApiCallback<Company>() {
+                override fun success(response: Company) {
+                    onAddCompanyListener.onAddCompanySuccess(response)
+                }
+
+                override fun failure(error: Error) {
+                    onAddCompanyListener.onAddCompanyFailure(error)
+                }
+
+            })
+    }
+
+    fun addJob(
+        companyName: String,
+        companyTitle: String,
+        companyDescription: String,
+        driveLocation: String,
+        commaSeparatedSkillIds: String,
+        driveDate: String,
+        driveMonth: String,
+        driveYear: String,
+        driveHour: String,
+        driveMinute: String,
+        userId: String,
+        onAddJobListener: OnAddJobListener
+    ) {
+        studentHelperService.addJob(
+            companyName,
+            companyTitle,
+            companyDescription,
+            driveLocation,
+            commaSeparatedSkillIds,
+            driveDate,
+            driveMonth,
+            driveYear,
+            driveHour,
+            driveMinute,
+            userId
+        )
+            .enqueue(object : ApiCallback<Job>() {
+                override fun success(response: Job) {
+                    onAddJobListener.onAddJobSuccess(response)
+                }
+
+                override fun failure(error: Error) {
+                    onAddJobListener.onAddJobFailure(error)
+                }
+
+            })
+    }
+
+    fun addSubject(
+        subjectName: String,
+        userId: String,
+        onAddSubjectsListener: OnAddSubjectListener
+    ) {
+        studentHelperService.addSubject(subjectName, userId)
+            .enqueue(object : ApiCallback<Subject>() {
+                override fun success(response: Subject) {
+                    onAddSubjectsListener.onAddSubjectSuccess(response)
+                }
+
+                override fun failure(error: Error) {
+                    onAddSubjectsListener.onAddSubjectFailure(error)
+                }
+
+            })
+    }
+
+    fun addSkill(
+        skillName: String,
+        userId: String,
+        onAddSkillListener: OnAddSkillListener
+    ) {
+        studentHelperService.addSkill(skillName, userId)
+            .enqueue(object : ApiCallback<Skill>() {
+                override fun success(response: Skill) {
+                    onAddSkillListener.onAddSkillSuccess(response)
+                }
+
+                override fun failure(error: Error) {
+                    onAddSkillListener.onAddSkillFailure(error)
+                }
+
             })
     }
 
