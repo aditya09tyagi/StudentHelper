@@ -2,10 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clJobContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/clHome"
     android:padding="@dimen/padding_16_dp">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/etCompanyName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_small"
+        android:backgroundTint="@color/dark_grey"
+        android:hint="@string/enter_company_name"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelText="@string/enter_job_title" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/etTitle"
@@ -17,7 +31,7 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etCompanyName"
         app:met_floatingLabel="highlight"
         app:met_floatingLabelText="@string/enter_job_title" />
 
@@ -72,20 +86,47 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/autoCompleteSkills"
-        app:spanCount="3"
+        app:spanCount="5"
         tools:itemCount="3"
-        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/cell_skill" />
+        tools:listitem="@layout/cell_generic" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnAdd"
-        android:layout_width="150dp"
+        android:id="@+id/btnAddJob"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_16_dp"
-        android:background="@color/colorPrimary"
-        android:text="@string/add"
+        android:background="@drawable/bg_rounded_corner"
+        android:paddingStart="@dimen/padding_huge"
+        android:paddingEnd="@dimen/padding_huge"
+        android:text="@string/add_job"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvAddDateTime"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvSkills" />
+
+    <TextView
+        android:id="@+id/tvAddDateTime"
+        style="@style/Text.Primary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_outlined"
+        android:padding="@dimen/padding_medium"
+        android:text="Enter the date time"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/font_normal"
+        app:layout_constraintBottom_toBottomOf="@id/btnAddJob"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnAddJob"
+        app:layout_constraintTop_toTopOf="@id/btnAddJob" />
+
+    <ImageView
+        android:id="@+id/ivJob"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_job"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnAddJob" />
 </androidx.constraintlayout.widget.ConstraintLayout>

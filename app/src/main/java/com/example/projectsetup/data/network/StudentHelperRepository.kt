@@ -290,11 +290,11 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
         companyDescription: String,
         driveLocation: String,
         commaSeparatedSkillIds: String,
-        driveDate: String,
-        driveMonth: String,
-        driveYear: String,
-        driveHour: String,
-        driveMinute: String,
+        driveDate: Int,
+        driveMonth: Int,
+        driveYear: Int,
+        driveHour: Int,
+        driveMinute: Int,
         userId: String,
         onAddJobListener: OnAddJobListener
     ) {

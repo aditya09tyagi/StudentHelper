@@ -32,16 +32,19 @@ class ChatActivity : BaseActivity() {
     private lateinit var layoutManager: LinearLayoutManager
     private lateinit var chatViewModel: ChatViewModel
     private lateinit var userId: String
+    private var projectId: String? = null
     private var currentListSize = 0
 
 
     companion object {
         private const val EXTRA_USER_ID = "EXTRA_USER_ID"
+        private const val EXTRA_PROJECT_ID = "EXTRA_PROJECT_ID"
         private const val DATABASE_CHILD_MESSAGES = "messages"
         private const val ANONYMOUS = "anonymous"
-        fun newIntent(context: Context, userId: String): Intent {
+        fun newIntent(context: Context, userId: String, projectId: String): Intent {
             val intent = Intent(context, ChatActivity::class.java)
-            intent.putExtra(EXTRA_USER_ID,userId)
+            intent.putExtra(EXTRA_USER_ID, userId)
+            intent.putExtra(EXTRA_PROJECT_ID, projectId)
             return intent
         }
     }
@@ -58,8 +61,11 @@ class ChatActivity : BaseActivity() {
 
     private fun getArguments() {
         intent?.let {
-            it.getStringExtra(EXTRA_USER_ID)?.let {uid->
+            it.getStringExtra(EXTRA_USER_ID)?.let { uid ->
                 userId = uid
+            }
+            it.getStringExtra(EXTRA_PROJECT_ID)?.let { pid ->
+                projectId = pid
             }
         }
     }
@@ -71,7 +77,7 @@ class ChatActivity : BaseActivity() {
 
         component.injectChatActivityComponent(this)
 
-        val referencePath = String.format("%s", DATABASE_CHILD_MESSAGES)
+        val referencePath = String.format("%s/%s", DATABASE_CHILD_MESSAGES,projectId)
         val databaseRef = databaseReference.getReference(referencePath)
 
         chatViewModel = ViewModelProvider(this, viewModelFactory).get(ChatViewModel::class.java)

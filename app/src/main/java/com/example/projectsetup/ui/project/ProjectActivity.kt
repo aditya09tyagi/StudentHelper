@@ -25,6 +25,7 @@ class ProjectActivity : BaseActivity() {
 
     private lateinit var projectViewModel: ProjectViewModel
     private lateinit var userId: String
+    private lateinit var projectId: String
 
     companion object {
         private const val EXTRA_USER_ID = "EXTRA_USER_ID"
@@ -77,8 +78,8 @@ class ProjectActivity : BaseActivity() {
 
     private fun setListener() {
         fabChat.setOnClickListener {
-            if (::userId.isInitialized) {
-                startActivity(ChatActivity.newIntent(this, userId))
+            if (::userId.isInitialized && ::projectId.isInitialized) {
+                startActivity(ChatActivity.newIntent(this, userId,projectId))
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
         }
@@ -90,12 +91,15 @@ class ProjectActivity : BaseActivity() {
                 Status.LOADING -> {
                     progressBar.visibility = View.VISIBLE
                     clProjectContainer.visibility = View.GONE
+                    clNoProjectAssigned.visibility = View.GONE
                 }
                 Status.SUCCESS -> {
+                    clNoProjectAssigned.visibility = View.GONE
                     progressBar.visibility = View.GONE
                     it.data?.let {
                         if (it.isNotEmpty()) {
                             it[0].let {
+                                projectId = it.id
                                 var members = ""
                                 it.userMembers.forEachIndexed { index, user ->
                                     if (index == it.userMembers.size - 1) {
@@ -117,6 +121,7 @@ class ProjectActivity : BaseActivity() {
                                 clProjectContainer.visibility = View.VISIBLE
                             }
                         } else {
+                            clNoProjectAssigned.visibility = View.VISIBLE
                             showSuccessToast("No Project Assigned Yet")
                         }
                     }

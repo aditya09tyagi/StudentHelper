@@ -44,11 +44,11 @@ interface StudentHelperService {
         @Query("description") companyDescription: String,
         @Query("place") driveLocation: String,
         @Query("skills") commaSeparatedSkillIds: String,
-        @Query("date") driveDate: String,
-        @Query("month") driveMonth: String,
-        @Query("year") driveYear: String,
-        @Query("hour") driveHour: String,
-        @Query("minute") driveMinute: String,
+        @Query("date") driveDate: Int,
+        @Query("month") driveMonth: Int,
+        @Query("year") driveYear: Int,
+        @Query("hour") driveHour: Int,
+        @Query("minute") driveMinute: Int,
         @Query("userId") userId: String
     ): Call<Job>
 

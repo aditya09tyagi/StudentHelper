@@ -18,6 +18,7 @@ import com.example.projectsetup.data.models.Skill
 import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerUserDetailsActivityComponent
 import com.example.projectsetup.ui.base.BaseActivity
+import com.example.projectsetup.ui.generic_rv.GenericDataAdapter
 import com.example.projectsetup.ui.loader.ProgressModal
 import com.example.projectsetup.ui.selection.SelectionActivity
 import com.example.projectsetup.util.Constants
@@ -29,21 +30,21 @@ import kotlinx.android.synthetic.main.activity_user_details.*
 import javax.inject.Inject
 
 
-class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener {
+class UserDetailsActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     @Inject
-    lateinit var adapter: SkillsAdapter
-
-    private lateinit var skillText: String
+    lateinit var adapter: GenericDataAdapter
 
     @NotEmpty
     private lateinit var etAge: MaterialEditText
 
-    private lateinit var autoCompleteSkills: AutoCompleteTextView
+    private lateinit var skillText: String
+
     private lateinit var userDetailsViewModel: UserDetailsViewModel
+    private lateinit var autoCompleteSkills: AutoCompleteTextView
     private var skillList: ArrayList<Skill> = ArrayList()
     private lateinit var name: String
     private lateinit var userId: String
@@ -175,7 +176,6 @@ class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener 
 
         adapter.setOnItemDeletedListener(this)
 
-
     }
 
     private fun observeData() {
@@ -249,7 +249,6 @@ class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener 
             }
         }
 
-
         val arrayAdapter =
             ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, skills)
 
@@ -276,7 +275,7 @@ class UserDetailsActivity : BaseActivity(), SkillsAdapter.OnItemDeletedListener 
                                 else
                                     ",${skillList[i].id}"
 
-                                adapter.updateSkillsList(skillText)
+                                adapter.updateGenericDataList(skillText)
                                 autoCompleteSkills.text?.clear()
                             }
                         }

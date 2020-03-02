@@ -1,41 +1,43 @@
-package com.example.projectsetup.ui.user_details
+package com.example.projectsetup.ui.generic_rv
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectsetup.R
 
-class SkillsAdapter:RecyclerView.Adapter<SkillsViewHolder>(),
-    SkillsViewHolder.OnItemDeletedListener {
+class GenericDataAdapter:RecyclerView.Adapter<GenericDataViewHolder>(),
+    GenericDataViewHolder.OnItemDeletedListener {
 
     private lateinit var onItemDeletedListener: OnItemDeletedListener
-    private var skillsList:ArrayList<String> = ArrayList()
+    private var genericDataList:ArrayList<String> = ArrayList()
 
-    fun updateSkillsList(skill:String){
-        skillsList.add(skill)
+    fun updateGenericDataList(genericData:String){
+        genericDataList.add(genericData)
         notifyDataSetChanged()
     }
 
     fun onRemoveItem(position: Int){
-        skillsList.removeAt(position)
+        genericDataList.removeAt(position)
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SkillsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericDataViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.cell_skill,parent,false)
-        return SkillsViewHolder(view)
+        val view = inflater.inflate(R.layout.cell_generic,parent,false)
+        return GenericDataViewHolder(
+            view
+        )
     }
 
     override fun getItemCount(): Int {
-        if (skillsList.isNotEmpty())
-            return skillsList.size
+        if (genericDataList.isNotEmpty())
+            return genericDataList.size
         return 0
     }
 
-    override fun onBindViewHolder(holder: SkillsViewHolder, position: Int) {
-        if (skillsList.isNotEmpty()){
-            holder.setSkill(skillsList[position])
+    override fun onBindViewHolder(holder: GenericDataViewHolder, position: Int) {
+        if (genericDataList.isNotEmpty()){
+            holder.setGenericData(genericDataList[position])
             holder.setOnItemDeletedListener(this)
         }
     }

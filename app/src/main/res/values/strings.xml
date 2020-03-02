@@ -157,4 +157,9 @@
     <string name="add_job">ADD JOB</string>
     <string name="add_skill">ADD SKILL</string>
     <string name="add_subject">ADD SUBJECT</string>
+    <string name="submit">Submit</string>
+    <string name="add_date_time">Add Job Date and Time</string>
+    <string name="dummy_time">22/09/2019</string>
+    <string name="time_label">Time :</string>
+    <string name="date_format">dd/mm/yyyy</string>
 </resources>

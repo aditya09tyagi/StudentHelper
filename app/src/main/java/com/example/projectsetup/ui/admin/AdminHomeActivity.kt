@@ -5,9 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import com.example.projectsetup.R
 import com.example.projectsetup.ui.base.BaseActivity
+import com.example.projectsetup.util.Constants
 import kotlinx.android.synthetic.main.activity_admin_home.*
 
 class AdminHomeActivity : BaseActivity() {
+
+    private lateinit var userId: String
 
     companion object {
         fun newIntent(context: Context) = Intent(context, AdminHomeActivity::class.java)
@@ -16,6 +19,7 @@ class AdminHomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_home)
+        getUserId()
         setWindowInsets()
         setListeners()
     }
@@ -27,21 +31,30 @@ class AdminHomeActivity : BaseActivity() {
         }
     }
 
+    private fun getUserId() {
+        userId = sharedPreferenceUtil.getString(Constants.EXTRA_USER_ID)
+    }
+
     private fun setListeners() {
         btnAddBranch.setOnClickListener {
-            startActivity(AddBranchActivity.newIntent(this))
+            if (::userId.isInitialized)
+                startActivity(AddBranchActivity.newIntent(this, userId))
         }
         btnAddCompany.setOnClickListener {
-            startActivity(AddCompanyActivity.newIntent(this))
+            if (::userId.isInitialized)
+                startActivity(AddCompanyActivity.newIntent(this, userId))
         }
         btnAddJob.setOnClickListener {
-            startActivity(AddJobActivity.newIntent(this))
+            if (::userId.isInitialized)
+                startActivity(AddJobActivity.newIntent(this, userId))
         }
         btnAddSkill.setOnClickListener {
-            startActivity(AddSkillActivity.newIntent(this))
+            if (::userId.isInitialized)
+                startActivity(AddSkillActivity.newIntent(this, userId))
         }
         btnAddSubject.setOnClickListener {
-            startActivity(AddSubjectActivity.newIntent(this))
+            if (::userId.isInitialized)
+                startActivity(AddSubjectActivity.newIntent(this, userId))
         }
     }
 }

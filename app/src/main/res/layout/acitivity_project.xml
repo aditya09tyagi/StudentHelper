@@ -32,6 +32,41 @@
         app:layout_constraintTop_toBottomOf="@id/tvProjectLabel">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clNoProjectAssigned"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/ivNoProjectAssigned"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:contentDescription="@string/image"
+                android:src="@drawable/no_project_assigned"
+                app:layout_constraintBottom_toTopOf="@id/tvNoProjectAssigned"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvNoProjectAssigned"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/Text.Primary.Bold"
+                android:textColor="#41E6B3"
+                android:textSize="@dimen/font_large"
+                android:padding="@dimen/padding_small"
+                android:text="No Project Assigned Yet"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clProjectContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

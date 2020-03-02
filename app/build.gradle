@@ -143,5 +143,8 @@ dependencies {
     //TextView
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
+    //Calendar date time picker
+    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
+
 }
 apply plugin: 'com.google.gms.google-services'

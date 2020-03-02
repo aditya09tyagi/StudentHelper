@@ -6,7 +6,7 @@ data class Project(
     @SerializedName("_v")
     val __v: Int,
     @SerializedName("_id")
-    val _id: String,
+    val id: String,
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("deadline")

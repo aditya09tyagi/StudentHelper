@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/tvDialogHeading"
+            style="@style/Text.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:padding="@dimen/padding_medium"
+            android:text="@string/add_date_time"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="@dimen/padding_medium"
+            android:clickable="true"
+            android:contentDescription="@string/image"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/ic_close_white"
+            app:layout_constraintBottom_toBottomOf="@id/tvDialogHeading"
+            app:layout_constraintEnd_toEndOf="@id/tvDialogHeading"
+            app:layout_constraintTop_toTopOf="@id/tvDialogHeading" />
+
+    <TextView
+            android:id="@+id/tvDeadLineLabel"
+            style="@style/Text.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:text="@string/deadline_label"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/tvCalendarDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDialogHeading" />
+
+    <TextView
+            android:id="@+id/tvCalendarDate"
+            style="@style/Text.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_normal_small"
+            android:background="@drawable/bg_round_outlined"
+            android:padding="@dimen/padding_normal_small"
+            android:text="@string/dummy_time"
+            app:layout_constraintBottom_toBottomOf="@id/tvDeadLineLabel"
+            app:layout_constraintStart_toEndOf="@id/tvDeadLineLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvDialogHeading" />
+
+    <TextView
+            android:id="@+id/tvCalendarDateFormat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_normal"
+            android:padding="@dimen/padding_micro"
+            android:text="@string/date_format"
+            app:layout_constraintStart_toEndOf="@id/tvDeadLineLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvCalendarDate" />
+
+    <TextView
+            android:id="@+id/tvTimeLabel"
+            style="@style/Text.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:text="@string/time_label"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/tvCalendarTime"
+            app:layout_constraintStart_toEndOf="@id/tvCalendarDate"
+            app:layout_constraintTop_toBottomOf="@id/tvDialogHeading" />
+
+    <TextView
+            android:id="@+id/tvCalendarTime"
+            style="@style/Text.Secondary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_normal_small"
+            android:background="@drawable/bg_round_outlined"
+            android:padding="@dimen/padding_normal_small"
+            android:text="@string/dummy_time"
+            app:layout_constraintBottom_toBottomOf="@id/tvDeadLineLabel"
+            app:layout_constraintStart_toEndOf="@id/tvTimeLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvDialogHeading" />
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmit"
+            style="@style/Text.Primary"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_medium"
+            android:layout_marginBottom="@dimen/padding_small"
+            android:background="@drawable/bg_rounded_corner"
+            android:elevation="@dimen/padding_nano"
+            android:padding="@dimen/padding_normal_small"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCalendarDateFormat" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

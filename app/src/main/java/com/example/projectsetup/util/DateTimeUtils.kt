@@ -42,6 +42,14 @@ class DateTimeUtils {
             return ZonedDateTime.parse(localString)
         }
 
+        fun getLocalDate(): ZonedDateTime {
+            val localString = LocalDateTime.now()
+                    .atOffset(ZoneOffset.UTC)
+                    .atZoneSameInstant(ZoneId.systemDefault())
+                    .format(formatter)
+            return ZonedDateTime.parse(localString)
+        }
+
         fun getCurrentLocalDateInUtc(): String {
             return LocalDateTime.parse(ZonedDateTime.now().toInstant().toString(), formatter)
                     .atOffset(ZoneOffset.UTC)
@@ -73,5 +81,15 @@ class DateTimeUtils {
             return Instant.ofEpochMilli(millis).atZone(ZoneId.systemDefault()).format(formatter12HourOnlyTime)
         }
 
+        fun convertParamsToLocalDateTime(
+            year: Int,
+            month: Int,
+            day: Int,
+            hours: Int,
+            minutes: Int,
+            seconds: Int
+        ): LocalDateTime {
+            return LocalDateTime.of(year, month, day, hours, minutes, seconds)
+        }
     }
 }
