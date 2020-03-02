@@ -108,6 +108,7 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
             .studentHelperApplicationComponent(StudentHelper.get(this).studentHelperApplicationComponent())
             .build()
         component.injectAddJobActivity(this)
+        validator = Validator(this)
         adminActivityViewModel =
             ViewModelProvider(this, viewModelFactory).get(AdminActivityViewModel::class.java)
     }
@@ -122,6 +123,7 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
         rvSkills.layoutManager = GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
         rvSkills.adapter = adapter
         initDialog()
+        adminActivityViewModel.searchSkills("")
     }
 
     private fun initDialog() {

@@ -156,7 +156,7 @@ class LoginActivity : BaseActivity(), LoginAdapter.OnItemClickListener {
                                 }
                             }
                             Constants.USER_TYPE_FACULTY -> {
-
+                                showSuccessSnackBar("Feature under development.",clLoginContainer)
                             }
                             Constants.USER_TYPE_ADMIN -> {
                                 startActivity(AdminHomeActivity.newIntent(this))

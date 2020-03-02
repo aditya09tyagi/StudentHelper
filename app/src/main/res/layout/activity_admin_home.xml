@@ -1,75 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clHome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/clHome"
+    android:layout_margin="@dimen/padding_small"
     android:padding="@dimen/padding_18_dp">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddBranch"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_18_dp"
         android:background="@drawable/bg_rounded_corner"
         android:padding="@dimen/padding_16_dp"
         android:text="@string/add_branch"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivAddBranch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/ivAddBranch"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/padding_medium"
+        android:src="@drawable/ic_branch"
+        android:contentDescription="@string/image"
+        app:layout_constraintBottom_toBottomOf="@id/btnAddBranch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnAddBranch"
+        app:layout_constraintTop_toTopOf="@id/btnAddBranch" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddCompany"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_18_dp"
         android:background="@drawable/bg_rounded_corner"
         android:padding="@dimen/padding_16_dp"
         android:text="@string/add_company"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivAddCompany"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAddBranch" />
+        app:layout_constraintTop_toBottomOf="@id/ivAddBranch" />
+
+    <ImageView
+        android:id="@+id/ivAddCompany"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/padding_medium"
+        android:src="@drawable/ic_company"
+        android:contentDescription="@string/image"
+        app:layout_constraintBottom_toBottomOf="@id/btnAddCompany"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnAddCompany"
+        app:layout_constraintTop_toTopOf="@id/btnAddCompany" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddJob"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_18_dp"
         android:background="@drawable/bg_rounded_corner"
         android:padding="@dimen/padding_16_dp"
         android:text="@string/add_job"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivAddJob"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAddCompany" />
+        app:layout_constraintTop_toBottomOf="@id/ivAddCompany" />
+
+    <ImageView
+        android:id="@+id/ivAddJob"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/padding_medium"
+        android:src="@drawable/ic_job"
+        android:contentDescription="@string/image"
+        app:layout_constraintBottom_toBottomOf="@id/btnAddJob"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnAddJob"
+        app:layout_constraintTop_toTopOf="@id/btnAddJob" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddSkill"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_18_dp"
         android:background="@drawable/bg_rounded_corner"
         android:padding="@dimen/padding_16_dp"
         android:text="@string/add_skill"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivAddSkill"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAddJob" />
+        app:layout_constraintTop_toBottomOf="@id/ivAddJob" />
+
+    <ImageView
+        android:id="@+id/ivAddSkill"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/padding_medium"
+        android:src="@drawable/ic_skills"
+        android:contentDescription="@string/image"
+        app:layout_constraintBottom_toBottomOf="@id/btnAddSkill"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnAddSkill"
+        app:layout_constraintTop_toTopOf="@id/btnAddSkill" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAddSubject"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_18_dp"
         android:background="@drawable/bg_rounded_corner"
         android:padding="@dimen/padding_16_dp"
         android:text="@string/add_subject"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivAddSubject"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnAddSkill" />
+        app:layout_constraintTop_toBottomOf="@id/ivAddSkill" />
+
+    <ImageView
+        android:id="@+id/ivAddSubject"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/padding_medium"
+        android:src="@drawable/ic_subject"
+        android:contentDescription="@string/image"
+        app:layout_constraintBottom_toBottomOf="@id/btnAddSubject"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnAddSubject"
+        app:layout_constraintTop_toTopOf="@id/btnAddSubject" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

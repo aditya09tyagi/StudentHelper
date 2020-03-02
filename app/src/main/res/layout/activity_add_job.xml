@@ -121,8 +121,8 @@
 
     <ImageView
         android:id="@+id/ivJob"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:contentDescription="@string/image"
         android:src="@drawable/ic_job"
         app:layout_constraintBottom_toBottomOf="parent"
