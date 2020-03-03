@@ -13,9 +13,11 @@ class UpcomingPlacementAdapter(val picasso: Picasso) :
 
     private lateinit var upcomingList: ArrayList<Upcoming>
     private lateinit var onUpcomingItemClickListener: OnUpcomingItemClickListener
+    private var shouldShowRegistration = false
 
-    fun setList(list: ArrayList<Upcoming>) {
-        upcomingList = list
+    fun setList(list: ArrayList<Upcoming>,shouldShowRegistration:Boolean) {
+        this.upcomingList = list
+        this.shouldShowRegistration = shouldShowRegistration
         notifyDataSetChanged()
     }
 
@@ -33,7 +35,7 @@ class UpcomingPlacementAdapter(val picasso: Picasso) :
 
     override fun onBindViewHolder(holderUpcoming: UpcomingPlacementViewHolder, position: Int) {
         if (::upcomingList.isInitialized) {
-            holderUpcoming.setUpcomingCompany(picasso, upcomingList[position])
+            holderUpcoming.setUpcomingCompany(picasso, upcomingList[position],shouldShowRegistration)
             holderUpcoming.setOnUpcomingItemClickListener(this)
         }
     }

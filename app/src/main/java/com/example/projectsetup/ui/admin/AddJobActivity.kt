@@ -18,7 +18,7 @@ import com.example.projectsetup.data.models.Skill
 import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerAddJobActivityComponent
 import com.example.projectsetup.ui.base.BaseActivity
-import com.example.projectsetup.ui.dialog.JobDateTimeDialog
+import com.example.projectsetup.ui.dialog.DateTimeSelectionDialog
 import com.example.projectsetup.ui.generic_rv.GenericDataAdapter
 import com.example.projectsetup.ui.loader.ProgressModal
 import com.example.projectsetup.util.CustomValidationListener
@@ -27,12 +27,11 @@ import com.mobsandgeeks.saripaar.Validator
 import com.mobsandgeeks.saripaar.annotation.NotEmpty
 import com.rengwuxian.materialedittext.MaterialEditText
 import kotlinx.android.synthetic.main.activity_add_job.*
-import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZonedDateTime
 import javax.inject.Inject
 
 class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
-    JobDateTimeDialog.OnSubmitClickListener {
+    DateTimeSelectionDialog.OnSubmitClickListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -45,29 +44,29 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
     private lateinit var etJobDescription: MaterialEditText
     @NotEmpty
     private lateinit var etJobPlace: MaterialEditText
+    private lateinit var autoCompleteSkills: AutoCompleteTextView
 
     private var day: Int = 0
     private var month: Int = 0
     private var year: Int = 0
     private var hours: Int = 0
-    private var minutes: Int = 0
 
+    private var minutes: Int = 0
     private lateinit var userId: String
     private lateinit var skillText: String
-    private var commaSeparatedSkillIds: String = ""
 
+    private var commaSeparatedSkillIds: String = ""
     private var isSkillAdded: Boolean = false
     private var isDateTimeSelected: Boolean = false
     private lateinit var validator: Validator
-    private lateinit var progressModal: ProgressModal
 
+    private lateinit var progressModal: ProgressModal
     private var skillList: ArrayList<Skill> = ArrayList()
     private var skills: ArrayList<String> = ArrayList()
-    private var companiesList: ArrayList<Company> = ArrayList()
 
-    private lateinit var dateTimeDialog: JobDateTimeDialog
+    private var companiesList: ArrayList<Company> = ArrayList()
+    private lateinit var dateTimeSelectionDialog: DateTimeSelectionDialog
     private lateinit var zonedDateTime: ZonedDateTime
-    private lateinit var autoCompleteSkills: AutoCompleteTextView
 
     private lateinit var adminActivityViewModel: AdminActivityViewModel
 
@@ -133,15 +132,15 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
     private fun initDialog() {
         zonedDateTime = DateTimeUtils.getLocalDate()
         supportFragmentManager.let { fm ->
-            dateTimeDialog =
-                JobDateTimeDialog(
+            dateTimeSelectionDialog =
+                DateTimeSelectionDialog(
                     this,
                     zonedDateTime = zonedDateTime,
                     fragmentManager = fm
                 )
         }
 
-        dateTimeDialog.setOnSubmitClickListener(this)
+        dateTimeSelectionDialog.setOnSubmitClickListener(this)
     }
 
     private fun setListener() {
@@ -150,8 +149,8 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
         }
 
         tvAddDateTime.setOnClickListener {
-            if (::dateTimeDialog.isInitialized) {
-                dateTimeDialog.show()
+            if (::dateTimeSelectionDialog.isInitialized) {
+                dateTimeSelectionDialog.show()
             }
         }
 
@@ -317,6 +316,6 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
         this.hours = hours
         this.minutes = minutes
         isDateTimeSelected = true
-        dateTimeDialog.dismiss()
+        dateTimeSelectionDialog.dismiss()
     }
 }

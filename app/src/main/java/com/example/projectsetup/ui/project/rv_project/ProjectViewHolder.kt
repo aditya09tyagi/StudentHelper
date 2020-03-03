@@ -29,7 +29,7 @@ class ProjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     DateTimeFormatter.BASIC_ISO_DATE
                 )
         itemView.projectRvProgress.progress = project.progress
-        itemView.tvRvProgressValue.text = project.progress.toString()
+        itemView.tvRvProgressValue.text = project.progress.toString() + " %"
 
         itemView.btnUpdateProgress.setOnClickListener {
             if (::onItemClickListener.isInitialized)

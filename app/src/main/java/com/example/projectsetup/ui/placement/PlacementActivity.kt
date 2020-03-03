@@ -40,7 +40,7 @@ class PlacementActivity : BaseActivity(), UpcomingPlacementAdapter.OnUpcomingIte
     private lateinit var placementViewModel: PlacementViewModel
     private lateinit var progressModal: ProgressModal
     private lateinit var userId: String
-
+    private var shouldShowRegistration:Boolean = false
     private lateinit var upcomingClasses: ArrayList<Upcoming>
     private var position = 0
 
@@ -72,6 +72,8 @@ class PlacementActivity : BaseActivity(), UpcomingPlacementAdapter.OnUpcomingIte
                 userId = uid
             }
         }
+
+        shouldShowRegistration = Constants.USER_TYPE_STUDENT == sharedPreferenceUtil.getInt(Constants.EXTRA_USER_TYPE)
     }
 
     private fun inject() {
@@ -154,7 +156,7 @@ class PlacementActivity : BaseActivity(), UpcomingPlacementAdapter.OnUpcomingIte
                         upcomingClasses = list
                         if (list.isNotEmpty()) {
                             tvUpcoming.visibility = View.VISIBLE
-                            upcomingPlacementAdapter.setList(upcomingClasses)
+                            upcomingPlacementAdapter.setList(upcomingClasses,shouldShowRegistration)
                         } else {
                             tvUpcoming.visibility = View.GONE
                         }
@@ -221,6 +223,11 @@ class PlacementActivity : BaseActivity(), UpcomingPlacementAdapter.OnUpcomingIte
 
     override fun onItemClick(position: Int, companyId: String) {
         startCompanyActivity(companyId)
+    }
+
+    override fun onBackPressed() {
+        overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left)
+        super.onBackPressed()
     }
 
     private fun startCompanyActivity(companyId: String) {

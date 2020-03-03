@@ -8,16 +8,14 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.FragmentManager
 import com.example.projectsetup.R
-import com.example.projectsetup.util.DateTimeUtils
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog
 import kotlinx.android.synthetic.main.dialog_job_date_time.*
-import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.temporal.ChronoField
 import java.util.*
 
-class JobDateTimeDialog(
+class DateTimeSelectionDialog(
     context: Context,
     private var zonedDateTime: ZonedDateTime,
     private val fragmentManager: FragmentManager
@@ -93,7 +91,7 @@ class JobDateTimeDialog(
 
     private fun initializeLayout() {
         datePickerDialog = DatePickerDialog.newInstance(
-            this@JobDateTimeDialog,
+            this@DateTimeSelectionDialog,
             now.get(Calendar.YEAR),
             now.get(Calendar.MONTH),
             now.get(Calendar.DAY_OF_MONTH)
@@ -103,7 +101,7 @@ class JobDateTimeDialog(
         datePickerDialog.minDate = now
 
         timePickerDialog = TimePickerDialog.newInstance(
-            this@JobDateTimeDialog,
+            this@DateTimeSelectionDialog,
             false
         )
 

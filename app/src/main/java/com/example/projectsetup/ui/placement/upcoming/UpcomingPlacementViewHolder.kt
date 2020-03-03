@@ -14,14 +14,15 @@ class UpcomingPlacementViewHolder(itemView: View) : RecyclerView.ViewHolder(item
 
     private lateinit var onUpcomingItemClickListener: OnUpcomingItemClickListener
 
-    fun setUpcomingCompany(picasso: Picasso, upcoming: Upcoming) {
+    fun setUpcomingCompany(picasso: Picasso, upcoming: Upcoming, shouldShowRegistration: Boolean) {
         itemView.tvCompanyName.text = upcoming.company.companyName
         itemView.tvCompanyDescription.text = upcoming.description
         itemView.tvJobProfile.text = upcoming.title
         itemView.tvDriveLocation.text = upcoming.place
         itemView.tvVisitDate.text = getStartDateString(upcoming.visit_date)
         setItemClickListener(itemView, upcoming)
-        setRegisterViews(upcoming.isRegistered)
+        if (shouldShowRegistration)
+            setRegisterViews(upcoming.isRegistered)
 
         val skills = upcoming.skill.joinToString { it.name }
         itemView.tvSkills.text = skills

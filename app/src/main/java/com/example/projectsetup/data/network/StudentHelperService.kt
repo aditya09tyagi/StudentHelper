@@ -117,22 +117,27 @@ interface StudentHelperService {
         @Query("user") userId: String
     ): Call<ArrayList<Project>>
 
+    @GET("/v1/user/find")
+    fun searchUser(
+        @Query("name") queryText: String
+    ):Call<ArrayList<User>>
+
     @POST("/project/assignproject")
     fun assignProject(
         @Query("faculty") facultyId: String,
         @Query("title") title: String,
         @Query("description") description: String,
         @Query("members") commaSeparatedMembersIds: String,
-        @Query("date") dayOfMonth: String,
-        @Query("month") month: String,
-        @Query("year") year: String
-    )
+        @Query("date") dayOfMonth: Int,
+        @Query("month") month: Int,
+        @Query("year") year: Int
+    ):Call<AssignProject>
 
     @POST("/project/updateProgress")
     fun updateProjectProgress(
         @Query("progress") updatedProgress: Int,
         @Query("project") projectId: String
-    ): Call<Project>
+    ): Call<UpdateProject>
 
     @GET("/project/getProjectUnderFaculty")
     fun getProjectUnderFaculty(

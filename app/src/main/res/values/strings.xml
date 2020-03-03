@@ -85,6 +85,10 @@
     <string name="dummy_deadline">25,March 2020</string>
     <string name="progress_label">Progress :- </string>
     <string name="update_progress">Update Progress</string>
+    <string name="assign_project">Assign Project</string>
+    <string name="enter_student_name">Enter Student Name</string>
+    <string name="enter_project_title">Enter Project Title</string>
+    <string name="enter_project_description">Enter Project Description</string>
 
     <!-- PLACEMENT SCREEN -->
     <string name="placement_label">PLACEMENT</string>

@@ -76,6 +76,9 @@
         <activity
             android:name=".ui.admin.AdminHomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.assign_project.AssignProjectActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

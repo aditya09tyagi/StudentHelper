@@ -18,7 +18,7 @@ class UpdateProgressDialog(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
-        setContentView(R.layout.dialog_job_date_time)
+        setContentView(R.layout.dialog_update_progress)
         window?.let {
             it.setDimAmount(0.55f)
             it.setGravity(Gravity.CENTER)
@@ -31,8 +31,8 @@ class UpdateProgressDialog(
     }
 
     private fun setListener() {
-        val progressValue = etUpdateProgressValue.text.toString()
         btnSubmit.setOnClickListener {
+            val progressValue = etUpdateProgressValue.text.toString()
             if (::onSubmitClickListener.isInitialized)
                 onSubmitClickListener.onSubmitClick(progressValue.toInt())
         }

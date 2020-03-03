@@ -12,6 +12,7 @@ import com.example.projectsetup.R
 import com.example.projectsetup.StudentHelper
 import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerProjectActivityComponent
+import com.example.projectsetup.ui.assign_project.AssignProjectActivity
 import com.example.projectsetup.ui.base.BaseActivity
 import com.example.projectsetup.ui.chat.ChatActivity
 import com.example.projectsetup.ui.dialog.UpdateProgressDialog
@@ -72,7 +73,6 @@ class ProjectActivity : BaseActivity(), ProjectAdapter.OnItemClickListener,
             .build()
 
         component.injectProjectActivity(this)
-        updateProgressDialog = UpdateProgressDialog(this)
         projectViewModel =
             ViewModelProvider(this, viewModelFactory).get(ProjectViewModel::class.java)
     }
@@ -81,10 +81,13 @@ class ProjectActivity : BaseActivity(), ProjectAdapter.OnItemClickListener,
         if (userType == Constants.USER_TYPE_STUDENT) {
             if (::userId.isInitialized) {
                 projectViewModel.getMyProject(userId)
+                hideTeacherView()
             }
         } else {
             if (::userId.isInitialized) {
                 projectViewModel.getFacultyProject(facultyId = userId)
+                updateProgressDialog = UpdateProgressDialog(this)
+                hideStudentView()
             }
         }
     }
@@ -99,6 +102,16 @@ class ProjectActivity : BaseActivity(), ProjectAdapter.OnItemClickListener,
         fabChat.visibility = View.VISIBLE
     }
 
+    private fun hideTeacherView() {
+        rvProjects.visibility = View.GONE
+        fabAddProject.visibility = View.GONE
+    }
+
+    private fun showTeacherView() {
+        rvProjects.visibility = View.VISIBLE
+        fabAddProject.visibility = View.VISIBLE
+    }
+
     private fun initialiseLayout() {
         if (userType == Constants.USER_TYPE_STUDENT) {
             showStudentView()
@@ -108,6 +121,7 @@ class ProjectActivity : BaseActivity(), ProjectAdapter.OnItemClickListener,
             rvProjects.layoutManager = LinearLayoutManager(this)
             rvProjects.adapter = projectAdapter
             projectAdapter.setOnItemClickListener(this)
+            updateProgressDialog.setOnSubmitClickListener(this)
         }
     }
 
@@ -116,6 +130,10 @@ class ProjectActivity : BaseActivity(), ProjectAdapter.OnItemClickListener,
             if (::userId.isInitialized && ::projectId.isInitialized) {
                 startChatActivity(userId, projectId)
             }
+        }
+        fabAddProject.setOnClickListener {
+            if (::userId.isInitialized)
+                startActivity(AssignProjectActivity.newIntent(this, userId))
         }
     }
 
@@ -129,13 +147,11 @@ class ProjectActivity : BaseActivity(), ProjectAdapter.OnItemClickListener,
             when (it.status) {
                 Status.LOADING -> {
                     progressBar.visibility = View.VISIBLE
-                    rvProjects.visibility = View.GONE
                     hideStudentView()
                     clNoProjectAssigned.visibility = View.GONE
                 }
                 Status.SUCCESS -> {
                     clNoProjectAssigned.visibility = View.GONE
-                    rvProjects.visibility = View.GONE
                     showStudentView()
                     progressBar.visibility = View.GONE
                     it.data?.let {
@@ -158,7 +174,7 @@ class ProjectActivity : BaseActivity(), ProjectAdapter.OnItemClickListener,
                                             DateTimeFormatter.BASIC_ISO_DATE
                                         )
                                 projectProgress.progress = it.progress
-                                tvProgressValue.text = it.progress.toString()
+                                tvProgressValue.text = it.progress.toString()+ " %"
                                 tvProjectName.text = it.title
                                 clProjectContainer.visibility = View.VISIBLE
                             }
@@ -172,7 +188,7 @@ class ProjectActivity : BaseActivity(), ProjectAdapter.OnItemClickListener,
                 Status.ERROR -> {
                     showErrorToast("${it.message}")
                     progressBar.visibility = View.GONE
-                    rvProjects.visibility = View.GONE
+                    hideTeacherView()
                     hideStudentView()
                 }
             }
@@ -182,32 +198,48 @@ class ProjectActivity : BaseActivity(), ProjectAdapter.OnItemClickListener,
             when (it.status) {
                 Status.LOADING -> {
                     progressBar.visibility = View.VISIBLE
-                    rvProjects.visibility = View.GONE
-                    hideStudentView()
+                    hideTeacherView()
                     clNoProjectAssigned.visibility = View.GONE
                 }
                 Status.SUCCESS -> {
                     clNoProjectAssigned.visibility = View.GONE
-                    rvProjects.visibility = View.VISIBLE
-                    hideStudentView()
+                    showTeacherView()
                     progressBar.visibility = View.GONE
                     it.data?.let { list ->
-                        projectAdapter.setProjectList(list)
+                        if (list.isNotEmpty()) {
+                            projectAdapter.setProjectList(list)
+                        } else {
+                            clNoProjectAssigned.visibility = View.VISIBLE
+                        }
                     }
                 }
                 Status.ERROR -> {
                     showErrorToast("${it.message}")
                     progressBar.visibility = View.GONE
-                    rvProjects.visibility = View.GONE
-                    hideStudentView()
+                    hideTeacherView()
+                }
+            }
+        })
+
+        projectViewModel.updateProgressLiveData.observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                }
+                Status.SUCCESS -> {
+                    it.data?.let {
+                        showSuccessToast("Progress Updated")
+                    }
+                }
+                Status.ERROR -> {
+                    showErrorToast("${it.message}")
                 }
             }
         })
     }
 
     override fun onUpdateClickListener(projectId: String, position: Int) {
+        this.projectId = projectId
         updateProgressDialog.show()
-        updateProgressDialog.setOnSubmitClickListener(this)
     }
 
     override fun onChatClickListener(projectId: String, position: Int) {
@@ -217,8 +249,20 @@ class ProjectActivity : BaseActivity(), ProjectAdapter.OnItemClickListener,
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (::userId.isInitialized)
+            projectViewModel.getFacultyProject(userId)
+    }
+
+    override fun onBackPressed() {
+        overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left)
+        super.onBackPressed()
+    }
+
     override fun onSubmitClick(updatedProgressValue: Int) {
+        updateProgressDialog.dismiss()
         if (::projectId.isInitialized)
-            projectViewModel.updateProjectProgress(updatedProgressValue,projectId)
+            projectViewModel.updateProjectProgress(updatedProgressValue, projectId)
     }
 }

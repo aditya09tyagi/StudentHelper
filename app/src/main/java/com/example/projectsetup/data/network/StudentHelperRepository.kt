@@ -67,6 +67,20 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
         })
     }
 
+    fun searchUsers(queryText: String, onSearchUserListener: OnSearchUserListener) {
+        studentHelperService.searchUser(queryText)
+            .enqueue(object : ApiCallback<ArrayList<User>>() {
+                override fun success(response: ArrayList<User>) {
+                    onSearchUserListener.onSearchUserSuccess(response)
+                }
+
+                override fun failure(error: Error) {
+                    onSearchUserListener.onSearchUserFailure(error)
+                }
+
+            })
+    }
+
     fun searchSkills(queryText: String, onSearchSkillListener: OnSearchSkillListener) {
         studentHelperService.searchSkill(queryText)
             .enqueue(object : ApiCallback<ArrayList<Skill>>() {
@@ -234,8 +248,8 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
         onUpdateProjectProgressListener: OnUpdateProjectProgressListener
     ) {
         studentHelperService.updateProjectProgress(updateProgress, projectId)
-            .enqueue(object : ApiCallback<Project>() {
-                override fun success(response: Project) {
+            .enqueue(object : ApiCallback<UpdateProject>() {
+                override fun success(response: UpdateProject) {
                     onUpdateProjectProgressListener.onUpdateProjectProgressSuccess(response)
                 }
 
@@ -359,6 +373,29 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
             })
     }
 
+    fun assignProject(
+        facultyId: String,
+        title: String,
+        description:String,
+        commaSeparatedMemberIds: String,
+        dayOfMonth:Int,
+        month:Int,
+        year:Int,
+        onAssignProjectListener: OnAssignProjectListener
+    ) {
+        studentHelperService.assignProject(facultyId,title,description,commaSeparatedMemberIds,dayOfMonth, month, year)
+            .enqueue(object : ApiCallback<AssignProject>() {
+                override fun success(response: AssignProject) {
+                    onAssignProjectListener.onAssignProjectSuccess(response)
+                }
+
+                override fun failure(error: Error) {
+                    onAssignProjectListener.onAssignProjectFailure(error)
+                }
+
+            })
+    }
+
     //-------INTERFACES----------
 
 
@@ -375,6 +412,14 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
         fun onUpdateUserSuccess(user: User)
 
         fun onUpdateUserFailure(error: Error)
+
+    }
+
+    interface OnSearchUserListener {
+
+        fun onSearchUserSuccess(userList: ArrayList<User>)
+
+        fun onSearchUserFailure(error: Error)
 
     }
 
@@ -477,7 +522,7 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
     interface OnUpdateProjectProgressListener {
 
-        fun onUpdateProjectProgressSuccess(updatedProject:Project)
+        fun onUpdateProjectProgressSuccess(updatedProject:UpdateProject)
 
         fun onUpdateProjectProgressFailure(error: Error)
 
@@ -525,7 +570,7 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
     interface OnAssignProjectListener {
 
-        fun onAssignProjectSuccess()
+        fun onAssignProjectSuccess(project: AssignProject)
 
         fun onAssignProjectFailure(error: Error)
 

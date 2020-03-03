@@ -28,7 +28,7 @@
 
             <TextView
                 android:id="@+id/tvRvProjectName"
-                fontPath="fonts/Lato-Medium.ttf"
+                style="@style/Text.Primary.Bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:alpha="0.96"
@@ -44,7 +44,7 @@
 
             <TextView
                 android:id="@+id/tvRvMembersLabel"
-                style="@style/Text.Primary"
+                style="@style/Text.Primary.Bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/padding_micro"
@@ -61,7 +61,7 @@
                 fontPath="fonts/Lato.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/padding_normal_large"
+                android:layout_marginStart="@dimen/padding_big"
                 android:layout_marginTop="@dimen/padding_micro"
                 android:alpha="0.80"
                 android:textColor="@color/black"
@@ -90,7 +90,7 @@
                 fontPath="fonts/Lato.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/padding_normal_large"
+                android:layout_marginStart="@dimen/padding_big"
                 android:layout_marginTop="@dimen/padding_micro"
                 android:alpha="0.80"
                 android:textColor="@color/black"
@@ -119,7 +119,7 @@
                 fontPath="fonts/Lato.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/padding_normal_large"
+                android:layout_marginStart="@dimen/padding_big"
                 android:layout_marginTop="@dimen/padding_micro"
                 android:alpha="0.80"
                 android:textColor="@color/black"
@@ -131,8 +131,9 @@
 
             <ImageView
                 android:id="@+id/tutorPhotoIv"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="@dimen/padding_big"
                 android:src="@drawable/ic_project"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -174,7 +175,7 @@
                 android:padding="@dimen/padding_micro"
                 android:progress="60"
                 android:progressTint="@color/collect_blue"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tvRvProgressValue"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvRvProgressLabel" />
 
@@ -185,14 +186,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/padding_small"
                 android:textColor="@color/collect_blue"
+                app:layout_constraintBottom_toBottomOf="@id/projectRvProgress"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/projectRvProgress"
+                app:layout_constraintTop_toBottomOf="@id/tvRvProgressLabel"
                 tools:text="60%" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnUpdateProgress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_small"
                 android:layout_marginStart="@dimen/padding_micro"
                 android:layout_marginBottom="@dimen/padding_small"
                 android:background="@drawable/bg_rounded_progress"
@@ -211,6 +214,7 @@
                 android:layout_height="50dp"
                 android:tint="@color/sub_exam_selected"
                 android:src="@drawable/ic_chat_icon"
+                android:layout_marginTop="@dimen/padding_small"
                 app:layout_constraintStart_toEndOf="@id/btnUpdateProgress"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

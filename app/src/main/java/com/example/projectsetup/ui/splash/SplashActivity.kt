@@ -62,13 +62,13 @@ class SplashActivity : BaseActivity() {
     private fun observeData() {
         sharedPreferencesLiveData.observe(this, Observer {
             it?.let {
+                userId = sharedPreferenceUtil.getString(Constants.EXTRA_USER_ID)
                 when (it.userType) {
                     Constants.USER_TYPE_STUDENT -> {
-                        userId = sharedPreferenceUtil.getString(Constants.EXTRA_USER_ID)
                         goToSelectionActivity()
                     }
                     Constants.USER_TYPE_FACULTY -> {
-
+                        goToSelectionActivity()
                     }
                     Constants.USER_TYPE_ADMIN -> {
                         startActivity(AdminHomeActivity.newIntent(this))

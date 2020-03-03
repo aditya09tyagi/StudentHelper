@@ -21,8 +21,8 @@ class ProjectViewModel @Inject constructor(
     val facultyProjectLiveData: LiveData<Resource<ArrayList<Project>>>
         get() = _facultyProjectLiveData
 
-    private val _updateProgressLiveData = MutableLiveData<Resource<Project>>()
-    val updateProgressLiveData: LiveData<Resource<Project>>
+    private val _updateProgressLiveData = MutableLiveData<Resource<UpdateProject>>()
+    val updateProgressLiveData: LiveData<Resource<UpdateProject>>
         get() = _updateProgressLiveData
 
     fun getMyProject(userId: String) {
@@ -56,7 +56,7 @@ class ProjectViewModel @Inject constructor(
         _facultyProjectLiveData.postValue(Resource.error(error))
     }
 
-    override fun onUpdateProjectProgressSuccess(updatedProject: Project) {
+    override fun onUpdateProjectProgressSuccess(updatedProject: UpdateProject ) {
         _updateProgressLiveData.postValue(Resource.success(updatedProject))
     }
 
