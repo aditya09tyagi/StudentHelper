@@ -7,19 +7,16 @@
     android:layout_height="match_parent"
     android:padding="@dimen/padding_16_dp">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/etCompanyName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <Spinner
+        android:id="@+id/spinnerCompany"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:layout_margin="@dimen/padding_small"
         android:backgroundTint="@color/dark_grey"
         android:hint="@string/enter_company_name"
-        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:met_floatingLabel="highlight"
-        app:met_floatingLabelText="@string/enter_job_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.rengwuxian.materialedittext.MaterialEditText
         android:id="@+id/etTitle"
@@ -31,7 +28,7 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etCompanyName"
+        app:layout_constraintTop_toBottomOf="@id/spinnerCompany"
         app:met_floatingLabel="highlight"
         app:met_floatingLabelText="@string/enter_job_title" />
 

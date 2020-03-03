@@ -23,6 +23,7 @@ interface Constants {
         const val TYPE_UPDATED = 2
 
         //User Type
+        const val EXTRA_USER_TYPE = "EXTRA_USER_TYPE"
         const val USER_TYPE_STUDENT = 1
         const val USER_TYPE_FACULTY = 2
         const val USER_TYPE_ADMIN = 3

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectsetup.R
 import com.example.projectsetup.StudentHelper
+import com.example.projectsetup.data.models.Company
 import com.example.projectsetup.data.models.Skill
 import com.example.projectsetup.data.models.Status
 import com.example.projectsetup.di.components.DaggerAddJobActivityComponent
@@ -38,9 +39,6 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
 
     @Inject
     lateinit var adapter: GenericDataAdapter
-
-    @NotEmpty
-    private lateinit var etCompanyName: MaterialEditText
     @NotEmpty
     private lateinit var etJobTitle: MaterialEditText
     @NotEmpty
@@ -48,23 +46,28 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
     @NotEmpty
     private lateinit var etJobPlace: MaterialEditText
 
-    private lateinit var autoCompleteSkills: AutoCompleteTextView
-    private var skillList: ArrayList<Skill> = ArrayList()
-    private lateinit var skillText: String
-    private lateinit var userId: String
-    private var isSkillAdded: Boolean = false
-    private lateinit var validator: Validator
-    private lateinit var progressModal: ProgressModal
-    private var commaSeparatedSkillIds: String = ""
-    private var skills: ArrayList<String> = ArrayList()
-    private lateinit var dateTimeDialog: JobDateTimeDialog
-    private lateinit var zonedDateTime: ZonedDateTime
     private var day: Int = 0
     private var month: Int = 0
     private var year: Int = 0
-
     private var hours: Int = 0
     private var minutes: Int = 0
+
+    private lateinit var userId: String
+    private lateinit var skillText: String
+    private var commaSeparatedSkillIds: String = ""
+
+    private var isSkillAdded: Boolean = false
+    private var isDateTimeSelected: Boolean = false
+    private lateinit var validator: Validator
+    private lateinit var progressModal: ProgressModal
+
+    private var skillList: ArrayList<Skill> = ArrayList()
+    private var skills: ArrayList<String> = ArrayList()
+    private var companiesList: ArrayList<Company> = ArrayList()
+
+    private lateinit var dateTimeDialog: JobDateTimeDialog
+    private lateinit var zonedDateTime: ZonedDateTime
+    private lateinit var autoCompleteSkills: AutoCompleteTextView
 
     private lateinit var adminActivityViewModel: AdminActivityViewModel
 
@@ -108,13 +111,13 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
             .studentHelperApplicationComponent(StudentHelper.get(this).studentHelperApplicationComponent())
             .build()
         component.injectAddJobActivity(this)
+        progressModal = ProgressModal(this)
         validator = Validator(this)
         adminActivityViewModel =
             ViewModelProvider(this, viewModelFactory).get(AdminActivityViewModel::class.java)
     }
 
     private fun initialiseLayout() {
-        etCompanyName = findViewById(R.id.etCompanyName)
         etJobTitle = findViewById(R.id.etTitle)
         etJobDescription = findViewById(R.id.etDescription)
         etJobPlace = findViewById(R.id.etPlace)
@@ -124,6 +127,7 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
         rvSkills.adapter = adapter
         initDialog()
         adminActivityViewModel.searchSkills("")
+        adminActivityViewModel.getAllCompanies()
     }
 
     private fun initDialog() {
@@ -155,24 +159,27 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
             CustomValidationListener(context = this@AddJobActivity) {
             override fun onValidationSucceeded() {
                 if (isSkillAdded) {
-                    if (::userId.isInitialized) {
-                        val companyName = etCompanyName.text.toString()
-                        val jobTitle = etJobTitle.text.toString()
-                        val jobDescription = etJobDescription.text.toString()
-                        val jobPlace = etJobPlace.text.toString()
-                        adminActivityViewModel.addJob(
-                            commaSeparatedSkillIds = commaSeparatedSkillIds,
-                            companyName = companyName,
-                            companyDescription = jobDescription,
-                            companyTitle = jobTitle,
-                            driveLocation = jobPlace,
-                            driveDay = day,
-                            driveMonth = month,
-                            driveYear = year,
-                            driveHour = hours,
-                            driveMinute = minutes,
-                            userId = userId
-                        )
+                    if (isDateTimeSelected){
+                        if (::userId.isInitialized) {
+                            val jobTitle = etJobTitle.text.toString()
+                            val jobDescription = etJobDescription.text.toString()
+                            val jobPlace = etJobPlace.text.toString()
+                            adminActivityViewModel.addJob(
+                                commaSeparatedSkillIds = commaSeparatedSkillIds,
+                                companyId = companiesList[spinnerCompany.selectedItemPosition].id,
+                                jobDescription = jobDescription,
+                                jobTitle = jobTitle,
+                                driveLocation = jobPlace,
+                                driveDay = day,
+                                driveMonth = month,
+                                driveYear = year,
+                                driveHour = hours,
+                                driveMinute = minutes,
+                                userId = userId
+                            )
+                        }
+                    }else{
+                        showErrorToast("Select date time for Job Posting.")
                     }
                 } else {
                     autoCompleteSkills.error = "Enter atleast one skill"
@@ -187,17 +194,37 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
         adminActivityViewModel.getSkillsLiveData.observe(this, Observer {
             when (it.status) {
                 Status.LOADING -> {
-
                 }
                 Status.SUCCESS -> {
                     it.data?.let { skills ->
                         this.skillList = skills
-                        initAutoComplete()
+                        initSkillsAutoComplete()
                     }
-
                 }
                 Status.ERROR -> {
-
+                }
+            }
+        })
+        adminActivityViewModel.getCompaniesLiveData.observe(this, Observer {
+            when (it.status) {
+                Status.LOADING -> {
+                }
+                Status.SUCCESS -> {
+                    it.data?.let { companies ->
+                        this.companiesList = companies
+                        val newList = ArrayList<String>()
+                        companies.forEach {
+                            newList.add(it.companyName)
+                        }
+                        val adapter = ArrayAdapter<String>(
+                            this,
+                            android.R.layout.simple_spinner_item,
+                            newList
+                        )
+                        spinnerCompany.adapter = adapter
+                    }
+                }
+                Status.ERROR -> {
                 }
             }
         })
@@ -222,7 +249,7 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
         })
     }
 
-    private fun initAutoComplete() {
+    private fun initSkillsAutoComplete() {
 
         if (skillList.isNotEmpty()) {
             skillList.forEachIndexed { index, skill ->
@@ -289,6 +316,7 @@ class AddJobActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListener,
         this.day = day
         this.hours = hours
         this.minutes = minutes
+        isDateTimeSelected = true
         dateTimeDialog.dismiss()
     }
 }

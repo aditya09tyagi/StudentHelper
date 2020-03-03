@@ -56,7 +56,7 @@ class UserDetailsActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedList
 
     private lateinit var branchList: List<Branch>
 
-    private var userType = Constants.USER_TYPE_STUDENT
+    private var userType = 0
 
     companion object {
         private const val EXTRA_USER_TYPE = "EXTRA_USER_TYPE"

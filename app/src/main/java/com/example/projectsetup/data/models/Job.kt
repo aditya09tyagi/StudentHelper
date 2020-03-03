@@ -8,7 +8,7 @@ data class Job(
     @SerializedName("_id")
     val id: String,
     @SerializedName("company")
-    val companyName: String,
+    val companyId: String,
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("description")
@@ -16,7 +16,7 @@ data class Job(
     @SerializedName("place")
     val drivePlace: String,
     @SerializedName("skill")
-    val commaSeparatedSkillIds: List<Skill>,
+    val commaSeparatedSkillIds: List<String>,
     @SerializedName("title")
     val jobTitle: String,
     @SerializedName("updatedAt")

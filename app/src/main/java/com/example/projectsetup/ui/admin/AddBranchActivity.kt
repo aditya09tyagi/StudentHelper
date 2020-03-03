@@ -89,7 +89,7 @@ class AddBranchActivity : BaseActivity(), GenericDataAdapter.OnItemDeletedListen
 
     private fun initialiseLayout() {
         autoCompleteSubjects = findViewById(R.id.autoCompleteSubjects)
-        adminActivityViewModel.getSubjects()
+        adminActivityViewModel.getAllSubjects()
 
         rvSubjects.layoutManager = GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
         rvSubjects.adapter = adapter

@@ -133,6 +133,7 @@ class LoginActivity : BaseActivity(), LoginAdapter.OnItemClickListener {
                         when (it.userType) {
                             Constants.USER_TYPE_STUDENT -> {
                                 if (it.age == 0) {
+                                    sharedPreferenceUtil.putInt(Constants.EXTRA_USER_TYPE,Constants.USER_TYPE_STUDENT)
                                     startActivity(
                                         UserDetailsActivity.newIntent(
                                             this,
@@ -156,9 +157,32 @@ class LoginActivity : BaseActivity(), LoginAdapter.OnItemClickListener {
                                 }
                             }
                             Constants.USER_TYPE_FACULTY -> {
-                                showSuccessSnackBar("Feature under development.",clLoginContainer)
+                                sharedPreferenceUtil.putInt(Constants.EXTRA_USER_TYPE,Constants.USER_TYPE_FACULTY)
+                                if (it.age == 0) {
+                                    startActivity(
+                                        UserDetailsActivity.newIntent(
+                                            this,
+                                            it.id,
+                                            it.name,
+                                            userType
+                                        )
+                                    )
+                                    overridePendingTransition(
+                                        R.anim.slide_in_right,
+                                        R.anim.slide_out_left
+                                    )
+                                    finishAffinity()
+                                } else {
+                                    startActivity(SelectionActivity.newIntent(this, it.id))
+                                    overridePendingTransition(
+                                        R.anim.slide_in_right,
+                                        R.anim.slide_out_left
+                                    )
+                                    finishAffinity()
+                                }
                             }
                             Constants.USER_TYPE_ADMIN -> {
+                                sharedPreferenceUtil.putInt(Constants.EXTRA_USER_TYPE,Constants.USER_TYPE_ADMIN)
                                 startActivity(AdminHomeActivity.newIntent(this))
                                 finishAffinity()
                             }

@@ -285,9 +285,9 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
     }
 
     fun addJob(
-        companyName: String,
-        companyTitle: String,
-        companyDescription: String,
+        companyId: String,
+        jobTitle: String,
+        jobDescription: String,
         driveLocation: String,
         commaSeparatedSkillIds: String,
         driveDate: Int,
@@ -299,9 +299,9 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
         onAddJobListener: OnAddJobListener
     ) {
         studentHelperService.addJob(
-            companyName,
-            companyTitle,
-            companyDescription,
+            companyId,
+            jobTitle,
+            jobDescription,
             driveLocation,
             commaSeparatedSkillIds,
             driveDate,

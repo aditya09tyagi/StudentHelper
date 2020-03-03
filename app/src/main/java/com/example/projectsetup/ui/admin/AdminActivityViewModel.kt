@@ -15,7 +15,8 @@ class AdminActivityViewModel @Inject constructor(
     StudentHelperRepository.OnAddJobListener,
     StudentHelperRepository.OnAddSkillListener,
     StudentHelperRepository.OnAddSubjectListener, StudentHelperRepository.OnGetAllSubjectsListener,
-    StudentHelperRepository.OnSearchSkillListener {
+    StudentHelperRepository.OnSearchSkillListener,
+    StudentHelperRepository.OnGetAllCompaniesListener {
 
     private val _addBranchLiveData = MutableLiveData<Resource<Branch>>()
     val addBranchLiveData: LiveData<Resource<Branch>>
@@ -45,6 +46,10 @@ class AdminActivityViewModel @Inject constructor(
     val getSkillsLiveData: LiveData<Resource<ArrayList<Skill>>>
         get() = _getSkillsLiveData
 
+    private val _getCompaniesLiveData = MutableLiveData<Resource<ArrayList<Company>>>()
+    val getCompaniesLiveData: LiveData<Resource<ArrayList<Company>>>
+        get() = _getCompaniesLiveData
+
     fun addBranch(
         branchName: String,
         commaSeparatedSubjectIds: String,
@@ -65,9 +70,9 @@ class AdminActivityViewModel @Inject constructor(
     }
 
     fun addJob(
-        companyName: String,
-        companyTitle: String,
-        companyDescription: String,
+        companyId: String,
+        jobTitle: String,
+        jobDescription: String,
         driveLocation: String,
         commaSeparatedSkillIds: String,
         driveDay: Int,
@@ -79,9 +84,9 @@ class AdminActivityViewModel @Inject constructor(
     ) {
         _addJobLiveData.postValue(Resource.loading())
         studentHelperRepository.addJob(
-            companyName,
-            companyTitle,
-            companyDescription,
+            companyId,
+            jobTitle,
+            jobDescription,
             driveLocation,
             commaSeparatedSkillIds,
             driveDay,
@@ -104,7 +109,7 @@ class AdminActivityViewModel @Inject constructor(
         studentHelperRepository.addSubject(subjectName, userID, this)
     }
 
-    fun getSubjects() {
+    fun getAllSubjects() {
         _getSubjectsLiveData.postValue(Resource.loading())
         studentHelperRepository.getAllSubjects(this)
     }
@@ -112,6 +117,11 @@ class AdminActivityViewModel @Inject constructor(
     fun searchSkills(queryText: String) {
         _getSkillsLiveData.postValue(Resource.loading())
         studentHelperRepository.searchSkills(queryText, this)
+    }
+
+    fun getAllCompanies(){
+        _getCompaniesLiveData.postValue(Resource.loading())
+        studentHelperRepository.getAllCompanies(this)
     }
 
     override fun onAddBranchSuccess(branch: Branch) {
@@ -168,5 +178,13 @@ class AdminActivityViewModel @Inject constructor(
 
     override fun onSearchSkillFailure(error: Error) {
         _getSkillsLiveData.postValue(Resource.error(error))
+    }
+
+    override fun onGetAllCompaniesSuccess(companies: ArrayList<Company>) {
+        _getCompaniesLiveData.postValue(Resource.success(companies))
+    }
+
+    override fun onGetAllCompaniesFailure(error: Error) {
+        _getCompaniesLiveData.postValue(Resource.error(error))
     }
 }
