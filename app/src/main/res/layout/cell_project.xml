@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?><!--suppress AndroidUnknownAttribute -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/padding_12_dp"
+    android:layout_marginTop="@dimen/padding_8_dp"
+    android:layout_marginEnd="@dimen/padding_12_dp"
+    android:elevation="@dimen/padding_4_dp"
+    app:cardCornerRadius="@dimen/padding_4_dp"
+    app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/companyDetailsHolder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_medium"
+            android:layout_marginTop="@dimen/padding_medium"
+            android:layout_marginEnd="@dimen/padding_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvRvProjectName"
+                fontPath="fonts/Lato-Medium.ttf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0.96"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_medium_large"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingPrefix"
+                tools:text="Student Final Year Management"
+                tools:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvRvMembersLabel"
+                style="@style/Text.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_micro"
+                android:layout_marginTop="@dimen/padding_14_dp"
+                android:text="@string/member_label"
+                android:textSize="@dimen/font_normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRvProjectName"
+                tools:ignore="MissingPrefix"
+                tools:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvRvMembers"
+                fontPath="fonts/Lato.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_normal_large"
+                android:layout_marginTop="@dimen/padding_micro"
+                android:alpha="0.80"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_medium_small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRvMembersLabel"
+                tools:ignore="MissingPrefix"
+                tools:text="@string/dummy_member" />
+
+            <TextView
+                android:id="@+id/tvRvCoordinatorLabel"
+                style="@style/Text.Primary.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_micro"
+                android:layout_marginTop="@dimen/padding_micro"
+                android:alpha="0.90"
+                android:text="@string/coordinator_label"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRvMembers" />
+
+            <TextView
+                android:id="@+id/tvRvCoordinatorName"
+                fontPath="fonts/Lato.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_normal_large"
+                android:layout_marginTop="@dimen/padding_micro"
+                android:alpha="0.80"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_medium_small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRvCoordinatorLabel"
+                tools:ignore="MissingPrefix"
+                tools:text="Aditya Tyagi" />
+
+            <TextView
+                android:id="@+id/tvRvDeadlineLabel"
+                style="@style/Text.Primary.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_micro"
+                android:layout_marginTop="@dimen/padding_micro"
+                android:alpha="0.90"
+                android:text="@string/deadline_label"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRvCoordinatorName" />
+
+            <TextView
+                android:id="@+id/tvRvDeadline"
+                fontPath="fonts/Lato.ttf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_normal_large"
+                android:layout_marginTop="@dimen/padding_micro"
+                android:alpha="0.80"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_medium_small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRvDeadlineLabel"
+                tools:ignore="MissingPrefix"
+                tools:text="@string/dummy_deadline" />
+
+            <ImageView
+                android:id="@+id/tutorPhotoIv"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_project"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRvProjectName"
+                tools:ignore="ContentDescription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/progressDetailsHolder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_normal"
+            android:background="@color/physics_live_class_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/companyDetailsHolder"
+            tools:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvRvProgressLabel"
+                style="@style/Text.Primary.Bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_micro"
+                android:layout_marginTop="@dimen/padding_micro"
+                android:text="@string/progress_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/projectRvProgress"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding_micro"
+                android:padding="@dimen/padding_micro"
+                android:progress="60"
+                android:progressTint="@color/collect_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRvProgressLabel" />
+
+            <TextView
+                android:id="@+id/tvRvProgressValue"
+                style="@style/Text.Primary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/padding_small"
+                android:textColor="@color/collect_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/projectRvProgress"
+                tools:text="60%" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnUpdateProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_micro"
+                android:layout_marginBottom="@dimen/padding_small"
+                android:background="@drawable/bg_rounded_progress"
+                android:paddingStart="@dimen/padding_medium"
+                android:paddingEnd="@dimen/padding_medium"
+                android:text="@string/update_progress"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@id/ivChat"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRvProgressValue" />
+
+            <ImageView
+                android:id="@+id/ivChat"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:tint="@color/sub_exam_selected"
+                android:src="@drawable/ic_chat_icon"
+                app:layout_constraintStart_toEndOf="@id/btnUpdateProgress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRvProgressValue" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

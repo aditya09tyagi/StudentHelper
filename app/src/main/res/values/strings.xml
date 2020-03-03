@@ -81,8 +81,10 @@
     <string name="coordinator_label">Co-ordinator :- </string>
     <string name="dummy_coordinator">Aditya Tyagi</string>
     <string name="deadline_label">Deadline :- </string>
+    <string name="updated_progress_label">Updated progress :- </string>
     <string name="dummy_deadline">25,March 2020</string>
     <string name="progress_label">Progress :- </string>
+    <string name="update_progress">Update Progress</string>
 
     <!-- PLACEMENT SCREEN -->
     <string name="placement_label">PLACEMENT</string>

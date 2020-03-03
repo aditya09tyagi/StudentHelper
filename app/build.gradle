@@ -7,6 +7,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('/Users/adityatyagi09/Downloads/studentHelper.jks')
+            storePassword 'scholar'
+            keyAlias = 'scholar'
+            keyPassword 'scholar'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {

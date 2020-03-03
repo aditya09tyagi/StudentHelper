@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/padding_small"
                 android:padding="@dimen/padding_small"
-                android:textColor="@color/yellow"
+                android:textColor="@color/black"
                 android:textSize="@dimen/font_large"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +92,7 @@
                 android:layout_margin="@dimen/padding_micro"
                 android:padding="@dimen/padding_small"
                 android:text="@string/member_label"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvProjectName" />
 
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/padding_micro"
                 android:padding="@dimen/padding_small"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/tvCoordinatorLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvMembersLabel"
                 tools:text="@string/dummy_member" />
@@ -116,7 +116,7 @@
                 android:layout_margin="@dimen/padding_micro"
                 android:padding="@dimen/padding_small"
                 android:text="@string/coordinator_label"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvMembers" />
 
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/padding_micro"
                 android:padding="@dimen/padding_small"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/tvCoordinatorLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvCoordinatorLabel"
                 tools:text="@string/dummy_coordinator" />
@@ -140,7 +140,7 @@
                 android:layout_margin="@dimen/padding_micro"
                 android:padding="@dimen/padding_small"
                 android:text="@string/deadline_label"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCoordinator" />
 
@@ -151,7 +151,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/padding_micro"
                 android:padding="@dimen/padding_small"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/tvCoordinatorLabel"
                 app:layout_constraintTop_toBottomOf="@id/tvDeadlineLabel"
                 tools:text="@string/dummy_deadline" />
@@ -164,7 +164,7 @@
                 android:layout_margin="@dimen/padding_micro"
                 android:padding="@dimen/padding_small"
                 android:text="@string/progress_label"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvDeadline" />
 
@@ -183,14 +183,27 @@
 
             <TextView
                 android:id="@+id/tvProgressValue"
+                style="@style/Text.Primary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/padding_small"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/projectProgress"
                 tools:text="60%" />
+
+            <ImageView
+                android:id="@+id/ivProject"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:contentDescription="@string/image"
+                android:src="@drawable/ic_project"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvProgressValue" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -201,6 +214,7 @@
         android:layout_margin="@dimen/padding_normal"
         android:src="@drawable/ic_chat_icon"
         android:tint="@color/white"
+        android:foregroundTint="@color/white"
         app:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

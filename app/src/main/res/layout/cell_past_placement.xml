@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/classDetailsHolder"
+            android:id="@+id/companyDetailsHolder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/padding_medium"
@@ -124,7 +124,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/classDetailsHolder"
+            app:layout_constraintTop_toBottomOf="@id/companyDetailsHolder"
             tools:layout_height="wrap_content">
 
 

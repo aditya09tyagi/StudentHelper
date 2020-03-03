@@ -184,8 +184,8 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
     }
 
     fun getMyProject(userId: String, onGetMyProjectListener: OnGetMyProjectListener) {
-        studentHelperService.getMyProject(userId).enqueue(object : ApiCallback<List<Project>>() {
-            override fun success(response: List<Project>) {
+        studentHelperService.getMyProject(userId).enqueue(object : ApiCallback<ArrayList<Project>>() {
+            override fun success(response: ArrayList<Project>) {
                 onGetMyProjectListener.onGetMyProjectSuccess(response)
             }
 
@@ -200,8 +200,8 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
         onGetProjectUnderFacultyListener: OnGetProjectUnderFacultyListener
     ) {
         studentHelperService.getProjectUnderFaculty(facultyId)
-            .enqueue(object : ApiCallback<Project>() {
-                override fun success(response: Project) {
+            .enqueue(object : ApiCallback<ArrayList<Project>>() {
+                override fun success(response: ArrayList<Project>) {
                     onGetProjectUnderFacultyListener.onGetProjectUnderFacultySuccess(response)
                 }
 
@@ -234,8 +234,8 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
         onUpdateProjectProgressListener: OnUpdateProjectProgressListener
     ) {
         studentHelperService.updateProjectProgress(updateProgress, projectId)
-            .enqueue(object : ApiCallback<Progress>() {
-                override fun success(response: Progress) {
+            .enqueue(object : ApiCallback<Project>() {
+                override fun success(response: Project) {
                     onUpdateProjectProgressListener.onUpdateProjectProgressSuccess(response)
                 }
 
@@ -453,7 +453,7 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
     interface OnGetMyProjectListener {
 
-        fun onGetMyProjectSuccess(project: List<Project>)
+        fun onGetMyProjectSuccess(project: ArrayList<Project>)
 
         fun onGetMyProjectFailure(error: Error)
 
@@ -461,7 +461,7 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
     interface OnGetProjectUnderFacultyListener {
 
-        fun onGetProjectUnderFacultySuccess(project: Project)
+        fun onGetProjectUnderFacultySuccess(project: ArrayList<Project>)
 
         fun onGetProjectUnderFacultyFailure(error: Error)
 
@@ -477,7 +477,7 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
     interface OnUpdateProjectProgressListener {
 
-        fun onUpdateProjectProgressSuccess(progress: Progress)
+        fun onUpdateProjectProgressSuccess(updatedProject:Project)
 
         fun onUpdateProjectProgressFailure(error: Error)
 

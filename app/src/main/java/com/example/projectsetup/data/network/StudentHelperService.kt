@@ -115,7 +115,7 @@ interface StudentHelperService {
     @GET("/project/getMyProject")
     fun getMyProject(
         @Query("user") userId: String
-    ): Call<List<Project>>
+    ): Call<ArrayList<Project>>
 
     @POST("/project/assignproject")
     fun assignProject(
@@ -132,10 +132,10 @@ interface StudentHelperService {
     fun updateProjectProgress(
         @Query("progress") updatedProgress: Int,
         @Query("project") projectId: String
-    ): Call<Progress>
+    ): Call<Project>
 
     @GET("/project/getProjectUnderFaculty")
     fun getProjectUnderFaculty(
         @Query("faculty") facultyId: String
-    ): Call<Project>
+    ): Call<ArrayList<Project>>
 }
