@@ -198,7 +198,7 @@ class PlacementActivity : BaseActivity(), UpcomingPlacementAdapter.OnUpcomingIte
                     it.data?.let { job ->
                         if (::upcomingClasses.isInitialized) {
                             upcomingClasses[position].isRegistered = true
-                            upcomingPlacementAdapter.notifyItemChanged(position)
+                            upcomingPlacementAdapter.notifyItemChanged (position)
                         }
                         showSuccessToast("Registered")
                     }

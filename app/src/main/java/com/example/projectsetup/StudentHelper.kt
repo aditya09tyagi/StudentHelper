@@ -47,6 +47,7 @@ class StudentHelper :Application(), LifecycleObserver {
         initComponent()
         initAndroidThreeTen()
         initTimber()
+        initOneSignal()
         initViewPump()
         listenNoInternetEvent()    }
 
@@ -60,6 +61,10 @@ class StudentHelper :Application(), LifecycleObserver {
 
     private fun initTimber() {
         Timber.plant(component.timberTree())
+    }
+
+    private fun initOneSignal() {
+        component.oneSignalBuilder().init()
     }
 
     private fun initViewPump() {

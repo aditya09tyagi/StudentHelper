@@ -9,6 +9,7 @@ import com.example.projectsetup.di.modules.network.StudentHelperRepositoryModule
 import com.example.projectsetup.di.scopes.SetUpApplicationScope
 import com.example.projectsetup.util.*
 import com.google.gson.Gson
+import com.onesignal.OneSignal
 import com.squareup.picasso.Picasso
 import dagger.Component
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
@@ -27,6 +28,8 @@ interface StudentHelperApplicationComponent {
     fun calligraphyInterceptor(): CalligraphyInterceptor
 
     fun timberTree(): Timber.Tree
+
+    fun oneSignalBuilder(): OneSignal.Builder
 
     fun getPicasso(): Picasso
 
