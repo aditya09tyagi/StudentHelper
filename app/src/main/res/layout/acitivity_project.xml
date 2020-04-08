@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="@dimen/padding_small"
+            android:padding="@dimen/padding_normal"
             android:text="No Project Assigned Yet"
             android:textColor="#41E6B3"
             android:textSize="@dimen/font_large"
@@ -60,11 +60,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="@dimen/padding_normal"
-        tools:visibility="gone"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/fabChat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvProjectLabel">
+        app:layout_constraintTop_toBottomOf="@id/tvProjectLabel"
+        tools:visibility="gone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clProjectContainer"
@@ -213,24 +214,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_normal"
+        android:foregroundTint="@color/white"
         android:src="@drawable/ic_chat_icon"
         android:tint="@color/white"
-        android:foregroundTint="@color/white"
+        android:visibility="gone"
         app:backgroundTint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddProjectOrSendNotification"
+        android:id="@+id/fabAddProject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_normal"
+        android:foregroundTint="@color/white"
+        android:src="@drawable/ic_add"
+        android:tint="@color/white"
+        android:visibility="gone"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSendNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_normal"
+        android:foregroundTint="@color/white"
         android:src="@drawable/ic_notification"
         android:tint="@color/white"
-        android:foregroundTint="@color/white"
-        app:backgroundTint="@color/colorPrimary"
         android:visibility="gone"
-        tools:visibility="visible"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -238,11 +252,12 @@
         android:id="@+id/rvProjects"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:listitem="@layout/cell_project"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvProjectLabel" />
+        app:layout_constraintTop_toBottomOf="@id/tvProjectLabel"
+        tools:listitem="@layout/cell_project" />
 
     <ProgressBar
         android:id="@+id/progressBar"

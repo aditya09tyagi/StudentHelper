@@ -4,6 +4,8 @@ import com.example.projectsetup.ui.base.BaseActivity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.projectsetup.R
@@ -89,6 +91,7 @@ class ChatActivity : BaseActivity() {
     }
 
     private fun initialiseLayout() {
+        progressBarChat.visibility = View.VISIBLE
         setAdapter()
     }
 
@@ -121,7 +124,8 @@ class ChatActivity : BaseActivity() {
     }
 
     private fun observeData() {
-        chatViewModel.getLiveChat().observe(this, androidx.lifecycle.Observer {
+        chatViewModel.getLiveChat().observe(this, Observer {
+            progressBarChat.visibility = View.GONE
             when (it.type) {
                 Constants.TYPE_ADDED -> {
                     currentListSize++

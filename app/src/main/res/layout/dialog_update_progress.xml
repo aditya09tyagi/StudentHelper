@@ -39,7 +39,7 @@
         android:padding="@dimen/padding_medium"
         android:layout_marginStart="@dimen/padding_micro"
         android:layout_marginEnd="@dimen/padding_micro"
-        android:text="@string/update_progress"
+        android:text="@string/updated_progress_label"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/etUpdateProgressValue"
         app:layout_constraintStart_toStartOf="parent"

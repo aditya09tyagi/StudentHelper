@@ -86,11 +86,20 @@ class ProjectActivity : BaseActivity(),
     private fun initialiseLayout() {
         if (userType == Constants.USER_TYPE_STUDENT) {
             showStudentView()
-            hideTeacherOrAdminView()
+            hideTeacherFab()
+            hideAdminFab()
+            hideRecyclerView()
             tvProjectName.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         } else {
+            showRecyclerView()
             hideStudentView()
-            showTeacherOrAdminView()
+            if (userType == Constants.USER_TYPE_FACULTY) {
+                hideAdminFab()
+                showTeacherFab()
+            } else if (userType == Constants.USER_TYPE_ADMIN) {
+                hideTeacherFab()
+                showAdminFab()
+            }
             rvProjects.layoutManager = LinearLayoutManager(this)
             rvProjects.adapter = projectAdapter
             projectAdapter.setOnItemClickListener(this)
@@ -106,10 +115,12 @@ class ProjectActivity : BaseActivity(),
                 Constants.USER_TYPE_FACULTY -> {
                     projectViewModel.getFacultyProject(facultyId = userId)
                     updateProgressDialog = UpdateProgressDialog(this)
+                    updateProgressDialog.setOnSubmitClickListener(this)
                 }
                 Constants.USER_TYPE_ADMIN -> {
                     projectViewModel.getAllProjects()
                     sendNotificationDialog = NotificationSenderDialog(this)
+                    sendNotificationDialog.setOnSubmitNotificationClickListener(this)
                 }
             }
         }
@@ -125,39 +136,44 @@ class ProjectActivity : BaseActivity(),
         fabChat.visibility = View.VISIBLE
     }
 
-    private fun hideTeacherOrAdminView() {
-        rvProjects.visibility = View.GONE
-        fabAddProjectOrSendNotification.visibility = View.GONE
+    private fun hideTeacherFab() {
+        fabAddProject.visibility = View.GONE
     }
 
-    private fun showTeacherOrAdminView() {
+    private fun showTeacherFab() {
+        fabAddProject.visibility = View.VISIBLE
+    }
+
+    private fun showAdminFab() {
+        fabSendNotification.visibility = View.VISIBLE
+    }
+
+    private fun hideAdminFab() {
+        fabSendNotification.visibility = View.GONE
+    }
+
+    private fun hideRecyclerView() {
+        rvProjects.visibility = View.GONE
+    }
+
+    private fun showRecyclerView() {
         rvProjects.visibility = View.VISIBLE
-        if (userType == Constants.USER_TYPE_FACULTY) {
-            fabAddProjectOrSendNotification.setImageResource(R.drawable.ic_add)
-        } else if (userType == Constants.USER_TYPE_ADMIN) {
-            fabAddProjectOrSendNotification.setImageResource(R.drawable.ic_notification)
-        }
-        fabAddProjectOrSendNotification.visibility = View.VISIBLE
     }
 
     private fun setListener() {
         fabChat.setOnClickListener {
-            if (::userId.isInitialized && ::projectId.isInitialized) {
+            if (::userId.isInitialized && ::projectId.isInitialized)
                 startChatActivity(userId, projectId)
-            }
-        }
-        fabAddProjectOrSendNotification.setOnClickListener {
-            if (::userId.isInitialized) {
-                if (userType == Constants.USER_TYPE_FACULTY) {
-                    updateProgressDialog.setOnSubmitClickListener(this)
-                    startActivity(AssignProjectActivity.newIntent(this, userId))
-                } else if (userType == Constants.USER_TYPE_ADMIN) {
-                    sendNotificationDialog.show()
-                    sendNotificationDialog.setOnSubmitNotificationClickListener(this)
-                }
-            }
         }
 
+        fabAddProject.setOnClickListener {
+            if (::userId.isInitialized)
+                startActivity(AssignProjectActivity.newIntent(this, userId))
+        }
+
+        fabSendNotification.setOnClickListener {
+            sendNotificationDialog.show()
+        }
     }
 
     private fun startChatActivity(userId: String, projectId: String) {
@@ -199,7 +215,6 @@ class ProjectActivity : BaseActivity(),
                                 projectProgress.progress = it.progress
                                 tvProgressValue.text = it.progress.toString() + " %"
                                 tvProjectName.text = it.title
-                                clProjectContainer.visibility = View.VISIBLE
                             }
                         } else {
                             clNoProjectAssigned.visibility = View.VISIBLE
@@ -211,7 +226,7 @@ class ProjectActivity : BaseActivity(),
                 Status.ERROR -> {
                     showErrorToast("${it.message}")
                     progressBar.visibility = View.GONE
-                    hideTeacherOrAdminView()
+                    clNoProjectAssigned.visibility = View.GONE
                     hideStudentView()
                 }
             }
@@ -221,24 +236,29 @@ class ProjectActivity : BaseActivity(),
             when (it.status) {
                 Status.LOADING -> {
                     progressBar.visibility = View.VISIBLE
-                    hideTeacherOrAdminView()
+                    hideTeacherFab()
                     clNoProjectAssigned.visibility = View.GONE
                 }
                 Status.SUCCESS -> {
                     clNoProjectAssigned.visibility = View.GONE
                     progressBar.visibility = View.GONE
+                    showRecyclerView()
+                    showTeacherFab()
                     it.data?.let { list ->
                         if (list.isNotEmpty()) {
-                            projectAdapter.setProjectList(list,userType)
+                            projectAdapter.setProjectList(list, userType)
                         } else {
                             clNoProjectAssigned.visibility = View.VISIBLE
+                            showTeacherFab()
                         }
                     }
                 }
                 Status.ERROR -> {
                     showErrorToast("${it.message}")
+                    clNoProjectAssigned.visibility = View.GONE
                     progressBar.visibility = View.GONE
-                    hideTeacherOrAdminView()
+                    hideRecyclerView()
+                    showTeacherFab()
                 }
             }
         })
@@ -277,27 +297,55 @@ class ProjectActivity : BaseActivity(),
             when (it.status) {
                 Status.LOADING -> {
                     progressBar.visibility = View.VISIBLE
-                    hideTeacherOrAdminView()
+                    hideAdminFab()
+                    hideRecyclerView()
                     clNoProjectAssigned.visibility = View.GONE
                 }
                 Status.SUCCESS -> {
                     clNoProjectAssigned.visibility = View.GONE
                     progressBar.visibility = View.GONE
+                    showRecyclerView()
+                    showAdminFab()
                     it.data?.let { list ->
                         if (list.isNotEmpty()) {
-                            projectAdapter.setProjectList(list,userType)
+                            projectAdapter.setProjectList(list, userType)
                         } else {
                             clNoProjectAssigned.visibility = View.VISIBLE
+                            showAdminFab()
                         }
                     }
                 }
                 Status.ERROR -> {
                     showErrorToast("${it.message}")
                     progressBar.visibility = View.GONE
-                    hideTeacherOrAdminView()
+                    clNoProjectAssigned.visibility = View.GONE
+                    hideRecyclerView()
+                    hideAdminFab()
                 }
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (::userId.isInitialized) {
+            when (userType) {
+                Constants.USER_TYPE_STUDENT -> {
+                    projectViewModel.getMyProject(userId)
+                }
+                Constants.USER_TYPE_FACULTY -> {
+                    projectViewModel.getFacultyProject(facultyId = userId)
+                }
+                Constants.USER_TYPE_ADMIN -> {
+                    projectViewModel.getAllProjects()
+                }
+            }
+        }
+    }
+
+    override fun onBackPressed() {
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        super.onBackPressed()
     }
 
     override fun onUpdateClickListener(projectId: String, position: Int) {
@@ -308,19 +356,8 @@ class ProjectActivity : BaseActivity(),
     override fun onChatClickListener(projectId: String, position: Int) {
         if (::userId.isInitialized) {
             this.projectId = projectId
-            startChatActivity(this.projectId, userId)
+            startChatActivity(userId, projectId)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (::userId.isInitialized)
-            projectViewModel.getFacultyProject(userId)
-    }
-
-    override fun onBackPressed() {
-        overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left)
-        super.onBackPressed()
     }
 
     override fun onSubmitClick(updatedProgressValue: Int) {
