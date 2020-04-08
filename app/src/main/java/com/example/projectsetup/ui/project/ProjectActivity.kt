@@ -56,8 +56,8 @@ class ProjectActivity : BaseActivity(),
         setContentView(R.layout.acitivity_project)
         getArguments()
         inject()
-        getDataFromViewModel()
         initialiseLayout()
+        getDataFromViewModel()
         setListener()
         observeData()
     }
@@ -83,22 +83,34 @@ class ProjectActivity : BaseActivity(),
             ViewModelProvider(this, viewModelFactory).get(ProjectViewModel::class.java)
     }
 
+    private fun initialiseLayout() {
+        if (userType == Constants.USER_TYPE_STUDENT) {
+            showStudentView()
+            hideTeacherOrAdminView()
+            tvProjectName.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+        } else {
+            hideStudentView()
+            showTeacherOrAdminView()
+            rvProjects.layoutManager = LinearLayoutManager(this)
+            rvProjects.adapter = projectAdapter
+            projectAdapter.setOnItemClickListener(this)
+        }
+    }
+
     private fun getDataFromViewModel() {
         if (::userId.isInitialized) {
-            if (userType == Constants.USER_TYPE_STUDENT) {
-                hideTeacherOrAdminView()
-                showStudentView()
-                projectViewModel.getMyProject(userId)
-            } else if (userType == Constants.USER_TYPE_FACULTY) {
-                hideStudentView()
-                showTeacherOrAdminView()
-                projectViewModel.getFacultyProject(facultyId = userId)
-                updateProgressDialog = UpdateProgressDialog(this)
-            } else if (userType == Constants.USER_TYPE_ADMIN) {
-                showTeacherOrAdminView()
-                hideStudentView()
-                projectViewModel.getAllProjects()
-                sendNotificationDialog = NotificationSenderDialog(this)
+            when (userType) {
+                Constants.USER_TYPE_STUDENT -> {
+                    projectViewModel.getMyProject(userId)
+                }
+                Constants.USER_TYPE_FACULTY -> {
+                    projectViewModel.getFacultyProject(facultyId = userId)
+                    updateProgressDialog = UpdateProgressDialog(this)
+                }
+                Constants.USER_TYPE_ADMIN -> {
+                    projectViewModel.getAllProjects()
+                    sendNotificationDialog = NotificationSenderDialog(this)
+                }
             }
         }
     }
@@ -128,20 +140,6 @@ class ProjectActivity : BaseActivity(),
         fabAddProjectOrSendNotification.visibility = View.VISIBLE
     }
 
-    private fun initialiseLayout() {
-        if (userType == Constants.USER_TYPE_STUDENT) {
-            showStudentView()
-            hideTeacherOrAdminView()
-            tvProjectName.paintFlags = Paint.UNDERLINE_TEXT_FLAG
-        } else {
-            hideStudentView()
-            showTeacherOrAdminView()
-            rvProjects.layoutManager = LinearLayoutManager(this)
-            rvProjects.adapter = projectAdapter
-            projectAdapter.setOnItemClickListener(this)
-        }
-    }
-
     private fun setListener() {
         fabChat.setOnClickListener {
             if (::userId.isInitialized && ::projectId.isInitialized) {
@@ -155,10 +153,10 @@ class ProjectActivity : BaseActivity(),
                     startActivity(AssignProjectActivity.newIntent(this, userId))
                 } else if (userType == Constants.USER_TYPE_ADMIN) {
                     sendNotificationDialog.show()
+                    sendNotificationDialog.setOnSubmitNotificationClickListener(this)
                 }
             }
         }
-        sendNotificationDialog.setOnSubmitNotificationClickListener(this)
 
     }
 
@@ -228,7 +226,6 @@ class ProjectActivity : BaseActivity(),
                 }
                 Status.SUCCESS -> {
                     clNoProjectAssigned.visibility = View.GONE
-                    showTeacherOrAdminView()
                     progressBar.visibility = View.GONE
                     it.data?.let { list ->
                         if (list.isNotEmpty()) {
@@ -285,7 +282,6 @@ class ProjectActivity : BaseActivity(),
                 }
                 Status.SUCCESS -> {
                     clNoProjectAssigned.visibility = View.GONE
-                    showTeacherOrAdminView()
                     progressBar.visibility = View.GONE
                     it.data?.let { list ->
                         if (list.isNotEmpty()) {

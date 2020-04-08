@@ -68,16 +68,19 @@ class ChatActivity : BaseActivity() {
                 projectId = pid
             }
         }
+        userName = sharedPreferenceUtil.getString(Constants.EXTRA_USER_NAME)
     }
 
     private fun inject() {
         val component = DaggerChatActivityComponent.builder()
-            .studentHelperApplicationComponent(StudentHelper.get(this).studentHelperApplicationComponent())
+            .studentHelperApplicationComponent(
+                StudentHelper.get(this).studentHelperApplicationComponent()
+            )
             .build()
 
         component.injectChatActivityComponent(this)
 
-        val referencePath = String.format("%s/%s", DATABASE_CHILD_MESSAGES,projectId)
+        val referencePath = String.format("%s/%s", DATABASE_CHILD_MESSAGES, projectId)
         val databaseRef = databaseReference.getReference(referencePath)
 
         chatViewModel = ViewModelProvider(this, viewModelFactory).get(ChatViewModel::class.java)
@@ -107,6 +110,10 @@ class ChatActivity : BaseActivity() {
     private fun sendMessageToCloud() {
         if (messageInputEditText.text.trim().isNotEmpty() && ::userId.isInitialized) {
             val message = messageInputEditText.text.toString()
+
+            if (userName.isEmpty() || userName.isBlank()) {
+                userName = ANONYMOUS
+            }
 
             chatViewModel.sendMessage(userId, userName, userAccess, userAvatar, message)
             messageInputEditText.setText("")
