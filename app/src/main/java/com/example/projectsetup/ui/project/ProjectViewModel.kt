@@ -11,15 +11,25 @@ class ProjectViewModel @Inject constructor(
     private val studentHelperRepository: StudentHelperRepository
 ) : ViewModel(), StudentHelperRepository.OnGetMyProjectListener,
     StudentHelperRepository.OnGetProjectUnderFacultyListener,
-    StudentHelperRepository.OnUpdateProjectProgressListener {
+    StudentHelperRepository.OnUpdateProjectProgressListener,
+    StudentHelperRepository.OnGetAllProjectsListener,
+    StudentHelperRepository.OnSendNotificationToAllListener {
 
     private val _projectLiveData = MutableLiveData<Resource<ArrayList<Project>>>()
     val projectLiveData: LiveData<Resource<ArrayList<Project>>>
         get() = _projectLiveData
 
+    private val _getAllProjectsLiveData = MutableLiveData<Resource<ArrayList<Project>>>()
+    val getAllProjectsLiveData: LiveData<Resource<ArrayList<Project>>>
+        get() = _getAllProjectsLiveData
+
     private val _facultyProjectLiveData = MutableLiveData<Resource<ArrayList<Project>>>()
     val facultyProjectLiveData: LiveData<Resource<ArrayList<Project>>>
         get() = _facultyProjectLiveData
+
+    private val _sendNotificationToAllLiveData = MutableLiveData<Resource<Boolean>>()
+    val sendNotificationToAllLiveData: LiveData<Resource<Boolean>>
+        get() = _sendNotificationToAllLiveData
 
     private val _updateProgressLiveData = MutableLiveData<Resource<UpdateProject>>()
     val updateProgressLiveData: LiveData<Resource<UpdateProject>>
@@ -33,6 +43,16 @@ class ProjectViewModel @Inject constructor(
     fun getFacultyProject(facultyId: String) {
         _facultyProjectLiveData.postValue(Resource.loading())
         studentHelperRepository.getProjectUnderFaculty(facultyId, this)
+    }
+
+    fun getAllProjects() {
+        _getAllProjectsLiveData.postValue(Resource.loading())
+        studentHelperRepository.getAllProjects(this)
+    }
+
+    fun sendNotificationToAll(notificationTitle: String, notificationDesc: String) {
+        _sendNotificationToAllLiveData.postValue(Resource.loading())
+        studentHelperRepository.sendNotificationToAll(notificationTitle,notificationDesc,this)
     }
 
     fun updateProjectProgress(progressValue: Int, projectId: String) {
@@ -56,12 +76,28 @@ class ProjectViewModel @Inject constructor(
         _facultyProjectLiveData.postValue(Resource.error(error))
     }
 
-    override fun onUpdateProjectProgressSuccess(updatedProject: UpdateProject ) {
+    override fun onUpdateProjectProgressSuccess(updatedProject: UpdateProject) {
         _updateProgressLiveData.postValue(Resource.success(updatedProject))
     }
 
     override fun onUpdateProjectProgressFailure(error: Error) {
         _updateProgressLiveData.postValue(Resource.error(error))
+    }
+
+    override fun onGetAllProjectsSuccess(project: ArrayList<Project>) {
+        _getAllProjectsLiveData.postValue(Resource.success(project))
+    }
+
+    override fun onGetAllProjectsFailure(error: Error) {
+        _getAllProjectsLiveData.postValue(Resource.error(error))
+    }
+
+    override fun onSendNotificationToAllSuccess(result: Boolean) {
+        _sendNotificationToAllLiveData.postValue(Resource.success(result))
+    }
+
+    override fun onSendNotificationToAllFailure(error: Error) {
+        _sendNotificationToAllLiveData.postValue(Resource.error(error))
     }
 
 }

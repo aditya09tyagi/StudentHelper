@@ -6,7 +6,7 @@ import com.example.projectsetup.data.exception.NoConnectivityException
 import com.example.projectsetup.di.modules.helper.ContextModule
 import com.example.projectsetup.di.modules.helper.SharedPreferenceModule
 import com.example.projectsetup.di.qualifiers.*
-import com.example.projectsetup.di.scopes.SetUpApplicationScope
+import com.example.projectsetup.di.scopes.StudentHelperApplicationScope
 import com.example.projectsetup.util.Constants
 import com.example.projectsetup.util.NetworkUtil
 import com.example.projectsetup.util.SharedPreferenceUtil
@@ -34,7 +34,7 @@ class NetworkModule {
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     fun okHttpClient(@HeaderInterceptor customInterceptor: Interceptor,
                      @CacheInterceptor cacheInterceptor: Interceptor,
                      @NetworkInterceptor networkInterceptor: Interceptor,
@@ -55,7 +55,7 @@ class NetworkModule {
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     @LoggingInterceptor
     fun loggingInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
@@ -69,19 +69,19 @@ class NetworkModule {
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     fun cache(cacheFile: File): Cache {
         return Cache(cacheFile, CACHE_SIZE)
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     fun file(context: Context): File {
         return File(context.cacheDir, "okhttp-cache")
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     @HeaderInterceptor
     fun customInterceptor(sharedPreferenceUtil: SharedPreferenceUtil): Interceptor {
         return Interceptor { chain ->
@@ -93,7 +93,7 @@ class NetworkModule {
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     @NetworkInterceptor
     fun networkInterceptor(networkUtil: NetworkUtil, cacheControl: CacheControl): Interceptor {
         return Interceptor { chain ->
@@ -110,7 +110,7 @@ class NetworkModule {
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     @StaleIfErrorInterceptor
     fun staleIfErrorInterceptor(cacheControl: CacheControl): Interceptor {
         return Interceptor { chain ->
@@ -138,7 +138,7 @@ class NetworkModule {
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     fun cacheControl(): CacheControl {
         return CacheControl.Builder()
                 .maxStale(MAX_STALE, TimeUnit.DAYS)
@@ -147,7 +147,7 @@ class NetworkModule {
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     @CacheInterceptor
     fun cacheInterceptor(cacheControl: CacheControl): Interceptor {
         return Interceptor { chain ->

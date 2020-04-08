@@ -76,6 +76,7 @@
 
     <!-- PROJECT SCREEN -->
     <string name="project_label">PROJECT</string>
+    <string name="get_all_project">All Projects</string>
     <string name="member_label">Members :- </string>
     <string name="dummy_member">1. Mehul Tyagi \n2. Aakansha \n3. Siddharth</string>
     <string name="coordinator_label">Co-ordinator :- </string>
@@ -89,6 +90,12 @@
     <string name="enter_student_name">Enter Student Name</string>
     <string name="enter_project_title">Enter Project Title</string>
     <string name="enter_project_description">Enter Project Description</string>
+
+    <string name="notification_send">Send notification</string>
+    <string name="notification_create">Create notification</string>
+    <string name="notification_title_label">Notification Title :- </string>
+    <string name="notification_desc_label">Notification Description :- </string>
+
 
     <!-- PLACEMENT SCREEN -->
     <string name="placement_label">PLACEMENT</string>

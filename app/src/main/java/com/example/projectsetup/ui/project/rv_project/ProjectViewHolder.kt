@@ -3,6 +3,7 @@ package com.example.projectsetup.ui.project.rv_project
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectsetup.data.models.Project
+import com.example.projectsetup.util.Constants
 import com.example.projectsetup.util.DateTimeUtils
 import kotlinx.android.synthetic.main.cell_project.view.*
 import org.threeten.bp.format.DateTimeFormatter
@@ -11,7 +12,14 @@ class ProjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private lateinit var onItemClickListener: OnItemClickListener
 
-    fun setProject(project: Project) {
+    fun setProject(project: Project, userType: Int) {
+
+        if (userType == Constants.USER_TYPE_FACULTY) {
+            itemView.btnUpdateProgress.visibility = View.VISIBLE
+        } else if (userType == Constants.USER_TYPE_ADMIN) {
+            itemView.btnUpdateProgress.visibility = View.GONE
+        }
+
         itemView.tvRvProjectName.text = project.title
         var members = ""
         project.userMembers.forEachIndexed { index, user ->
@@ -33,15 +41,22 @@ class ProjectViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         itemView.btnUpdateProgress.setOnClickListener {
             if (::onItemClickListener.isInitialized)
-                onItemClickListener.onUpdateClickListener(projectId = project.id,position = adapterPosition)
+                onItemClickListener.onUpdateClickListener(
+                    projectId = project.id,
+                    position = adapterPosition
+                )
         }
+
         itemView.ivChat.setOnClickListener {
             if (::onItemClickListener.isInitialized)
-                onItemClickListener.onChatClickListener(projectId = project.id,position = adapterPosition)
+                onItemClickListener.onChatClickListener(
+                    projectId = project.id,
+                    position = adapterPosition
+                )
         }
     }
 
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener){
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
         this.onItemClickListener = onItemClickListener
     }
 

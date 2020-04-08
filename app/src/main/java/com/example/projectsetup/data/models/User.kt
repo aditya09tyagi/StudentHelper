@@ -30,5 +30,7 @@ data class User(
     @SerializedName("age")
     val age: Int = 0,
     @SerializedName("semester")
-    val semester: Int
+    val semester: Int,
+    @SerializedName("playerId")
+    val playerId: String
 )

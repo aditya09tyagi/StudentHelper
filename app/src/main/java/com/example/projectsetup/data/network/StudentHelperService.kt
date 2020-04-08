@@ -80,6 +80,7 @@ interface StudentHelperService {
         @Query("userType") userType: Int,
         @Query("section") section: String,
         @Query("semester") semester: Int,
+        @Query("playerId") playerId: String,
         @Query("skills") commaSeparatedSkillIds: String
     ): Call<User>
 
@@ -120,7 +121,7 @@ interface StudentHelperService {
     @GET("/v1/user/find")
     fun searchUser(
         @Query("name") queryText: String
-    ):Call<ArrayList<User>>
+    ): Call<ArrayList<User>>
 
     @POST("/project/assignproject")
     fun assignProject(
@@ -131,7 +132,7 @@ interface StudentHelperService {
         @Query("date") dayOfMonth: Int,
         @Query("month") month: Int,
         @Query("year") year: Int
-    ):Call<AssignProject>
+    ): Call<AssignProject>
 
     @POST("/project/updateProgress")
     fun updateProjectProgress(
@@ -143,4 +144,13 @@ interface StudentHelperService {
     fun getProjectUnderFaculty(
         @Query("faculty") facultyId: String
     ): Call<ArrayList<Project>>
+
+    @GET("/project/getAllProjects")
+    fun getAllProjects(): Call<ArrayList<Project>>
+
+    @GET("/project/sendMessageToAll")
+    fun sendMessageToAll(
+        @Query("title") notificationTitle: String,
+        @Query("description") notificationDesc: String
+    ): Call<Boolean>
 }

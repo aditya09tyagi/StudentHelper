@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projectsetup.data.models.*
 import com.example.projectsetup.data.network.StudentHelperRepository
+import com.onesignal.OneSignal
 import javax.inject.Inject
 
 class AdminActivityViewModel @Inject constructor(
@@ -16,11 +17,16 @@ class AdminActivityViewModel @Inject constructor(
     StudentHelperRepository.OnAddSkillListener,
     StudentHelperRepository.OnAddSubjectListener, StudentHelperRepository.OnGetAllSubjectsListener,
     StudentHelperRepository.OnSearchSkillListener,
-    StudentHelperRepository.OnGetAllCompaniesListener {
+    StudentHelperRepository.OnGetAllCompaniesListener,
+    StudentHelperRepository.OnUpdateUserListener {
 
     private val _addBranchLiveData = MutableLiveData<Resource<Branch>>()
     val addBranchLiveData: LiveData<Resource<Branch>>
         get() = _addBranchLiveData
+
+    private val _updateUserLiveData = MutableLiveData<Resource<User>>()
+    val updateUserLiveData: LiveData<Resource<User>>
+        get() = _updateUserLiveData
 
     private val _addCompanyLiveData = MutableLiveData<Resource<Company>>()
     val addCompanyLiveData: LiveData<Resource<Company>>
@@ -49,6 +55,30 @@ class AdminActivityViewModel @Inject constructor(
     private val _getCompaniesLiveData = MutableLiveData<Resource<ArrayList<Company>>>()
     val getCompaniesLiveData: LiveData<Resource<ArrayList<Company>>>
         get() = _getCompaniesLiveData
+
+    fun updateUser(
+        userId: String,
+        userType: Int
+    ) {
+        val status = OneSignal.getPermissionSubscriptionState()
+        var playerId = ""
+        status?.let {
+            it.subscriptionStatus?.let {
+                it.userId?.let { id ->
+                    playerId = id
+                }
+            }
+        }
+
+        _updateUserLiveData.postValue(Resource.loading())
+
+        studentHelperRepository.updateUser(
+            userId = userId,
+            userType = userType,
+            playerId = playerId,
+            onUpdateUserListener = this
+        )
+    }
 
     fun addBranch(
         branchName: String,
@@ -119,7 +149,7 @@ class AdminActivityViewModel @Inject constructor(
         studentHelperRepository.searchSkills(queryText, this)
     }
 
-    fun getAllCompanies(){
+    fun getAllCompanies() {
         _getCompaniesLiveData.postValue(Resource.loading())
         studentHelperRepository.getAllCompanies(this)
     }
@@ -186,5 +216,13 @@ class AdminActivityViewModel @Inject constructor(
 
     override fun onGetAllCompaniesFailure(error: Error) {
         _getCompaniesLiveData.postValue(Resource.error(error))
+    }
+
+    override fun onUpdateUserSuccess(user: User) {
+        _updateUserLiveData.postValue(Resource.success(user))
+    }
+
+    override fun onUpdateUserFailure(error: Error) {
+        _updateUserLiveData.postValue(Resource.error(error))
     }
 }

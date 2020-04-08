@@ -1,12 +1,12 @@
 package com.example.projectsetup.di.components
 
 import com.example.projectsetup.data.network.StudentHelperRepository
-import com.example.projectsetup.di.modules.application.SetUpAppModule
+import com.example.projectsetup.di.modules.application.StudentHelperAppModule
 import com.example.projectsetup.di.modules.helper.SharedPreferenceModule
 import com.example.projectsetup.di.modules.helper.UtilsModule
 import com.example.projectsetup.di.modules.libraries.PicassoModule
 import com.example.projectsetup.di.modules.network.StudentHelperRepositoryModule
-import com.example.projectsetup.di.scopes.SetUpApplicationScope
+import com.example.projectsetup.di.scopes.StudentHelperApplicationScope
 import com.example.projectsetup.util.*
 import com.google.gson.Gson
 import com.onesignal.OneSignal
@@ -15,9 +15,9 @@ import dagger.Component
 import io.github.inflationx.calligraphy3.CalligraphyInterceptor
 import timber.log.Timber
 
-@SetUpApplicationScope
+@StudentHelperApplicationScope
 @Component(modules = [
-    SetUpAppModule::class,
+    StudentHelperAppModule::class,
     StudentHelperRepositoryModule::class,
     PicassoModule::class,
     SharedPreferenceModule::class,

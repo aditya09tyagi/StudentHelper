@@ -3,7 +3,7 @@
 package com.example.projectsetup.di.modules.network
 
 import com.example.projectsetup.data.network.StudentHelperService
-import com.example.projectsetup.di.scopes.SetUpApplicationScope
+import com.example.projectsetup.di.scopes.StudentHelperApplicationScope
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -22,13 +22,13 @@ class StudentHelperServiceModule {
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     fun setUpService(retrofit: Retrofit): StudentHelperService {
         return retrofit.create(StudentHelperService::class.java)
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     fun retrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -38,7 +38,7 @@ class StudentHelperServiceModule {
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     fun gson(): Gson {
         return GsonBuilder().create()
     }

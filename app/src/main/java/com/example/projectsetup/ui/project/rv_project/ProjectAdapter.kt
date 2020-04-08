@@ -9,11 +9,13 @@ import com.example.projectsetup.data.models.Project
 class ProjectAdapter : RecyclerView.Adapter<ProjectViewHolder>(),
     ProjectViewHolder.OnItemClickListener {
 
+    private var userType: Int = 0
     private var projectList: ArrayList<Project> = ArrayList()
     private lateinit var onItemClickListener: OnItemClickListener
 
-    fun setProjectList(list: ArrayList<Project>){
+    fun setProjectList(list: ArrayList<Project>, userType: Int) {
         projectList = list
+        this.userType = userType
         notifyDataSetChanged()
     }
 
@@ -30,13 +32,13 @@ class ProjectAdapter : RecyclerView.Adapter<ProjectViewHolder>(),
     }
 
     override fun onBindViewHolder(holder: ProjectViewHolder, position: Int) {
-        if(projectList.isNotEmpty()){
-            holder.setProject(projectList[position])
+        if (projectList.isNotEmpty()) {
+            holder.setProject(projectList[position],userType)
             holder.setOnItemClickListener(this)
         }
     }
 
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener){
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
         this.onItemClickListener = onItemClickListener
     }
 

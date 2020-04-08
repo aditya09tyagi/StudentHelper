@@ -39,11 +39,12 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
     fun updateUser(
         userId: String,
-        age: Int,
-        branch: String,
+        age: Int = 0,
+        branch: String = "",
         userType: Int,
         section: String = "A",
-        semester: Int,
+        semester: Int = 0,
+        playerId: String,
         commaSeparatedSkillIds: String = "",
         onUpdateUserListener: OnUpdateUserListener? = null
     ) {
@@ -54,6 +55,7 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
             userType,
             section,
             semester,
+            playerId,
             commaSeparatedSkillIds
         ).enqueue(object : ApiCallback<User>() {
             override fun success(response: User) {
@@ -198,15 +200,16 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
     }
 
     fun getMyProject(userId: String, onGetMyProjectListener: OnGetMyProjectListener) {
-        studentHelperService.getMyProject(userId).enqueue(object : ApiCallback<ArrayList<Project>>() {
-            override fun success(response: ArrayList<Project>) {
-                onGetMyProjectListener.onGetMyProjectSuccess(response)
-            }
+        studentHelperService.getMyProject(userId)
+            .enqueue(object : ApiCallback<ArrayList<Project>>() {
+                override fun success(response: ArrayList<Project>) {
+                    onGetMyProjectListener.onGetMyProjectSuccess(response)
+                }
 
-            override fun failure(error: Error) {
-                onGetMyProjectListener.onGetMyProjectFailure(error)
-            }
-        })
+                override fun failure(error: Error) {
+                    onGetMyProjectListener.onGetMyProjectFailure(error)
+                }
+            })
     }
 
     fun getProjectUnderFaculty(
@@ -221,6 +224,21 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
                 override fun failure(error: Error) {
                     onGetProjectUnderFacultyListener.onGetProjectUnderFacultyFailure(error)
+                }
+            })
+    }
+
+    fun getAllProjects(
+        onGetAllProjectsListener: OnGetAllProjectsListener
+    ) {
+        studentHelperService.getAllProjects()
+            .enqueue(object : ApiCallback<ArrayList<Project>>() {
+                override fun success(response: ArrayList<Project>) {
+                    onGetAllProjectsListener.onGetAllProjectsSuccess(response)
+                }
+
+                override fun failure(error: Error) {
+                    onGetAllProjectsListener.onGetAllProjectsFailure(error)
                 }
             })
     }
@@ -376,14 +394,22 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
     fun assignProject(
         facultyId: String,
         title: String,
-        description:String,
+        description: String,
         commaSeparatedMemberIds: String,
-        dayOfMonth:Int,
-        month:Int,
-        year:Int,
+        dayOfMonth: Int,
+        month: Int,
+        year: Int,
         onAssignProjectListener: OnAssignProjectListener
     ) {
-        studentHelperService.assignProject(facultyId,title,description,commaSeparatedMemberIds,dayOfMonth, month, year)
+        studentHelperService.assignProject(
+            facultyId,
+            title,
+            description,
+            commaSeparatedMemberIds,
+            dayOfMonth,
+            month,
+            year
+        )
             .enqueue(object : ApiCallback<AssignProject>() {
                 override fun success(response: AssignProject) {
                     onAssignProjectListener.onAssignProjectSuccess(response)
@@ -395,6 +421,25 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
             })
     }
+
+    fun sendNotificationToAll(
+        notificationTitle: String,
+        notificationDesc: String,
+        onSendNotificationToAllListener: OnSendNotificationToAllListener
+    ) {
+        studentHelperService.sendMessageToAll(notificationTitle, notificationDesc)
+            .enqueue(object : ApiCallback<Boolean>() {
+                override fun success(response: Boolean) {
+                    onSendNotificationToAllListener.onSendNotificationToAllSuccess(response)
+                }
+
+                override fun failure(error: Error) {
+                    onSendNotificationToAllListener.onSendNotificationToAllFailure(error)
+                }
+
+            })
+    }
+
 
     //-------INTERFACES----------
 
@@ -512,6 +557,15 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
     }
 
+
+    interface OnGetAllProjectsListener {
+
+        fun onGetAllProjectsSuccess(project: ArrayList<Project>)
+
+        fun onGetAllProjectsFailure(error: Error)
+
+    }
+
     interface OnApplyForJobListener {
 
         fun onApplyForJobSuccess(jobApply: JobApply)
@@ -522,7 +576,7 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
 
     interface OnUpdateProjectProgressListener {
 
-        fun onUpdateProjectProgressSuccess(updatedProject:UpdateProject)
+        fun onUpdateProjectProgressSuccess(updatedProject: UpdateProject)
 
         fun onUpdateProjectProgressFailure(error: Error)
 
@@ -573,6 +627,14 @@ class StudentHelperRepository(private val studentHelperService: StudentHelperSer
         fun onAssignProjectSuccess(project: AssignProject)
 
         fun onAssignProjectFailure(error: Error)
+
+    }
+
+    interface OnSendNotificationToAllListener {
+
+        fun onSendNotificationToAllSuccess(result: Boolean)
+
+        fun onSendNotificationToAllFailure(error: Error)
 
     }
 

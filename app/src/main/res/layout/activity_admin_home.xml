@@ -25,8 +25,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="@dimen/padding_medium"
-        android:src="@drawable/ic_branch"
         android:contentDescription="@string/image"
+        android:src="@drawable/ic_branch"
         app:layout_constraintBottom_toBottomOf="@id/btnAddBranch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnAddBranch"
@@ -50,8 +50,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="@dimen/padding_medium"
-        android:src="@drawable/ic_company"
         android:contentDescription="@string/image"
+        android:src="@drawable/ic_company"
         app:layout_constraintBottom_toBottomOf="@id/btnAddCompany"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnAddCompany"
@@ -75,8 +75,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="@dimen/padding_medium"
-        android:src="@drawable/ic_job"
         android:contentDescription="@string/image"
+        android:src="@drawable/ic_job"
         app:layout_constraintBottom_toBottomOf="@id/btnAddJob"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnAddJob"
@@ -100,8 +100,8 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="@dimen/padding_medium"
-        android:src="@drawable/ic_skills"
         android:contentDescription="@string/image"
+        android:src="@drawable/ic_skills"
         app:layout_constraintBottom_toBottomOf="@id/btnAddSkill"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnAddSkill"
@@ -125,12 +125,41 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="@dimen/padding_medium"
-        android:src="@drawable/ic_subject"
         android:contentDescription="@string/image"
+        android:src="@drawable/ic_subject"
         app:layout_constraintBottom_toBottomOf="@id/btnAddSubject"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btnAddSubject"
         app:layout_constraintTop_toTopOf="@id/btnAddSubject" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnProjects"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_18_dp"
+        android:background="@drawable/bg_rounded_corner"
+        android:elevation="@dimen/padding_micro"
+        android:padding="@dimen/padding_small"
+        android:text="@string/get_all_project"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ivGetProjects"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivAddSubject" />
+
+
+    <ImageView
+        android:id="@+id/ivGetProjects"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="@dimen/padding_medium"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_project"
+        app:layout_constraintBottom_toBottomOf="@id/btnProjects"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnProjects"
+        app:layout_constraintTop_toTopOf="@id/btnProjects" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

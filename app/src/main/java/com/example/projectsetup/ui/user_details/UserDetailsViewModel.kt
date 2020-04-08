@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.projectsetup.data.models.*
 import com.example.projectsetup.data.network.StudentHelperRepository
+import com.onesignal.OneSignal
 import javax.inject.Inject
 
 class UserDetailsViewModel @Inject constructor(
@@ -45,6 +46,16 @@ class UserDetailsViewModel @Inject constructor(
         commaSeparatedSkillIds: String,
         userType: Int
     ) {
+        val status = OneSignal.getPermissionSubscriptionState()
+        var playerId = ""
+        status?.let {
+            it.subscriptionStatus?.let {
+                it.userId?.let { id ->
+                    playerId = id
+                }
+            }
+        }
+
         studentHelperRepository.updateUser(
             userId = userId,
             age = age,
@@ -53,6 +64,7 @@ class UserDetailsViewModel @Inject constructor(
             semester = semester,
             commaSeparatedSkillIds = commaSeparatedSkillIds,
             userType = userType,
+            playerId = playerId,
             onUpdateUserListener = this
         )
     }

@@ -14,7 +14,7 @@ data class AssignProject(
     @SerializedName("description")
     val description: String,
     @SerializedName("faculty")
-    val userFaculty: User,
+    val userFaculty: String,
     @SerializedName("members")
     val userMembers: List<String>,
     @SerializedName("progress")

@@ -2,7 +2,7 @@ package com.example.projectsetup.di.modules.libraries
 
 import android.content.Context
 import com.example.projectsetup.di.modules.helper.ContextModule
-import com.example.projectsetup.di.scopes.SetUpApplicationScope
+import com.example.projectsetup.di.scopes.StudentHelperApplicationScope
 import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
@@ -11,7 +11,7 @@ import dagger.Provides
 class PicassoModule {
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     fun picasso(context: Context): Picasso {
         return Picasso.Builder(context)
                 .build()

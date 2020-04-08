@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.example.projectsetup.di.modules.network.NetworkModule
-import com.example.projectsetup.di.scopes.SetUpApplicationScope
+import com.example.projectsetup.di.scopes.StudentHelperApplicationScope
 import com.example.projectsetup.util.SharedPreferenceUtil
 import com.example.projectsetup.util.SharedPreferencesUserLiveData
 import com.google.gson.Gson
@@ -20,13 +20,13 @@ class SharedPreferenceModule {
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     fun preferences(context: Context): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }
 
     @Provides
-    @SetUpApplicationScope
+    @StudentHelperApplicationScope
     fun getSharedPreferencesUserLiveData(preferences: SharedPreferences, gson: Gson): SharedPreferencesUserLiveData {
         return SharedPreferencesUserLiveData(preferences, gson)
     }

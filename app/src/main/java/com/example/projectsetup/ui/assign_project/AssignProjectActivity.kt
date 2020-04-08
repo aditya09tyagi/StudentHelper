@@ -204,6 +204,7 @@ class AssignProjectActivity : BaseActivity(), DateTimeSelectionDialog.OnSubmitCl
                     progressModal.dismiss()
                     it.data?.let {ap->
                         showSuccessToast("${ap.title} project added.")
+                        finish()
                     }
                 }
                 Status.ERROR->{
