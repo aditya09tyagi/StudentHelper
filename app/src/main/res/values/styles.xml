@@ -35,8 +35,7 @@
         <item name="android:progressTint">#C83233</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
-    </style>
+    <style name="AppTheme.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar"></style>
 
     <style name="AppTheme.Launcher" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/launch_screen</item>
@@ -92,13 +91,17 @@
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
 
     <!-- PHOTO VIEW LAYOUT -->
-    <style name="ImageViewerDialog" parent="android:Theme.Translucent.NoTitleBar"/>
+    <style name="ImageViewerDialog" parent="android:Theme.Translucent.NoTitleBar" />
 
-    <style name="ImageViewerDialog.NoStatusBar" parent="android:Theme.Translucent.NoTitleBar.Fullscreen"/>
+    <style name="ImageViewerDialog.NoStatusBar" parent="android:Theme.Translucent.NoTitleBar.Fullscreen" />
 
     <style name="ImageViewerDialog.Default" parent="android:Theme.Translucent.NoTitleBar">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

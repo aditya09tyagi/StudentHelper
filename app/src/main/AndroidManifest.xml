@@ -12,11 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".ui.chat.MainActivity"
+            android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.base.BaseActivity" />
-
         <activity
             android:name=".ui.splash.SplashActivity"
             android:launchMode="singleTask"
@@ -28,36 +30,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.home.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.user_details.UserDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan|adjustResize" />
-
         <activity
             android:name=".ui.selection.SelectionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.placement.PlacementActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.project.ProjectActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.chat.ChatActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.company.CompanyActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".ui.admin.AddBranchActivity"
             android:theme="@style/AppTheme.NoActionBar" />

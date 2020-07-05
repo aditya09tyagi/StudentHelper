@@ -8,7 +8,7 @@ object EnvironmentUtil {
     private val internalStoragePath: String
         get() = Environment.getExternalStorageDirectory().toString()
 
-    private val PARENT_FOLDER_PATH = "$internalStoragePath/InstaSolv"
+    private val PARENT_FOLDER_PATH = "$internalStoragePath/Studenthelper"
     private val COMPRESSED_FOLDER_PATH = "$PARENT_FOLDER_PATH/compressed/"
 
     init {
